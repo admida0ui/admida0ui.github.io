@@ -10,11 +10,11 @@
 # BASIC INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 info:
   # Site title
-  title: OSINTHeimers
+  title: admida0ui
   # Author name
   author: admida0ui
   # Site URL
-  url: https://osintheimers.rocks
+  url: https://admida0ui.tech
 # BASIC INFORMATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -105,7 +105,7 @@ home_banner:
     light: /images/wallhaven-wqery6-light.webp # light mode
     dark: /images/wallhaven-wqery6-dark.webp # dark mode
   # Home banner title
-  title: Rania & Adam
+  title: mida0ui & adm
   # Home banner subtitle
   subtitle:
     text: [Cloud & DevOps, Open Source Intelligence, Capture-The-Flag, TV Shows and more...] # subtitle text, array
@@ -144,7 +144,7 @@ home_banner:
     enable: true
     # Social links
     links:
-      github:  https://github.com/raniamidaoui
+      github:  #https://github.com/raniamidaoui
       instagram: # your Instagram URL
       zhihu:  # your ZhiHu URL
       twitter:  # your twitter URL
@@ -332,7 +332,7 @@ footer:
   # The start time of the website, format: YYYY/MM/DD HH:mm:ss
   start: 2023/3/19 14:00:00
   # Footer message
-  customize:
+  customize:`
   # ICP record number. See https://beian.miit.gov.cn/
   icp:
     enable: false # Whether to enable

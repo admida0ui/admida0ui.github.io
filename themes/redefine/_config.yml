@@ -105,7 +105,7 @@ home_banner:
     light: /images/wallhaven-wqery6-light.webp # light mode
     dark: /images/wallhaven-wqery6-dark.webp # dark mode
   # Home banner title
-  title: Rania & Adam
+  title: mida0ui & adm
   # Home banner subtitle
   subtitle:
     text: [Cloud & DevOps, Open Source Intelligence, Capture-The-Flag, TV Shows and more...] # subtitle text, array

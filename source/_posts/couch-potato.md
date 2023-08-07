@@ -28,7 +28,7 @@ Another file is what seems to be an updated firmware for the device, `Firmware.b
 
 [Download Link](https://drive.google.com/drive/folders/1TGNAOWKZZbCzZuVImklA18IH_cUvtkNy?usp=sharing)
 
-# Analysis
+## Analysis
 
 A Couch potato is a lazy guy that sits in front of the TV screen, indicating that we are dealing with a console, set-top-box STB or Digital Video Recorder DVR and not a PCI card satellite/Tuner card or a computer. The user mentioned that he was watching his favorite channel when he fall asleep which make it more likely an STB, or a receiver for simplicity.
 This also means that the show name we are looking for was broadcasted in his favorite channel.
@@ -277,7 +277,7 @@ And there it is, the serial number, let's query the IPTV validity.
 
 And the last part of the flag is `20141105`
 
-# Final Words
+## Final Words
 
 Flag: **Securinets{live_rugby_7s_00ff30cf_00ff8877_20141105}**
 

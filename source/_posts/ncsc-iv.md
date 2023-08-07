@@ -120,11 +120,11 @@ The challenge was about transmitting a sequence of Morse code over the band exac
 
 It was hilarious to see people's reactions to the whole thing and how the radio never came to their minds, people thought of WiFi, Bluetooth, cameras and many more stuff but never a radio!
 
-Shout out to UKW Radio Sender DIY - Joniwa's Weblog
+Shout out to [UKW Radio Sender DIY - Joniwa's Weblog](https://www.joniwa.de/ukw-radio-sender-diy/)
 
 ![](https://i.imgur.com/AAYhBCT.png)
 
-Literally: Stero_Hearts
+Literally: Stereo_Hearts
 
 # Finals Words
 

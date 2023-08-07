@@ -18,6 +18,8 @@ Congratulations to SKSD, r3kapig, Hexagon for earning the top 3 spots in the CTF
 
 ![](https://i.imgur.com/eYBMvzh.jpg)
 
+[Event Link](https://ctftime.org/event/1874)
+
 ## Writeups
 
 1. [Quantum: 0-8-4 Challenge Writeup](/2023/08/06/0-8-4/)

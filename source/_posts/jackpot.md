@@ -23,7 +23,9 @@ Flag format: Securinets{drug-enforcement-administration-for-the-win-style}
 Given a disk image, `disk.img`. The disk image is a raw disk image, and can be investigated using FTK Imager.
 [https://drive.google.com/file/d/1Ss4QTQi4XbRXbTfy3FU0nDbqePFhuRFI/view?usp=sharing](https://drive.google.com/file/d/1Ss4QTQi4XbRXbTfy3FU0nDbqePFhuRFI/view?usp=sharing)
 
-# Writeup
+## Writeup
+
+### Hibernation Part
 
 The disk image is a raw disk image, and can be investigated using FTK Imager. The disk image contains a single partition, which is a Windows XP installation.
 
@@ -64,6 +66,8 @@ There we go, we can see what they meant by the legacy, old school chat. They wer
 
 The chat goes with the description and indicates that our guy got some kind of password that was placed in a certain registry key and permanetly deleted it after.
 
+### Metamask Part
+
 Now, let's further investigate the programs now to build an understanding around this situation
 
 ![](https://i.imgur.com/NGRW8VU.png)
@@ -91,6 +95,8 @@ According to this [Ethereum Stackexchange question](https://ethereum.stackexchan
 Yes it is possible, and we will get back to it later, for now, finding password is the priority!! We know it is a registry key, that was deleted.
 
 Let's think how we can RESTORE it xD
+
+### Restore Point Part
 
 Is it the time, to investigate the `_restore{xxxxxx}` folder? right?
 
@@ -162,6 +168,8 @@ Let's open the registry now, shall we?
 
 And there we go, a key named password containing a string named deleteMe! Bingo!
 
+### Banking!
+
 At this point, there is only one thing left, let's get the flag!
 
 Remember that Ethereum stack exchange question I mentioned earlier? here is the link again, also bring the content of the ldb file's vault which is near the word "keyring", you can CTRL+F that in the ldb files and adjust the format if some letters are escaped or encoded because data is never lost, you can also upload the whole file to the [tool](https://metamask.github.io/vault-decryptor/)
@@ -184,6 +192,6 @@ Thanks for reading, we hope you enjoyed it, and we will be happy to hear your fe
 
 GGs **itunderground** for solving this challenge
 
-# Idea and Final Words
+## Idea and Final Words
 
 Just wanted to use pagefile.sys, hiberfile.sys, the Metamask thing, and Restore points because nobody used them like this in a CTF. So don't know if that's a great thing or rather will make players frustrated. Yet, tried to make everything as clear as possible for the players to understand and enjoy the challenge as a whole.

@@ -23,7 +23,7 @@ defaults:
   # Favicon
   favicon: https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png
   # Site logo
-  logo: 
+  logo: https://i.imgur.com/9NJGKah.png
   # Site avatar
   avatar: https://i.imgur.com/9NJGKah.png
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
@@ -102,7 +102,7 @@ home_banner:
   style: static # static or fixed
   # Home banner image
   image: 
-    light: /images/wallhaven-wqery6-light.webp # light mode
+    light: /images/wallhaven-wqery6-dark.webp # light mode
     dark: /images/wallhaven-wqery6-dark.webp # dark mode
   # Home banner title
   title: mida0ui & adm
@@ -121,7 +121,7 @@ home_banner:
   # Color of home banner text
   text_color: 
     light: "#fff" # light mode
-    dark: "#d1d1b6" # dark mode
+    dark: "#fff" # dark mode
   # Specific style of the text
   text_style: 
     # Title font size

@@ -55,7 +55,7 @@ hexo.extend.helper.register('getAuthorLabel', function (postCount, isAuto, label
   if (isAuto === false && Array.isArray(labelList) && labelList.length > 0) {
     return level > labelList.length ? labelList[labelList.length - 1] : labelList[level - 1];
   } else {
-    return `Lv${level}`;
+    return ``;
   }
 
 });

@@ -21,11 +21,11 @@ info:
 # IMAGE CONFIGURATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 defaults:
   # Favicon
-  favicon: /images/redefine-favicon.svg
+  favicon: https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png
   # Site logo
   logo: 
   # Site avatar
-  avatar: /images/redefine-avatar.svg
+  avatar: https://i.imgur.com/9NJGKah.png
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -108,7 +108,7 @@ home_banner:
   title: mida0ui & adm
   # Home banner subtitle
   subtitle:
-    text: [Cloud & DevOps, Open Source Intelligence, Capture-The-Flag, TV Shows and more...] # subtitle text, array
+    text: [Hey! This is Adam & Rania, Cloud & DevOps Enthusiasts, Open Source Intelligence, CTFs @ SOter14 Securinets] # subtitle text, array
     hitokoto:  # 一言配置
       enable: false # Whether to enable hitokoto
       api: https://v1.hitokoto.cn # API URL, can add types, see https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
@@ -144,11 +144,11 @@ home_banner:
     enable: true
     # Social links
     links:
-      github:  https://github.com/raniamidaoui
+      github:  https://github.com/admida0ui
       instagram: # your Instagram URL
       zhihu:  # your ZhiHu URL
-      twitter:  # your twitter URL
-      email:  # your email
+      twitter:  https://twitter.com/admida0ui
+      email:  contact@admida0ui.tech
       # ...... # you can add more
 # HOME BANNER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
@@ -170,22 +170,17 @@ navbar:
     Archives: 
       path: /archives 
       icon: fa-regular fa-archive # can be empty
-    Status: 
-      path: https://status.evanluo.top/
-      icon: fa-regular fa-chart-bar
+    Stories:
+      path: /categories/Stories/
+      icon: fa-regular fa-book
+    Writeups:
+      path: /categories/Writeups/
+      icon: fa-regular fa-file-code
     About: 
       icon: fa-regular fa-user
       submenus:
-        Me: /about
-        Github: https://github.com/EvanNotFound/hexo-theme-redefine
-        Blog: https://ohevan.com
-        Friends: /friends
-    Links: 
-      icon: fa-regular fa-link
-      submenus:
-        Link1: /link1
-        Link2: /link2
-        Link3: /link3
+        Rania: https://raniamida0ui.github.io
+        Adam: https://adamlahbib.me
     # you can add more
   # Navbar search (local search). Requires hexo-generator-searchdb (npm i hexo-generator-searchdb). See https://github.com/theme-next/hexo-generator-searchdb
   search:
@@ -245,7 +240,7 @@ articles:
     min2read: true # Whether to display reading time
   # Author label
   author_label: 
-    enable: true # Whether to enable
+    enable: false # Whether to enable
     auto: false # Whether to automatically add author label, e.g. Lv1, Lv2, Lv3...
     list: []
   # Code block settings

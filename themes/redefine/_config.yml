@@ -23,9 +23,9 @@ defaults:
   # Favicon
   favicon: https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png
   # Site logo
-  logo: https://i.imgur.com/9NJGKah.png
+  logo: /images/admida0ui.png
   # Site avatar
-  avatar: https://i.imgur.com/9NJGKah.png
+  avatar: /images/admida0ui.png
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 

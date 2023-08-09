@@ -3,7 +3,7 @@ title: Securinets NCSC IV CTF - Quantum Challenges Writeup
 date: 2023-3-22 20:00:00
 tags: Quantum
 categories: Writeups
-thumbnail: "https://i.imgur.com/NdX0RT0.jpg"
+thumbnail: "https://i.imgur.com/IVz5ogy.jpg"
 ---
 
 # QASM Writeup

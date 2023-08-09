@@ -102,8 +102,8 @@ home_banner:
   style: static # static or fixed
   # Home banner image
   image: 
-    light: /images/wallhaven-wqery6-dark.webp # light mode
-    dark: /images/wallhaven-wqery6-dark.webp # dark mode
+    light: /images/wallpaper.webp # light mode
+    dark: /images/wallpaper.webp # dark mode
   # Home banner title
   title: mida0ui & adm
   # Home banner subtitle
@@ -185,9 +185,9 @@ navbar:
   # Navbar search (local search). Requires hexo-generator-searchdb (npm i hexo-generator-searchdb). See https://github.com/theme-next/hexo-generator-searchdb
   search:
     # Whether to enable
-    enable: true
+    enable: false
     # Preload search data when the page loads
-    preload: true
+    preload: false
 # NAVIGATION BAR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -203,12 +203,6 @@ home:
       Archives: 
         path: /archives 
         icon: fa-regular fa-archive # can be empty
-      Tags: 
-        path: /tags 
-        icon: fa-regular fa-tags # can be empty
-      Categories: 
-        path: /categories 
-        icon: fa-regular fa-folder # can be empty
      # ...... # you can add more
   # Article date format
   article_date_format: auto # auto, relative, YYYY-MM-DD, YYYY-MM-DD HH:mm:ss etc.

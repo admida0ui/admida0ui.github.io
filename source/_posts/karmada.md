@@ -2,7 +2,7 @@
 title: Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada
 date: 2023-8-19 9:30:00
 tags: Cloud
-categories: work
+categories: Work
 thumbnail: "https://i.imgur.com/1xrxNAA.png"
 ---
 

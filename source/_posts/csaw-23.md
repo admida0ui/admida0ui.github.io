@@ -1,6 +1,6 @@
 ---
 title: My CSAW'23 at NYU Abu Dhabi Journey - Rania 
-date: 2023-11-18 12:00:00
+date: 2023-11-17 12:00:00
 tags: csaw, ctf, nyuad
 categories: Stories
 thumbnail: "https://i.imgur.com/JDJlXaD.png"
@@ -24,9 +24,17 @@ I arrived the first hour of the next morning in Dubai International Airport, my 
 
 Dubai, it breathes life into the night, unfolded before me as I keep photographing every step of the way leading to the hotel. The smooth road beneath the wheels like a magical ribbon guiding me through a luminescent labyrinth of lights on both sides, the city skyling being the masterpiece of it all.
 
+![](https://i.imgur.com/3kwglBj.jpg)
+
 It takes around an hour and thirty minutes to go from Dubai to Abu Dhabi, and I've never felt exhausted, I was wide awake, ready to discover the hotel surroundings, I just kept my stuff in the room, and went exploring the streets, trying some chinese food and taking pictures of the city.
 
-We were already in the early morning hours and by the sunrise, I got my breakfast at the hotel, trying every available cheese, and then we set off to the nearest mall, Wehda mall, one of the biggest malls in Abu Dhabi, I was amazed by the size of the mall, and the number of shops, I bought some souvenirs and then we went to the beach, the weather was so hot during the day so we got back to the hotel to get some rest before the opening ceremony of the CTF.
+![](https://i.imgur.com/2baglCq.jpg)
+
+We were already in the early morning hours and by the sunrise, I got my breakfast at the hotel, trying every available cheese, and then we set off to the nearest mall, Wehda mall, one of the biggest malls in Abu Dhabi I visited along with Abu Dhabi Mall, I was amazed by the size of the mall, and the number of shops, I bought some souvenirs and then we went to the beach, the weather was so hot during the day so we got back to the hotel to get some rest before the opening ceremony of the CTF.
+
+![](https://i.imgur.com/5ZV5kM0.jpg)
+
+![](https://i.imgur.com/16oeW4b.jpg)
 
 I noticed how clean the cars were, and the organization of traffic, street cats are missing a little care, I was patting them, I missed my family, Adam, and my cat.
 

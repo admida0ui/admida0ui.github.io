@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2023/08/06/jackpot/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="We were able to find a left-behind cranky old cartel laptop in hibernation state. We believe that this device can help us retrieve the cartel’s crypto-currency wallet and withdraw their future gains.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Securinets Quals CTF 2023 - Jackpot Forensics Challenge Writeup">
+<meta property="og:url" content="http://admida0ui.tech/2023/08/06/jackpot/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="We were able to find a left-behind cranky old cartel laptop in hibernation state. We believe that this device can help us retrieve the cartel’s crypto-currency wallet and withdraw their future gains.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/GONLlyG.png">
+<meta property="og:image" content="https://i.imgur.com/Qx1z5zy.png">
+<meta property="og:image" content="https://i.imgur.com/AgJlPlG.png">
+<meta property="og:image" content="https://i.imgur.com/MGjHNpu.png">
+<meta property="og:image" content="https://i.imgur.com/8KCPq36.png">
+<meta property="og:image" content="https://i.imgur.com/NGRW8VU.png">
+<meta property="og:image" content="https://i.imgur.com/wWzkTjZ.png">
+<meta property="og:image" content="https://i.imgur.com/t8T8lYY.png">
+<meta property="og:image" content="https://i.imgur.com/gAJWn0m.png">
+<meta property="og:image" content="https://i.imgur.com/hoZj5DU.png">
+<meta property="og:image" content="https://i.imgur.com/LH8W47T.png">
+<meta property="og:image" content="https://i.imgur.com/6JWtrGQ.png">
+<meta property="og:image" content="https://i.imgur.com/ReEeaE9.png">
+<meta property="og:image" content="https://i.imgur.com/NW9lTab.png">
+<meta property="og:image" content="https://i.imgur.com/VMADEqo.png">
+<meta property="og:image" content="https://i.imgur.com/X1drpyr.png">
+<meta property="og:image" content="https://i.imgur.com/ynNyJqX.png">
+<meta property="og:image" content="https://i.imgur.com/FxNDjWP.png">
+<meta property="og:image" content="https://i.imgur.com/Mhm1M63.png">
+<meta property="og:image" content="https://i.imgur.com/3tK5T2J.png">
+<meta property="article:published_time" content="2023-08-06T17:30:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T19:05:17.071Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="Forensics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/GONLlyG.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Securinets Quals CTF 2023 - Jackpot Forensics Challenge Writeup -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/bpm3E2X.jpg" alt="Securinets Quals CTF 2023 - Jackpot Forensics Challenge Writeup" />
+                    <h1 class="article-title-cover">Securinets Quals CTF 2023 - Jackpot Forensics Challenge Writeup</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-06 19:30</span>
+        <span class="mobile">2023-08-06 19:30</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-17 21:05:17</span>
+            <span class="mobile">2024-05-17 21:05</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Writeups/">Writeups</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Forensics/">Forensics</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/GONLlyG.png"
+                     
+                ></p>
+<p>We were able to find a left-behind cranky old cartel laptop in hibernation state. We believe that this device can help us retrieve the cartel’s crypto-currency wallet and withdraw their future gains.</p>
+<p>We know that the cartel uses an intranet to communicate their news within couple of blocks in the city undergrounds.</p>
+<p>Provided this intellisense, can you win us the jackpot? Wrap your finding in Securinets as indicated below.</p>
+<p>Flag format: Securinets{drug-enforcement-administration-for-the-win-style}</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://twitter.com/admida0ui" >adm &amp; mida0ui <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="Attachment"><a href="#Attachment" class="headerlink" title="Attachment"></a>Attachment</h2><p>Given a disk image, <code>disk.img</code>. The disk image is a raw disk image, and can be investigated using FTK Imager.<br><a class="link"   target="_blank" rel="noopener" href="https://drive.google.com/file/d/1Ss4QTQi4XbRXbTfy3FU0nDbqePFhuRFI/view?usp=sharing" >https://drive.google.com/file/d/1Ss4QTQi4XbRXbTfy3FU0nDbqePFhuRFI/view?usp=sharing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h2><h3 id="Hibernation-Part"><a href="#Hibernation-Part" class="headerlink" title="Hibernation Part"></a>Hibernation Part</h3><p>The disk image is a raw disk image, and can be investigated using FTK Imager. The disk image contains a single partition, which is a Windows XP installation.</p>
+<p>Looking at the root of the disk image, we can see a few interesting files:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/Qx1z5zy.png"
+                     
+                ></p>
+<ul>
+<li><code>Documents and Settings</code> - Contains the user profiles of the system</li>
+<li><code>Program Files</code> - Contains the installed programs</li>
+<li><code>Windows</code> - Contains the Windows installation files</li>
+<li><code>pagefile.sys</code> - The page file of the system, aka swap file, which holds the memory of the system when it is not in use or when it is not enough RAM to hold the memory of the system.</li>
+<li><code>hiberfil.sys</code> - The hibernation file of the system, which contains the memory of the system when it is hibernated.</li>
+<li><code>System Volume Information</code> - Contains the shadow copies of the system, which is a backup of the system files. It is used to restore the system in case of a system failure. It is also used by the Windows Backup utility to create a backup of the system. It is also used by the Windows Restore utility to restore the system to a previous state. This folder is present in all disk images, people are usually not interested in it. However, it is very interesting in this case, as it contains a folder named <code>_restore&#123;xxxxxx&#125;</code>. This folder contains a file named <code>RPx</code>, this cleary a restore point of the system. We will investigate it later as well.</li>
+</ul>
+<p>and the rest of the stuff that would really find in any Windows disk…</p>
+<p>Let’s start with the fact that the laptop was in hibernation mode, we know for a fact that the hiberfil.sys stores the memory content at hibernation, maybe we can treat it as an actual memory and find the intranet chat!!?</p>
+<p>Googling a bit, I found this (Superuser question)[<a class="link"   target="_blank" rel="noopener" href="https://superuser.com/questions/660649/how-to-read-windows-hibernation-file-hiberfil-sys-to-extract-data]" >https://superuser.com/questions/660649/how-to-read-windows-hibernation-file-hiberfil-sys-to-extract-data] <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> and it says that if we convert the hiberfile.sys file to a raw image, we can use Volatility to analyze it!</p>
+<p>and this is the command to use, as indicated:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vol -f hiberfil.sys --profile WinXPSP3x86 imagecopy -O hiberfil.raw</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/AgJlPlG.png"
+                     
+                ></p>
+<p>Cool, we hope now we can use Volatility to analyze the hiberfil.raw file. Let’s start by checking the processes and commands history.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/MGjHNpu.png"
+                     
+                ></p>
+<p>Cmdscan now maybe!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/8KCPq36.png"
+                     
+                ></p>
+<p>There we go, we can see what they meant by the legacy, old school chat. They were using <code>msg.exe</code> to communicate with each other. This is a very old program, and it is used to send messages to other users in the same network. It is very similar to the LAN messenger that we found earlier, but it is a command line program. <code>msg</code> can also be used to transmit files as well.</p>
+<p>The chat goes with the description and indicates that our guy got some kind of password that was placed in a certain registry key and permanetly deleted it after.</p>
+<h3 id="Metamask-Part"><a href="#Metamask-Part" class="headerlink" title="Metamask Part"></a>Metamask Part</h3><p>Now, let’s further investigate the programs now to build an understanding around this situation</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/NGRW8VU.png"
+                     
+                ></p>
+<p>We only see Chrome to be the only interesting thing in this disk evidence.</p>
+<p>We know the crypto-currency part might need some searching to know that Metamask the most famous crypto wallet is a browser extension!!</p>
+<p>And yeah, Metamask is being used in Chrome. Metamask is a browser extension that allows you to use Ethereum, Binance Chain, and more. It is a very popular extension, and it is used by a lot of people. Metamask gives you a wallet address, and you can use it to send and receive cryptocurrencies whether in the Ethereum network, BSC network, or custom networks. But an address is only the public key you use to send and receive, we are looking further than that, we want the private one to be able to control the wallet completely.</p>
+<p>Metamask Extension for Chrome</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/wWzkTjZ.png"
+                     
+                ></p>
+<p>Could there be an active wallet within Metamask? Let’s check it out.</p>
+<p>Usually the extension data is stored within the ‘Local Extension Settings’ folder. And as expected, that folder contains some interesting files.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/t8T8lYY.png"
+                     
+                ></p>
+<p>The <code>Local Extension Settings</code> folder contains a folder named <code>nkbihfbeogaeaoehlefnkodbefgpgknn</code>, which is the ID of the Metamask extension. This folder contains a file named 0000xx.ldb, which is a DB file. Let’s check it out.</p>
+<p>According to this <a class="link"   target="_blank" rel="noopener" href="https://ethereum.stackexchange.com/questions/52658/where-does-metamask-store-the-wallet-seed-file-path" >Ethereum Stackexchange question <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>. We could be able to completely control the existing wallet if we have the password. Could the challenge be all about that? and how to get the wallet password?</p>
+<p>Yes it is possible, and we will get back to it later, for now, finding password is the priority!! We know it is a registry key, that was deleted.</p>
+<p>Let’s think how we can RESTORE it xD</p>
+<h3 id="Restore-Point-Part"><a href="#Restore-Point-Part" class="headerlink" title="Restore Point Part"></a>Restore Point Part</h3><p>Is it the time, to investigate the <code>_restore&#123;xxxxxx&#125;</code> folder? right?</p>
+<p>We can make use of a VM, however (OP: says the disk must not be converted back to vmdk whether by using a different file format or breaking the boot files). This way we can’t use a VM to check the restore point. So, we have to do it manually. My idea is to spin my own Windows XP on VMware, you can get the ISO officially by Microsoft with serial number from the WayBackMachine SP3 and x86 of course. After that we create a dummy restore point and modify its files by copying the RP folders from <code>System Volume Information</code> and then we can proceed to perform a restore point to see what is inside. I hope you can understand what I mean here.</p>
+<p>(OP Note: for order I guess I will accept any provided order or make the user follow the order as shown in the leaked chat.)</p>
+<p>Let’s do it.</p>
+<ul>
+<li>Spinning a new Windows XP machine</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/gAJWn0m.png"
+                     
+                ></p>
+<ul>
+<li>Creating a dummy restore point or just get the disk UUID, anyways we need Windows to create a restore point folder for us, so let’s do it.</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/hoZj5DU.png"
+                     
+                ></p>
+<ul>
+<li>Copying the RP folders from the Disk image <code>System Volume Information</code> to the new VM’s <code>System Volume Information</code></li>
+</ul>
+<p>Export the restore folder from System Volume Information to your desktop or some folder.</p>
+<p>Adjust these folder options on Windows XP VM</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/LH8W47T.png"
+                     
+                ></p>
+<p>Then use this command to gain access to the System Volume Information folder</p>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cacls <span class="string">&quot;C:\System Volume Information&quot;</span> /E /G Administrator:F</span><br></pre></td></tr></table></figure></div>
+
+<p>It can be administrator, Everyone or your specific VM username.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/6JWtrGQ.png"
+                     
+                ></p>
+<p>Then copy the restore folder contents to the System Volume Information folder</p>
+<p>This is the current dummy restore point we made</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/ReEeaE9.png"
+                     
+                ></p>
+<p>We add the exported RP5 and RP6 folders from the disk image with them</p>
+<p>In each of the folders there is a <code>drivetable.txt</code> file that contains the old disk UUID, we need to replace it with the new one.</p>
+<ul>
+<li>Modifying Disk UUID in the restore point</li>
+</ul>
+<p>You can also modify the <code>domain.txt</code> since it contains the old user-id but I believe the Restore point utility can very much detect the change.</p>
+<ul>
+<li>Restoring the system like if it was a real restore point we made.</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/NW9lTab.png"
+                     
+                ></p>
+<p>We can see a new entry added called “restore_point”, so let’s proceed with it!</p>
+<p>This is the domain thing, hit ‘OK’</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/VMADEqo.png"
+                     
+                ></p>
+<p>We wait for a quick restart.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/X1drpyr.png"
+                     
+                ></p>
+<p>And that’s a success!</p>
+<p>Let’s open the registry now, shall we?</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/ynNyJqX.png"
+                     
+                ></p>
+<p>And there we go, a key named password containing a string named deleteMe! Bingo!</p>
+<h3 id="Banking"><a href="#Banking" class="headerlink" title="Banking!"></a>Banking!</h3><p>At this point, there is only one thing left, let’s get the flag!</p>
+<p>Remember that Ethereum stack exchange question I mentioned earlier? here is the link again, also bring the content of the ldb file’s vault which is near the word “keyring”, you can CTRL+F that in the ldb files and adjust the format if some letters are escaped or encoded because data is never lost, you can also upload the whole file to the <a class="link"   target="_blank" rel="noopener" href="https://metamask.github.io/vault-decryptor/" >tool <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://ethereum.stackexchange.com/questions/52658/where-does-metamask-store-the-wallet-seed-file-path" >https://ethereum.stackexchange.com/questions/52658/where-does-metamask-store-the-wallet-seed-file-path <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/FxNDjWP.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/Mhm1M63.png"
+                     
+                ></p>
+<p>Let’s get our flag now</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/3tK5T2J.png"
+                     
+                ></p>
+<p>Done, we have some critical information here. The seed phrase! We wrap it in Securinets</p>
+<p><code>Securinets&#123;female-fire-strong-accuse-spring-update-bird-exchange-home-embark-latin-mom&#125;</code></p>
+<p>Thanks for reading, we hope you enjoyed it, and we will be happy to hear your feedback and suggestions.</p>
+<p>GGs <strong>itunderground</strong> for solving this challenge</p>
+<h2 id="Idea-and-Final-Words"><a href="#Idea-and-Final-Words" class="headerlink" title="Idea and Final Words"></a>Idea and Final Words</h2><p>Just wanted to use pagefile.sys, hiberfile.sys, the Metamask thing, and Restore points because nobody used them like this in a CTF. So don’t know if that’s a great thing or rather will make players frustrated. Yet, tried to make everything as clear as possible for the players to understand and enjoy the challenge as a whole.</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Securinets Quals CTF 2023 - Jackpot Forensics Challenge Writeup</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2023-08-06 19:30:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-17 21:05:17
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2023/08/06/jackpot/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Forensics/">#Forensics</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/08/06/0-8-4/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Securinets Quals CTF 2023 - 0-8-4 Quantum Writeup</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/08/06/couch-potato/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Securinets Quals CTF 2023 - Couch Potato Misc Challenge Writeup</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Securinets Quals CTF 2023 - Jackpot Forensics Challenge Writeup</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Attachment"><span class="nav-text">Attachment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writeup"><span class="nav-text">Writeup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hibernation-Part"><span class="nav-text">Hibernation Part</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Metamask-Part"><span class="nav-text">Metamask Part</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Restore-Point-Part"><span class="nav-text">Restore Point Part</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Banking"><span class="nav-text">Banking!</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea-and-Final-Words"><span class="nav-text">Idea and Final Words</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

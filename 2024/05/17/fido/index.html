@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2024/05/17/fido/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="FIDO2FIDO (Fast Identity Online) is a set of standards for passwordless authentication. FIDO2 is the latest version of the FIDO standard. It enables users to leverage common devices to easily authenti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setting up FIDO2 on Linux (1)">
+<meta property="og:url" content="http://admida0ui.tech/2024/05/17/fido/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="FIDO2FIDO (Fast Identity Online) is a set of standards for passwordless authentication. FIDO2 is the latest version of the FIDO standard. It enables users to leverage common devices to easily authenti">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hwsecurity.dev/img/hardware-partners/yubico-series.png">
+<meta property="og:image" content="https://i.imgur.com/CT0SsBS.png">
+<meta property="og:image" content="https://i.imgur.com/T483rw5.png">
+<meta property="og:image" content="https://i.imgur.com/z4HbBkb.png">
+<meta property="og:image" content="https://i.imgur.com/8CKyxgA.png">
+<meta property="og:image" content="https://smart-tux.de/en/post/pam-u2f/featured_huab28890d5d08b5025e1bea807990a145_37566_720x2500_fit_q75_h2_lanczos_3.webp">
+<meta property="og:image" content="https://i.imgur.com/b99OyBP.png">
+<meta property="article:published_time" content="2024-05-17T18:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-23T16:20:23.447Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="fido">
+<meta property="article:tag" content="fedora">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hwsecurity.dev/img/hardware-partners/yubico-series.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Setting up FIDO2 on Linux (1) -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/wt5aHGQ.png" alt="Setting up FIDO2 on Linux (1)" />
+                    <h1 class="article-title-cover">Setting up FIDO2 on Linux (1)</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-05-17 20:00</span>
+        <span class="mobile">2024-05-17 20</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-23 18:20:23</span>
+            <span class="mobile">2024-05-23 18:20</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Work/">Work</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/fido/">fido</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/fedora/">fedora</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/security/">security</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="FIDO2"><a href="#FIDO2" class="headerlink" title="FIDO2"></a>FIDO2</h1><p>FIDO (Fast Identity Online) is a set of standards for passwordless authentication. FIDO2 is the latest version of the FIDO standard. It enables users to leverage common devices to easily authenticate to online services in both mobile and desktop environments.</p>
+<p>Authentication with FIDO2 is based on public key cryptography. The user registers a device with the online service, and then authenticates by proving possession of the device. The device creates a new key pair for each service, and the private key is stored securely on the device, never leaving it.</p>
+<p>In addition to classic two-factor authentication (2FA), FIDO2 also supports passwordless authentication. This means that users can authenticate without entering a password, using only a FIDO2 device.</p>
+<p>Various devices can be used for FIDO2 authentication, such as Nitrokey, YubiKey, or SoloKeys. These devices are connected to the computer via USB, NFC, or Bluetooth.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hwsecurity.dev/img/hardware-partners/yubico-series.png"
+                      alt="FIDO2"
+                ></p>
+<h1 id="PAM"><a href="#PAM" class="headerlink" title="PAM"></a>PAM</h1><p>PAM is a central authentication framework used on Unix-like systems. It is used to authenticate users when they log in, and to manage the authentication process for various services.</p>
+<p>PAM can be used to integrate FIDO2 authentication into the system.This allows developers to not rewrite authentication code for each application, and to use the same authentication method across all services by delegating authentication to PAM.</p>
+<p>The integration of FIDO2 into PAM allows users to authenticate with FIDO2 devices for various services, such as SSH, sudo, or login seamlessly.</p>
+<h2 id="Pre-requisites"><a href="#Pre-requisites" class="headerlink" title="Pre-requisites"></a>Pre-requisites</h2><p>For this guide, we will use Fedora 40 as the operating system. The steps may vary slightly for other distributions (differences will be indicated where applicable).</p>
+<p>In this guide, we have the Nitrokey 3A NFC as the FIDO2 device. The steps should be the same for the others.</p>
+<p>First, we install the PAM module for FIDO which is luckily included in the most common distributions repositories.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install pam-u2f pamu2fcfg fido2-tools -y</span><br></pre></td></tr></table></figure></div>
+
+<p>The package <code>pam-u2f</code> contains the PAM module for FIDO2 authentication, <code>pamu2fcfg</code> is the helper tool for registering FIDO2 devices, and <code>fido2-tools</code> contains the tools for working with FIDO2 devices.</p>
+<details>
+  <summary>Debian/Manjaro/OpenSuse</summary>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install libpam-u2f pamu2fcfg fido2-tools -y</span><br><span class="line">sudo pacman -Syu pam-u2f --noconfirm</span><br><span class="line">sudo zypper --non-interactive install pam_u2f libfido2-utils</span><br></pre></td></tr></table></figure></div>
+</details>
+
+<h2 id="FIDO2-Key-Registration"><a href="#FIDO2-Key-Registration" class="headerlink" title="FIDO2 Key Registration"></a>FIDO2 Key Registration</h2><p>A FIDO2 Key is ready for use right after purchase. No need to manually generate keys or configure anything. The key is ready to be used for authentication out of the box.</p>
+<p>It only requires to be registered with the target system for authentication.</p>
+<p>To support that, the user account is linked to the FIDO2 key data thanks to the helper tool <code>pamu2fcfg</code>.</p>
+<p>Initially, we create a directory for the key data on the system:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /etc/fido2</span><br></pre></td></tr></table></figure></div>
+
+<p>Then, we register the FIDO2 key with the system, by linking the user account and FIDO2 key. Plug in the Nitrokey on a USB port and run the next command with the desired user account (i.e. not root).</p>
+<p>Notice that the key will blink green to prompt you to briefly touch it (depending on the key if it is protected with a PIN, it must be entered in addition, we will also cover how to enable the PIN protection if the key didn’t come with it enabled).</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pamu2fcfg | sudo <span class="built_in">tee</span> -a /etc/fido2/u2f_keys</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="PAM-Configuration"><a href="#PAM-Configuration" class="headerlink" title="PAM Configuration"></a>PAM Configuration</h2><p>The PAM configuration files for all distributions are located in the <code>/etc/pam.d/</code> directory.</p>
+<p>Each login service has its own configuration file. For example, the SSH service configuration file is <code>/etc/pam.d/sshd</code>.</p>
+<p>The reference to the FIDO2 module must be inserted into the configuration file of the desired service. Mind that the order of the modules is important as the authentication process is sequential.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth sufficient pam_u2f.so authfile=/etc/fido2/u2f_keys cue [cue_prompt=Please briefly <span class="built_in">touch</span> the Nitrokey...]</span><br></pre></td></tr></table></figure></div>
+
+<p>The service type <code>auth</code> instructs PAM to use the module for authentication. The <code>sufficient</code> keyword tells PAM that if the module succeeds, the authentication process is complete. The <code>authfile</code> parameter specifies the path to the file containing the FIDO2 key data. The <code>cue</code> parameter is used to display a message to the user, in this case, when the FIDO2 key needs to be touched. The <code>cue_prompt</code> parameter specifies the message to be displayed.</p>
+<p>It is important to know that changes to the PAM configuration files is active immediately upon saving the file.</p>
+<p>However, thanks to the sequence of the modules, if the FIDO2 module is not connected to the computer, the user will still be able to authenticate with the password or fingerprint.</p>
+<h3 id="SUDO-Console-and-Desktop-Logins"><a href="#SUDO-Console-and-Desktop-Logins" class="headerlink" title="SUDO, Console and Desktop Logins"></a>SUDO, Console and Desktop Logins</h3><p>Fedora uses GDM – GNOME Display Manager – as the login manager which comes with the GNOME desktop environment. The configuration file for GDM is <code>/etc/pam.d/gdm-password</code>.</p>
+<p>If you did some customisations to the display manager or desktop environment, you might want to figure out which service is responsible for the login.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status display-manager</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/CT0SsBS.png"
+                      alt="display-manager service"
+                ></p>
+<p>The reference to the FIDO2 module must be inserted on top of the configuration file, before the other modules for the console login file <code>etc/pam.d/login</code> and the sudo file <code>etc/pam.d/sudo</code>.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/T483rw5.png"
+                      alt="login"
+                ></p>
+<p>You can test it by opening a TTY session with <code>Ctrl+Alt+F3</code> and logging in with your user account. Return to the graphical session with <code>Ctrl+Alt+F2</code>.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/z4HbBkb.png"
+                      alt="sudo"
+                ></p>
+<p>You can test it by running a command with <code>sudo</code>.</p>
+<p>The PAM configuration file for the GDM display manager is <code>/etc/pam.d/gdm-password</code>. For which the reference to the FIDO2 module must be inserted second as indicated in the image below.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/8CKyxgA.png"
+                      alt="gdm-password"
+                ></p>
+<p>You can test it by logging out and logging in again to the system.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://smart-tux.de/en/post/pam-u2f/featured_huab28890d5d08b5025e1bea807990a145_37566_720x2500_fit_q75_h2_lanczos_3.webp"
+                     
+                ></p>
+<p>Credits: <a class="link"   target="_blank" rel="noopener" href="https://smart-tux.de/en/post/pam-u2f/" >Smart Tux <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<details>
+  <summary>Debian/Manjaro/OpenSuse</summary>
+
+<p><strong>For Debian</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auth sufficient pam_u2f.so authfile=/etc/fido2/u2f_keys cue [cue_prompt=Please <span class="built_in">touch</span> the Nitrokey...]</span><br><span class="line">@include common-auth</span><br></pre></td></tr></table></figure></div>
+
+<p>is inserted above the existing line <code>@include common-auth</code>. for the following files:</p>
+<ul>
+<li>&#x2F;etc&#x2F;pam.d&#x2F;sudo</li>
+<li>&#x2F;etc&#x2F;pam.d&#x2F;login</li>
+<li>&#x2F;etc&#x2F;pam.d&#x2F;lightdm (The default Debian Desktop Manager)</li>
+</ul>
+<p><strong>For Manjaro and OpenSuse</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth sufficient pam_u2f.so authfile=/etc/fido2/u2f_keys cue [cue_prompt=Please <span class="built_in">touch</span> the Nitrokey...]`</span><br></pre></td></tr></table></figure></div>
+
+<p>is inserted above the existing lines for the following files:</p>
+<ul>
+<li>&#x2F;etc&#x2F;pam.d&#x2F;sudo</li>
+<li>&#x2F;etc&#x2F;pam.d&#x2F;login</li>
+<li>&#x2F;etc&#x2F;pam.d&#x2F;lightdm (The default Manjaro Desktop Manager) and &#x2F;etc&#x2F;pam.d&#x2F;gdm (The default OpenSuse Desktop Manager)</li>
+</ul>
+</details>
+
+<p><em>All distributions can also customise a central configuration file as an alternative to the individual PAM configuration files. This file is <code>/etc/pam.d/system-auth</code>. <code>etc/pam.d/common-auth</code> for Debian and OpenSuse.</em></p>
+<p><em>You can include the line there as well for all services system-wide use of FIDO2.</em></p>
+<p><em>For Fedora, the file is managed by the <code>authselect</code> tool, and any many manual changes might be overwritten.</em></p>
+<p>Activate FIDO U2F support in PAM using authselect with the with-pam-u2f flag:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo authselect <span class="keyword">select</span> sssd with-pam-u2f</span><br></pre></td></tr></table></figure></div>
+
+<p>If you also want to use your fingerprint reader you have to enable both features:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo authselect <span class="keyword">select</span> sssd with-pam-u2f with-fingerprint</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="Tips-and-Tricks"><a href="#Tips-and-Tricks" class="headerlink" title="Tips and Tricks"></a>Tips and Tricks</h1><h2 id="PIN-Management"><a href="#PIN-Management" class="headerlink" title="PIN Management"></a>PIN Management</h2><p>To prevent misuse of the FIDO2 key, it is recommended to set a PIN. The PIN is required to unlock the key before it can be used for authentication.</p>
+<p>We can rely on the <code>fido2-tools</code> package to manage the PIN or the Chromium browser.</p>
+<h3 id="Using-fido2-tools"><a href="#Using-fido2-tools" class="headerlink" title="Using fido2-tools"></a>Using fido2-tools</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fido2-token -L</span><br></pre></td></tr></table></figure></div>
+
+<p>This command lists all FIDO2 keys connected to the system. The key is identified by the <code>ID</code> field.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fido2-token -S /dev/hidraw1</span><br></pre></td></tr></table></figure></div>
+
+<p>This command sets a PIN for the FIDO2 key. Replace <code>/dev/hidraw1</code> with the correct device path.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fido2-token -C /dev/hidraw1</span><br></pre></td></tr></table></figure></div>
+
+<p>This command changes the PIN for the FIDO2 key. Replace <code>/dev/hidraw1</code> with the correct device path.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fido2-token -R /dev/hidraw1</span><br></pre></td></tr></table></figure></div>
+
+<p>This command resets the PIN for the FIDO2 key. Replace <code>/dev/hidraw1</code> with the correct device path. The key will be reset to factory settings and all data will be lost. It is important to switch all accounts that have been linked to the key to an alternative authentication method before resetting the key.</p>
+<h3 id="Using-Chromium"><a href="#Using-Chromium" class="headerlink" title="Using Chromium"></a>Using Chromium</h3><p>Chromium browser can also be used to manage the PIN of the FIDO2 key. The browser must be installed on the system.</p>
+<p>Open the Chromium browser and navigate to <code>chrome://settings/securityKeys</code> and rhe rest is self-explanatory.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/b99OyBP.png"
+                      alt="Chromium"
+                ></p>
+<h2 id="GIT-Authentication-over-SSH-and-Nitrokey"><a href="#GIT-Authentication-over-SSH-and-Nitrokey" class="headerlink" title="GIT Authentication over SSH and Nitrokey"></a>GIT Authentication over SSH and Nitrokey</h2><p>Git over SSH can be configured to use the FIDO2 key to authenticate git operations exactly the same as when setting up SSH with the FIDO.</p>
+<p>This can be implemented in two ways, either by using the FIDO2 key for all git operations or to use it just to sign the commits.</p>
+<h3 id="Using-FIDO2-Key-for-All-Git-Operations"><a href="#Using-FIDO2-Key-for-All-Git-Operations" class="headerlink" title="Using FIDO2 Key for All Git Operations"></a>Using FIDO2 Key for All Git Operations</h3><p>Let’s start first by generating a new SSH key for the FIDO2 key:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ecdsa-sk -f ~/.ssh/id_ecdsa_sk</span><br></pre></td></tr></table></figure></div>
+
+<p>The <code>-t ecdsa-sk</code> specifies the type of key to generate, in this case, an ECDSA key with Secure Key (SK) support. The <code>-f ~/.ssh/id_ecdsa_sk</code> specifies the file to save the key to.</p>
+<p>Now, we need to add the public key to GitHub user settings.</p>
+<p>If you try to commit to a repository, <code>git</code> will wait for you to touch the FIDO2 key and will blink green to signal that.</p>
+<h3 id="Using-FIDO2-Key-to-Sign-Commits"><a href="#Using-FIDO2-Key-to-Sign-Commits" class="headerlink" title="Using FIDO2 Key to Sign Commits"></a>Using FIDO2 Key to Sign Commits</h3><p>To sign git tags or commits, we will need to configure git client to use SSH key format instead of PGP.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config gpg.format ssh</span><br></pre></td></tr></table></figure></div>
+
+<p>In addition, we need to specify which key to use for signing:</p>
+<p>Let’s generate a new SSH key (ECDSA with Secure Key support) for this purpose:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ecdsa-sk -f ~/.ssh/id_ecdsa_sk</span><br></pre></td></tr></table></figure></div>
+
+<p>Then, we instruct git to use this key for signing:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config user.signingKey ~/.ssh/id_ecdsa_sk</span><br></pre></td></tr></table></figure></div>
+
+<p>Next, we tell git which SSH public key is trusted for verification, in PGP case, it is the GPG key ring, for SSH it is the <code>~/.ssh/allowed_signers</code> file.</p>
+<p>We add it to the git configuration:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers</span><br></pre></td></tr></table></figure></div>
+
+<p>All done, don’t foget to use the <code>-S</code> flag when committing to sign the commit upon which the Nitrokey will blink green to prompt you to touch it.</p>
+<h2 id="NFC-Support"><a href="#NFC-Support" class="headerlink" title="NFC Support"></a>NFC Support</h2><p>Per Nitrokey website, it is possible to use Nitrokey on Android smartphones. OpenKeychain, the popular Android app for OpenPGP encryption, supports Nitrokey. You can use your private keys on your Nitrokey to encrypt, decrypt and sign emails using OpenKeychain.</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Setting up FIDO2 on Linux (1)</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2024-05-17 20:00:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-23 18:20:23
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2024/05/17/fido/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/fido/">#fido</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/fedora/">#fedora</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/security/">#security</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/08/19/karmada/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Setting up FIDO2 on Linux (1)</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FIDO2"><span class="nav-text">FIDO2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PAM"><span class="nav-text">PAM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pre-requisites"><span class="nav-text">Pre-requisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FIDO2-Key-Registration"><span class="nav-text">FIDO2 Key Registration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PAM-Configuration"><span class="nav-text">PAM Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SUDO-Console-and-Desktop-Logins"><span class="nav-text">SUDO, Console and Desktop Logins</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips-and-Tricks"><span class="nav-text">Tips and Tricks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PIN-Management"><span class="nav-text">PIN Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-fido2-tools"><span class="nav-text">Using fido2-tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Chromium"><span class="nav-text">Using Chromium</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIT-Authentication-over-SSH-and-Nitrokey"><span class="nav-text">GIT Authentication over SSH and Nitrokey</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-FIDO2-Key-for-All-Git-Operations"><span class="nav-text">Using FIDO2 Key for All Git Operations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-FIDO2-Key-to-Sign-Commits"><span class="nav-text">Using FIDO2 Key to Sign Commits</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NFC-Support"><span class="nav-text">NFC Support</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2023/03/22/ncsc-iv-quantum/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="QASM WriteupDescription: Can you make this quantum circuit work? Flag Format: Securinets{output} Author: mida0ui  Attachment: circuit.qasm  The file “circuit.qasm” was attached with the task, you can">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Securinets NCSC IV CTF - Quantum Challenges Writeup">
+<meta property="og:url" content="http://admida0ui.tech/2023/03/22/ncsc-iv-quantum/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="QASM WriteupDescription: Can you make this quantum circuit work? Flag Format: Securinets{output} Author: mida0ui  Attachment: circuit.qasm  The file “circuit.qasm” was attached with the task, you can">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227212904-65c59610-ca9d-47d8-9c10-77d5a778a901.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227237110-fde0799f-7c11-46f7-b979-5e875700b573.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227240203-d0370ac5-878c-4283-8604-d0ca57514d69.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227387829-286fd428-c826-4f30-8264-ea534bff4060.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227385150-7ef68a9d-5df0-44f1-8a15-3cd7ef30c3a1.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227385473-bec4a07f-9c72-4cdd-bcb3-1d74bf6f60d6.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227386762-efc389e2-0fc7-40df-a1d4-ce875cc796b7.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227386943-e500f1df-3336-46e4-9e04-77b4712c0a66.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227387496-b3b2db78-49ab-461e-aa20-6bc45a8a2175.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227387322-15c87f80-6249-4b31-b330-320e1527e89f.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227387580-b1f2e3e5-a042-4cd9-ab1a-85efe86e6f7e.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227387914-12ac7b4b-7a8a-454b-9b72-7168e05c378a.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227387960-e482bfa2-1ef5-40dd-837d-ac00bb5b5a8d.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227388030-6a777d62-5c66-4930-ad04-8d80a4cc8209.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227388440-e82427d9-a370-40cb-bbeb-57b4ed6e79f9.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227388502-2d56a22c-9f23-445f-a93f-ac1861661171.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227512203-39c1f52b-4c32-426e-8fb8-676bf2740cd8.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227512818-c69dc67e-3b9a-4110-806a-68a1d8259f4f.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227512923-b68d7c97-22fb-4e3b-9ca3-59e835b93bf9.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/227514820-95d36f4c-11ce-47bb-bdcf-ef68002436e0.png">
+<meta property="article:published_time" content="2023-03-22T19:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T19:05:17.071Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="Quantum">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/68945305/227212904-65c59610-ca9d-47d8-9c10-77d5a778a901.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Securinets NCSC IV CTF - Quantum Challenges Writeup -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/IVz5ogy.jpg" alt="Securinets NCSC IV CTF - Quantum Challenges Writeup" />
+                    <h1 class="article-title-cover">Securinets NCSC IV CTF - Quantum Challenges Writeup</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-03-22 20:00</span>
+        <span class="mobile">2023-03-22 20</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-17 21:05:17</span>
+            <span class="mobile">2024-05-17 21:05</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Writeups/">Writeups</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Quantum/">Quantum</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="QASM-Writeup"><a href="#QASM-Writeup" class="headerlink" title="QASM Writeup"></a>QASM Writeup</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h2><blockquote>
+<p>Can you make this quantum circuit work? Flag Format: Securinets{output}</p>
+<p>Author: mida0ui</p>
+</blockquote>
+<p>Attachment: <a class="link"   target="_blank" rel="noopener" href="https://github.com/RaniaMidaoui/CTF-writeups/blob/main/NCSC4.0-CTF/Quantum/QASM/circuit.qasm" >circuit.qasm <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>The file “circuit.qasm” was attached with the task, you can find it in this repo.</p>
+<p>First of all, what is QASM?</p>
+<p>QASM(quantum assembly language) is a simple text-format language for describing acyclic quantum circuits composed from single qubit, multiply controlled single-qubit gates, multiple-qubit, and multiple-qubit controlled multiple-qubit gates.<br>A QASM program declares the classical bits and qubits, describes the operations (gates) on those qubits and the measurements needed to obtain the classical result by inspecting the qubits. </p>
+<p>In this challenge, the only thing that needs to be done is to open the qasm file and run the circuit describes.<br>This can be done in various ways, there’s no single intended solution, i will only state 2 solutions in this writeup. </p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1:"></a>Solution 1:</h3><p>You can import the code in the QASM file in IBM Quantum composer: <a class="link"   target="_blank" rel="noopener" href="https://quantum-computing.ibm.com/composer/files/new" >https://quantum-computing.ibm.com/composer/files/new <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227212904-65c59610-ca9d-47d8-9c10-77d5a778a901.png"
+                      alt="2023-03-23_14h03_27"
+                ></p>
+<p>Yhe output of this circuit is always 01001 (with a 100% probability).<br>Flag: Securinets{01001}</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution 2:"></a>Solution 2:</h3><p>You can import the QASM file code and run the circuit using qiskit.<br>In this case, to make the quantum circuit work, you only have to add measurements.</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">from qiskit import *</span><br><span class="line"></span><br><span class="line">qasm_str = &quot;&quot;&quot;OPENQASM 2.0;</span><br><span class="line">include &quot;qelib1.inc&quot;;</span><br><span class="line"></span><br><span class="line">qreg q[5];</span><br><span class="line">creg c[4];</span><br><span class="line">y q[0];</span><br><span class="line">y q[2];</span><br><span class="line">x q[3];</span><br><span class="line">y q[1];</span><br><span class="line">id q[3];</span><br><span class="line">id q[1];</span><br><span class="line">z q[0];</span><br><span class="line">y q[0];</span><br><span class="line">ccx q[2], q[3], q[4];</span><br><span class="line">swap q[0], q[1];</span><br><span class="line">cx q[3], q[4];</span><br><span class="line">x q[2];</span><br><span class="line">x q[0];</span><br><span class="line">cx q[2], q[3];</span><br><span class="line">y q[0];</span><br><span class="line">x q[2];</span><br><span class="line">swap q[2], q[3];</span><br><span class="line">cx q[3], q[4];</span><br><span class="line">ccx q[0], q[1], q[2];</span><br><span class="line">y q[4];</span><br><span class="line">z q[3];</span><br><span class="line">y q[2];</span><br><span class="line">cx q[2], q[3];</span><br><span class="line">measure q[0] -&gt; c[0];</span><br><span class="line">measure q[1] -&gt; c[1];</span><br><span class="line">measure q[2] -&gt; c[2];</span><br><span class="line">measure q[3] -&gt; c[3];</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">circuit = QuantumCircuit.from_qasm_str(qasm_str)</span><br><span class="line"></span><br><span class="line">backend = Aer.get_backend(&#x27;qasm_simulator&#x27;)</span><br><span class="line">job = execute(circuit, backend)</span><br><span class="line">result = job.result()</span><br><span class="line"></span><br><span class="line">print(result.get_counts(circuit))</span><br></pre></td></tr></table></figure></div>
+
+<p>The reuslt of this code is:<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227237110-fde0799f-7c11-46f7-b979-5e875700b573.png"
+                      alt="2023-03-23_15h35_19"
+                ></p>
+<p>But the circuit contains a quantum register of 5 qubits, we have to get the measurement result of them all: we notice that all the quantum gates described in the QASM file did not change the state of the fifth qubit, so its still in the default value.<br>The default state of a qubit, if not initialisaed is |0&gt;.<br>So the overall output of the circuit is 01001 (always, with a 100% probability).</p>
+<p>Flag: Securinets{01001}</p>
+<h1 id="Secret-Message-1"><a href="#Secret-Message-1" class="headerlink" title="Secret Message 1"></a>Secret Message 1</h1><h2 id="Description-1"><a href="#Description-1" class="headerlink" title="Description"></a>Description</h2><blockquote>
+<p>Oh look! I managed to get this super secret message, but i cannot decode it :( The message is the output of this circuit.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227240203-d0370ac5-878c-4283-8604-d0ca57514d69.png"
+                      alt="226449081-4b7f8c73-8fe9-4a68-a515-fca0733f43df"
+                ></p>
+<p>The message is: òßÒïá×ÙßìâæÔ,í#ÙÞúÝïÙúî#.Ôúãï,Ù.ïÛúÎ,ì”&#x2F;*ú#Ñ!Ó-Üë</p>
+<p>Can you help me ?</p>
+<p>Author: mida0ui</p>
+</blockquote>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>A quantum gate is basic quantum circuit operating on a small number of qubits, they perform operations to change the state of the qubits, and unlike many classical logic gates, quantum logic gates are reversible.<br>Each quantum gate has its matrix, and since the qubit states are represented with vectors, the gates transform these vectors to get new states.<br>The state vectors of the states |0&gt; and |1&gt; are:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227387829-286fd428-c826-4f30-8264-ea534bff4060.png"
+                      alt="2023-03-24_00h39_51"
+                ></p>
+<p>First of all, lets explain the components of the given quantum circuit:</p>
+<h4 id="The-X-Gate"><a href="#The-X-Gate" class="headerlink" title="The X-Gate:"></a>The X-Gate:</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227385150-7ef68a9d-5df0-44f1-8a15-3cd7ef30c3a1.png"
+                      alt="2023-03-24_00h15_54"
+                ></p>
+<p>A single-qubit gate represented by the Pauli-X matrix:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227385473-bec4a07f-9c72-4cdd-bcb3-1d74bf6f60d6.png"
+                      alt="2023-03-24_00h18_49"
+                ></p>
+<p>the X-gate simply switches the amplitudes of the states |0&gt; and |1&gt;, you can see it like this: A qubit has a probability of measuring zero and a probability of measuring one, and an X gate swaps those probabilities. It perfroms a π rotation around the x-axis.</p>
+<h4 id="The-Y-Gate"><a href="#The-Y-Gate" class="headerlink" title="The Y-Gate:"></a>The Y-Gate:</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227386762-efc389e2-0fc7-40df-a1d4-ce875cc796b7.png"
+                      alt="2023-03-24_00h16_38"
+                ></p>
+<p>Similar to the X gate, it’s single-qubit gate represented by the Pauli-Y matrix:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227386943-e500f1df-3336-46e4-9e04-77b4712c0a66.png"
+                      alt="2023-03-24_00h30_41"
+                ></p>
+<p>It performs a π rotation around the y-axis in the Bloch sphere.</p>
+<h4 id="The-S-Gate"><a href="#The-S-Gate" class="headerlink" title="The S-Gate:"></a>The S-Gate:</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227387496-b3b2db78-49ab-461e-aa20-6bc45a8a2175.png"
+                      alt="2023-03-24_00h16_31"
+                ></p>
+<p>The Phase gate (or S gate) is a single-qubit operation represented by the matrix:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227387322-15c87f80-6249-4b31-b330-320e1527e89f.png"
+                      alt="2023-03-24_00h35_34"
+                ></p>
+<p>The S gate is also known as the phase gate or the Z90 gate, because it represents a 90-degree rotation around the z-axis.</p>
+<h4 id="The-Controlled-Not-or-CX-Gate"><a href="#The-Controlled-Not-or-CX-Gate" class="headerlink" title="The Controlled Not or CX Gate:"></a>The Controlled Not or CX Gate:</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227387580-b1f2e3e5-a042-4cd9-ab1a-85efe86e6f7e.png"
+                      alt="2023-03-24_00h16_42"
+                ></p>
+<p>The CNOT gate iss a two-qubit quantum gate that performs a controlled NOT where one qubit is the control and the second qubit is the target. Its matrix is the following :</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227387914-12ac7b4b-7a8a-454b-9b72-7168e05c378a.png"
+                      alt="2023-03-24_00h40_32"
+                ></p>
+<p>When applied:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227387960-e482bfa2-1ef5-40dd-837d-ac00bb5b5a8d.png"
+                      alt="2023-03-24_00h40_54"
+                ></p>
+<p>The mathematics behind these results are simple:</p>
+<p>Lets take |10&gt; and |11&gt;:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227388030-6a777d62-5c66-4930-ad04-8d80a4cc8209.png"
+                      alt="2023-03-24_00h41_31"
+                ></p>
+<p>This ⊗ represents a tensor product, you can read about it here if you don’t know what it is : <a class="link"   target="_blank" rel="noopener" href="https://www.math3ma.com/blog/the-tensor-product-demystified" >https://www.math3ma.com/blog/the-tensor-product-demystified <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>The first qubit is usually referred to as the control qubit and the second qubit as the target qubit. Expressed in basis states, the CNOT gate: leaves the control qubit unchanged and performs a Pauli-X gate or NOT gate (which just flips the state of the qubit) on the target qubit when the control qubit is in state ∣1⟩; leaves the target qubit unchanged when the control qubit is in state ∣0⟩.</p>
+<h4 id="The-SWAP-Gate"><a href="#The-SWAP-Gate" class="headerlink" title="The SWAP Gate:"></a>The SWAP Gate:</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227388440-e82427d9-a370-40cb-bbeb-57b4ed6e79f9.png"
+                      alt="2023-03-24_00h16_58"
+                ></p>
+<p>The SWAP gate is two-qubit operation. Expressed in basis states, the SWAP gate swaps the state of the two qubits involved in the operation:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227388502-2d56a22c-9f23-445f-a93f-ac1861661171.png"
+                      alt="2023-03-24_00h45_19"
+                ></p>
+<h4 id="Reversing-the-given-circuit"><a href="#Reversing-the-given-circuit" class="headerlink" title="Reversing the given circuit:"></a>Reversing the given circuit:</h4><p>All the matrices of the gates stated bellow (and in genereal in quantum computing) are reversible, which means, the gate can be applied to reverse its own effet, so the only thing we have to do is to put them in a reversed order, and we get our flag.<br>We transform the output given in the description into a binary string to fit in the quantum circuit, the encoding used here is ‘windows-1252’ because the output string uses characters from the extended ASCII table, so we cannot use utf-8 for example. We create a quantum circuit with one quantum register containing 2 qubits and one classical register to measure the state of those qubits, put the gates in a reversed order and pass our string in a loop and decode the message slowly.</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">from qiskit import *</span><br><span class="line"></span><br><span class="line">output = &#x27;òßÒïá×ÙßìâæÔ,í#ÙÞúÝïÙúî#.Ôúãï,Ù.ïÛúÎ,ì&quot;/*ú#Ñ!Ó-Üë&#x27;</span><br><span class="line">output_array = &#x27;&#x27;.join(format(i, &#x27;08b&#x27;) for i in bytearray(output, encoding =&#x27;windows-1252&#x27;))</span><br><span class="line"></span><br><span class="line">bin_flag = &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">def state_vect(bit):</span><br><span class="line">    if(bit == &#x27;0&#x27;):</span><br><span class="line">        vect = [1, 0]</span><br><span class="line">    else : </span><br><span class="line">        vect = [0 ,1]</span><br><span class="line">    return vect</span><br><span class="line"></span><br><span class="line">i = 0</span><br><span class="line">while i&lt;len(output_array):</span><br><span class="line">    </span><br><span class="line">    #Initialize the quantum circuit</span><br><span class="line">    q = QuantumRegister(2, &quot;q&quot;)</span><br><span class="line">    c = ClassicalRegister(2, &quot;c&quot;)</span><br><span class="line">    </span><br><span class="line">    qc = QuantumCircuit(q,c)</span><br><span class="line"></span><br><span class="line">    vect0 = state_vect(output_array[i])</span><br><span class="line">    vect1 = state_vect(output_array[i+1])</span><br><span class="line"></span><br><span class="line">    qc.initialize(vect1,0)</span><br><span class="line">    qc.initialize(vect0,1)</span><br><span class="line">    </span><br><span class="line">    qc.measure(q, c)</span><br><span class="line"></span><br><span class="line">    qc.swap(q[0],q[1])</span><br><span class="line">    qc.x(q[0])</span><br><span class="line">    qc.cx(q[0],q[1])</span><br><span class="line">    qc.s(q[0])</span><br><span class="line">    qc.x(q[0])</span><br><span class="line">    qc.y(q[1])</span><br><span class="line"></span><br><span class="line">    qc.measure(q, c)</span><br><span class="line">    </span><br><span class="line">    qobj = assemble(qc, shots=1)</span><br><span class="line">    job = execute(qc,Aer.get_backend(&#x27;qasm_simulator&#x27;),shots=1)</span><br><span class="line">    counts = job.result().get_counts()</span><br><span class="line">    </span><br><span class="line">    bin_flag += str(counts)[2:4]</span><br><span class="line"></span><br><span class="line">    i=i+2</span><br><span class="line">    </span><br><span class="line">flag = &#x27;&#x27;.join(chr(int(bin_flag[i*8:i*8+8],2)) for i in range(len(bin_flag)//8))</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure></div>
+<p>Flag: Securinets{h4v1ng_fun_w17h_qu4n7um_G4t35?_1b2a6d}</p>
+<h1 id="Secret-Message-2"><a href="#Secret-Message-2" class="headerlink" title="Secret Message 2"></a>Secret Message 2</h1><h2 id="Description-2"><a href="#Description-2" class="headerlink" title="Description"></a>Description</h2><blockquote>
+<p>I want to tell you a secret, but i’m afraid someone will intercept our communication. I know how good you are now with quantum encoding, so I will let you figure it out on your own.<br>I used the following code to get to encode the secret:<br> <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qc.s(q[2])</span><br><span class="line">qc.ccx(q[0],q[1],q[2])</span><br><span class="line">qc.h(q[2])</span><br><span class="line">qc.swap(q[1],q[0])</span><br><span class="line">qc.y(q[0])</span><br></pre></td></tr></table></figure></div><br>The secret is: VMëÜÁÂÎèÜ</p>
+<p>Also, the secret contains two english words, it doesn’t contain special characters nor numbers.</p>
+<p>Flag format: Securinets{decoded_message}</p>
+<p>BE CAREFUL, YOU ONLY HAVE 5 attempts</p>
+<p>Author: mida0ui</p>
+</blockquote>
+<h2 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h2><p>From the description of this task, we can see that the CCNOT gate was used, along with other gates to encode the message, meaning that we need to use a quantum register containing 3 qubits to solve this task. The CCNOT gate is similar to the CNOT gate seen in the previous task, but it’s a three-qubit gate, it is applied to one target qubit based on the state of two control qubits:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227512203-39c1f52b-4c32-426e-8fb8-676bf2740cd8.png"
+                      alt="2023-03-24_12h41_54"
+                ></p>
+<p>To encode the message, a very special gate waas used too, the Hadamard gate.<br>The Hadamard gate is a single-qubit operation that maps the basis state ∣0⟩ to <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227512818-c69dc67e-3b9a-4110-806a-68a1d8259f4f.png"
+                      alt="2023-03-24_12h45_04"
+                > &#x3D; |+&gt; and |1&gt; to <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227512923-b68d7c97-22fb-4e3b-9ca3-59e835b93bf9.png"
+                      alt="2023-03-24_12h45_39"
+                > &#x3D; |-&gt;, thus creating an equal superposition of the two basis states.<br>It has the matrix:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/227514820-95d36f4c-11ce-47bb-bdcf-ef68002436e0.png"
+                      alt="2023-03-24_12h55_46"
+                ></p>
+<p>A qubit can exist in a superposition of its two “basis” states, which loosely means that it is in both states simultaneously. When measuring a qubit, the result is a probabilistic output of a classical bit, so for one single qubit, the measurement can give either |1&gt; or |0&gt; depending on the probabilistic state.<br>With that said, we cannot use one iteration to decode the message like in the previous task, we need to print all the possibilities (or almost) to see the different reults of measurements, and get the decoded message.<br>To make the task easier and less time consuming, the description specifies that the secret contains two english words and it doesn’t contain special characters nor numbers. So we will filter the results based on these two facts.</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib</span><br><span class="line">from qiskit import *</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">output = &#x27;VMëÜÁÂÎèÜ&#x27;</span><br><span class="line">output_array = &#x27;&#x27;.join(format(i, &#x27;08b&#x27;) for i in bytearray(output, encoding=&quot;windows-1252&quot;))</span><br><span class="line"></span><br><span class="line">bin_flag = &#x27;&#x27;</span><br><span class="line">bins = &#x27;&#x27;</span><br><span class="line">def state_vect(bit):</span><br><span class="line">    if(bit == &#x27;0&#x27;):</span><br><span class="line">        vect = [1, 0]</span><br><span class="line">    else : </span><br><span class="line">        vect = [0 ,1]</span><br><span class="line">    return vect</span><br><span class="line"></span><br><span class="line">while(1):</span><br><span class="line">    i = 0</span><br><span class="line">    flag = &quot;&quot;</span><br><span class="line">    while i&lt;len(output_array):</span><br><span class="line"></span><br><span class="line">        #Initialize the quantum circuit</span><br><span class="line">        q = QuantumRegister(3, &quot;q&quot;)</span><br><span class="line">        c = ClassicalRegister(3, &quot;c&quot;)</span><br><span class="line"></span><br><span class="line">        qc = QuantumCircuit(q,c)</span><br><span class="line"></span><br><span class="line">        #get the initial state from the output</span><br><span class="line">        vect0 = state_vect(output_array[i])</span><br><span class="line">        vect1 = state_vect(output_array[i+1])</span><br><span class="line">        vect2 = state_vect(output_array[i+2])</span><br><span class="line"></span><br><span class="line">        #in itialize the register</span><br><span class="line">        qc.initialize(vect0,2)</span><br><span class="line">        qc.initialize(vect1,1)</span><br><span class="line">        qc.initialize(vect2,0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        qc.measure(q, c)</span><br><span class="line"></span><br><span class="line">        #Reverse the circuit</span><br><span class="line">        qc.y(q[0])  </span><br><span class="line">        qc.swap(q[1],q[0])     </span><br><span class="line">        qc.h(q[2])</span><br><span class="line">        qc.ccx(q[0],q[1],q[2])</span><br><span class="line">        qc.s(q[2])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        qc.measure(q, c)</span><br><span class="line"></span><br><span class="line">        #execute the circuit</span><br><span class="line">        qobj = assemble(qc, shots=1)</span><br><span class="line">        job = execute(qc,Aer.get_backend(&#x27;qasm_simulator&#x27;),shots=1)</span><br><span class="line">        counts = job.result().get_counts()</span><br><span class="line"></span><br><span class="line">        bin_flag += str(counts)[2:5]</span><br><span class="line">        #Increment the counter to get the next 2 qubits</span><br><span class="line">        i=i+3</span><br><span class="line"></span><br><span class="line">    flag = &#x27;&#x27;.join(chr(int(bin_flag[i*8:i*8+8],2)) for i in range(len(bin_flag)//8))</span><br><span class="line">    if(bool(re.match(&#x27;^[a-zA-Z]*$&#x27;,flag))==True):</span><br><span class="line">        print(flag)</span><br><span class="line">    bin_flag = &#x27;&#x27;</span><br></pre></td></tr></table></figure></div>
+<p>Flag: Securinets{youwin}</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Securinets NCSC IV CTF - Quantum Challenges Writeup</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2023-03-22 20:00:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-17 21:05:17
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2023/03/22/ncsc-iv-quantum/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Quantum/">#Quantum</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/06/01/kli8nt/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Streamlined Application Deployemet using Kubernetes</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/03/19/ncsc-iv/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Securinets NCSC IV - The Hackback</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Securinets NCSC IV CTF - Quantum Challenges Writeup</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#QASM-Writeup"><span class="nav-text">QASM Writeup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-text">Description:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-text">Solution 1:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2"><span class="nav-text">Solution 2:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Secret-Message-1"><span class="nav-text">Secret Message 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description-1"><span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Secret-Message-2"><span class="nav-text">Secret Message 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description-2"><span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution-1"><span class="nav-text">Solution</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

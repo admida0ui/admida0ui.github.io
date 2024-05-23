@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2023/07/19/pulumi/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="Before you begin, make sure you have the following:  Google Cloud Platform (GCP) account with appropriate permissions. Pulumi CLI installed. You can find installation instructions here. Go installed.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Provisioning a GKE Cluster Using Pulumi">
+<meta property="og:url" content="http://admida0ui.tech/2023/07/19/pulumi/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="Before you begin, make sure you have the following:  Google Cloud Platform (GCP) account with appropriate permissions. Pulumi CLI installed. You can find installation instructions here. Go installed.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/KVpYJDh.png">
+<meta property="og:image" content="https://i.imgur.com/ZLDXrNR.png">
+<meta property="og:image" content="https://i.imgur.com/jNrR6WW.png">
+<meta property="og:image" content="https://i.imgur.com/hmUc53v.png">
+<meta property="og:image" content="https://i.imgur.com/7PrrjKe.png">
+<meta property="og:image" content="https://i.imgur.com/onYn6lx.png">
+<meta property="og:image" content="https://i.imgur.com/4mFCcHo.png">
+<meta property="og:image" content="https://i.imgur.com/ryHQFpL.png">
+<meta property="og:image" content="https://i.imgur.com/kTWNdDw.png">
+<meta property="article:published_time" content="2023-07-19T07:30:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T19:05:17.071Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="Cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/KVpYJDh.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Provisioning a GKE Cluster Using Pulumi -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/yLRvYVC.jpg" alt="Provisioning a GKE Cluster Using Pulumi" />
+                    <h1 class="article-title-cover">Provisioning a GKE Cluster Using Pulumi</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-07-19 09:30</span>
+        <span class="mobile">2023-07-19 09:30</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-17 21:05:17</span>
+            <span class="mobile">2024-05-17 21:05</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Work/">Work</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Cloud/">Cloud</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p>Before you begin, make sure you have the following:</p>
+<ul>
+<li>Google Cloud Platform (GCP) account with appropriate permissions.</li>
+<li>Pulumi CLI installed. You can find installation instructions here.</li>
+<li>Go installed. You can find installation instructions here.</li>
+<li>Make sure to check Pulumi documentations</li>
+</ul>
+<h1 id="Google-Cloud-SDK"><a href="#Google-Cloud-SDK" class="headerlink" title="Google-Cloud-SDK"></a>Google-Cloud-SDK</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/KVpYJDh.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/ZLDXrNR.png"
+                     
+                ></p>
+<p>Then</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcloud auth application-default login</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="Pulumi-Installation"><a href="#Pulumi-Installation" class="headerlink" title="Pulumi Installation"></a>Pulumi Installation</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/jNrR6WW.png"
+                     
+                ></p>
+<h1 id="New-Project-and-stack-name"><a href="#New-Project-and-stack-name" class="headerlink" title="New Project and stack name"></a>New Project and stack name</h1><ul>
+<li>Create a new directory for your project: mkdir pulumi-gke-cluster</li>
+<li>Change into the project directory: cd pulumi-gke-cluster</li>
+<li>Initialize a new Pulumi project with Go: pulumi new gcp-go</li>
+<li>Select the desired project name and stack name when prompted.</li>
+</ul>
+<p>This project name allows you to track your changes via the Pulumi Dashboard</p>
+<p>In Pulumi, a stack name represents a unique identifier for a specific instance of your infrastructure. It helps you manage different configurations or variations of your infrastructure within a single Pulumi project.</p>
+<p>When you create a new Pulumi stack, you provide a stack name to distinguish it from other stacks. The stack name can be any string that meets the naming requirements of your cloud provider.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/hmUc53v.png"
+                     
+                ></p>
+<p>For the first time, you will be promoted to enter your auth token which you can get by making a Pulumi account.</p>
+<h1 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h1><h2 id="pulumi-new-lt-template-gt"><a href="#pulumi-new-lt-template-gt" class="headerlink" title="pulumi new &lt;template&gt;"></a>pulumi new &lt;template&gt;</h2><ul>
+<li>Description: Initializes a new Pulumi project from a template.</li>
+<li>Usage: pulumi new &lt;template&gt;</li>
+<li>Example: pulumi new gcp-go</li>
+</ul>
+<h2 id="pulumi-stack-select"><a href="#pulumi-stack-select" class="headerlink" title="pulumi stack select"></a>pulumi stack select</h2><ul>
+<li>Description: Selects an existing Pulumi stack to work with.</li>
+<li>Usage: pulumi stack select &lt;stack-name&gt;</li>
+<li>Example: pulumi stack select dev-cluster</li>
+</ul>
+<h2 id="pulumi-up"><a href="#pulumi-up" class="headerlink" title="pulumi up"></a>pulumi up</h2><ul>
+<li>Description: Deploys or updates the resources in the current Pulumi stack.</li>
+<li>Usage: pulumi up</li>
+<li>Example: pulumi up</li>
+</ul>
+<h2 id="pulumi-destroy"><a href="#pulumi-destroy" class="headerlink" title="pulumi destroy"></a>pulumi destroy</h2><ul>
+<li>Description: Destroys all resources in the current stack.</li>
+<li>Usage: pulumi destroy</li>
+<li>Example: pulumi destroy</li>
+</ul>
+<h2 id="pulumi-stack-ls"><a href="#pulumi-stack-ls" class="headerlink" title="pulumi stack ls"></a>pulumi stack ls</h2><ul>
+<li>Description: Lists all the available stacks.</li>
+<li>Usage: pulumi stack ls</li>
+<li>Example: pulumi stack ls</li>
+</ul>
+<h2 id="pulumi-config"><a href="#pulumi-config" class="headerlink" title="pulumi config"></a>pulumi config</h2><ul>
+<li>Description: Manages configuration values for the current stack.</li>
+<li>Usage:<br>pulumi config set &lt;key&gt; &lt;value&gt;<br>pulumi config get &lt;key&gt;<br>pulumi config rm &lt;key&gt;</li>
+<li>Example:<br>pulumi config set gcpProject my-project-id<br>pulumi config get gcpProject<br>pulumi config rm gcpProject</li>
+</ul>
+<h2 id="pulumi-stack-export"><a href="#pulumi-stack-export" class="headerlink" title="pulumi stack export"></a>pulumi stack export</h2><ul>
+<li>Description: Exports the current stack’s state to a file.</li>
+<li>Usage: pulumi stack export –file &lt;filename&gt;</li>
+<li>Example: pulumi stack export –file stack-state.json</li>
+</ul>
+<h2 id="pulumi-stack-import"><a href="#pulumi-stack-import" class="headerlink" title="pulumi stack import"></a>pulumi stack import</h2><ul>
+<li>Description: Imports a stack’s state from a file.</li>
+<li>Usage: pulumi stack import –file &lt;filename&gt;</li>
+<li>Example: pulumi stack import –file stack-state.json</li>
+</ul>
+<h1 id="State-Management"><a href="#State-Management" class="headerlink" title="State Management"></a>State Management</h1><p>Pulumi state represents the current state of your infrastructure as managed by Pulumi. It includes resource information, configuration settings, and other relevant metadata.</p>
+<p>Pulumi state is stored in a backend, which can be a local file, a cloud storage bucket (our case), or a remote state management service (e.g., Pulumi service, AWS S3, Azure Blob Storage, etc.).</p>
+<h1 id="Provisioning-the-Cluster"><a href="#Provisioning-the-Cluster" class="headerlink" title="Provisioning the Cluster"></a>Provisioning the Cluster</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/7PrrjKe.png"
+                     
+                ></p>
+<p>Voila! Our cluster</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/onYn6lx.png"
+                     
+                ></p>
+<p>The NodePools</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/4mFCcHo.png"
+                     
+                ></p>
+<p>And the bucket</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/ryHQFpL.png"
+                     
+                ></p>
+<p>Pulumi Dashboard</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/kTWNdDw.png"
+                     
+                ></p>
+<p>Pulumi Dashboard helps you visualize your infrastructure and track changes over time. It also provides a convenient way to share your infrastructure with your team.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p><strong>Main.go</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;github.com/pulumi/pulumi-gcp/sdk/v6/go/gcp/storage&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/pulumi/pulumi-gcp/sdk/v6/go/gcp/container&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes&quot;</span></span><br><span class="line">	appsv1 <span class="string">&quot;github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/apps/v1&quot;</span></span><br><span class="line">	corev1 <span class="string">&quot;github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/core/v1&quot;</span></span><br><span class="line">	metav1 <span class="string">&quot;github.com/pulumi/pulumi-kubernetes/sdk/v3/go/kubernetes/meta/v1&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/pulumi/pulumi/sdk/v3/go/pulumi&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">generateKubeconfig</span><span class="params">(clusterEndpoint pulumi.StringOutput, clusterName pulumi.StringOutput,</span></span></span><br><span class="line"><span class="params"><span class="function">	clusterMasterAuth container.ClusterMasterAuthOutput)</span></span> pulumi.StringOutput &#123;</span><br><span class="line">	context := pulumi.Sprintf(<span class="string">&quot;demo_%s&quot;</span>, clusterName)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> pulumi.Sprintf(<span class="string">`apiVersion: v1</span></span><br><span class="line"><span class="string">clusters:</span></span><br><span class="line"><span class="string">- cluster:</span></span><br><span class="line"><span class="string">    certificate-authority-data: %s</span></span><br><span class="line"><span class="string">    server: https://%s</span></span><br><span class="line"><span class="string">  name: %s</span></span><br><span class="line"><span class="string">contexts:</span></span><br><span class="line"><span class="string">- context:</span></span><br><span class="line"><span class="string">    cluster: %s</span></span><br><span class="line"><span class="string">    user: %s</span></span><br><span class="line"><span class="string">  name: %s</span></span><br><span class="line"><span class="string">current-context: %s</span></span><br><span class="line"><span class="string">kind: Config</span></span><br><span class="line"><span class="string">preferences: &#123;&#125;</span></span><br><span class="line"><span class="string">users:</span></span><br><span class="line"><span class="string">- name: %s</span></span><br><span class="line"><span class="string">  user:</span></span><br><span class="line"><span class="string">    exec:</span></span><br><span class="line"><span class="string">      apiVersion: client.authentication.k8s.io/v1beta1</span></span><br><span class="line"><span class="string">      command: gke-gcloud-auth-plugin</span></span><br><span class="line"><span class="string">      installHint: Install gke-gcloud-auth-plugin for use with kubectl by following</span></span><br><span class="line"><span class="string">        https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke</span></span><br><span class="line"><span class="string">      provideClusterInfo: true</span></span><br><span class="line"><span class="string">`</span>,</span><br><span class="line">		clusterMasterAuth.ClusterCaCertificate().Elem(),</span><br><span class="line">		clusterEndpoint, context, context, context, context, context, context)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	pulumi.Run(<span class="function"><span class="keyword">func</span><span class="params">(ctx *pulumi.Context)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">		<span class="comment">// Create a GCP resource (Storage Bucket)</span></span><br><span class="line">		bucket, err := storage.NewBucket(ctx, <span class="string">&quot;my-bucket&quot;</span>, &amp;storage.BucketArgs&#123;</span><br><span class="line">			Location: pulumi.String(<span class="string">&quot;US&quot;</span>),</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		projectName := pulumi.String(ctx.Project())</span><br><span class="line">		clusterName := pulumi.String(<span class="string">&quot;my-cluster&quot;</span>)</span><br><span class="line">		nodePoolName := pulumi.String(<span class="string">&quot;my-node-pool&quot;</span>)</span><br><span class="line">		zone := pulumi.String(<span class="string">&quot;us-central1-a&quot;</span>)</span><br><span class="line"></span><br><span class="line">		cluster, err := container.NewCluster(ctx, <span class="string">&quot;gkeCluster&quot;</span>, &amp;container.ClusterArgs&#123;</span><br><span class="line">			Project:     projectName,</span><br><span class="line">			Name:        clusterName,</span><br><span class="line">			InitialNodeCount: pulumi.Int(<span class="number">1</span>),</span><br><span class="line">			Location:          zone,</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		nodePool, erro := container.NewNodePool(ctx, <span class="string">&quot;gkeNodePool&quot;</span>, &amp;container.NodePoolArgs&#123;</span><br><span class="line">			Project:     projectName,</span><br><span class="line">			Cluster:     cluster.Name,</span><br><span class="line">			Name:        nodePoolName,</span><br><span class="line">			InitialNodeCount: pulumi.Int(<span class="number">1</span>),</span><br><span class="line">			Location:          zone,</span><br><span class="line">		&#125;, pulumi.DependsOn([]pulumi.Resource&#123;cluster&#125;))</span><br><span class="line">		<span class="keyword">if</span> erro != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> erro</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Export KubeConfig</span></span><br><span class="line">		ctx.Export(<span class="string">&quot;kubeconfig&quot;</span>, generateKubeconfig(cluster.Endpoint, cluster.Name, cluster.MasterAuth))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		k8sProvider, err := kubernetes.NewProvider(ctx, <span class="string">&quot;k8sprovider&quot;</span>, &amp;kubernetes.ProviderArgs&#123;</span><br><span class="line">			Kubeconfig: generateKubeconfig(cluster.Endpoint, cluster.Name, cluster.MasterAuth),</span><br><span class="line">		&#125;, pulumi.DependsOn([]pulumi.Resource&#123;cluster&#125;))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// create deployment and service for nginx</span></span><br><span class="line">		appLabels := pulumi.StringMap&#123;</span><br><span class="line">			<span class="string">&quot;app&quot;</span>: pulumi.String(<span class="string">&quot;nginx&quot;</span>),</span><br><span class="line">		&#125;</span><br><span class="line">		deployment, er := appsv1.NewDeployment(ctx, <span class="string">&quot;nginx&quot;</span>, &amp;appsv1.DeploymentArgs&#123;</span><br><span class="line">			Metadata: &amp;metav1.ObjectMetaArgs&#123;</span><br><span class="line">				Name:      pulumi.String(<span class="string">&quot;nginx&quot;</span>),</span><br><span class="line">				Namespace: pulumi.String(<span class="string">&quot;default&quot;</span>),</span><br><span class="line">				Labels:    appLabels,</span><br><span class="line">			&#125;,</span><br><span class="line">			Spec: &amp;appsv1.DeploymentSpecArgs&#123;</span><br><span class="line">				Replicas: pulumi.Int(<span class="number">1</span>),</span><br><span class="line">				Selector: &amp;metav1.LabelSelectorArgs&#123;</span><br><span class="line">					MatchLabels: appLabels,</span><br><span class="line">				&#125;,</span><br><span class="line">				Template: &amp;corev1.PodTemplateSpecArgs&#123;</span><br><span class="line">					Metadata: &amp;metav1.ObjectMetaArgs&#123;</span><br><span class="line">						Labels: appLabels,</span><br><span class="line">					&#125;,</span><br><span class="line">					Spec: &amp;corev1.PodSpecArgs&#123;</span><br><span class="line">						Containers: corev1.ContainerArray&#123;</span><br><span class="line">							corev1.ContainerArgs&#123;</span><br><span class="line">								Name:  pulumi.String(<span class="string">&quot;nginx&quot;</span>),</span><br><span class="line">								Image: pulumi.String(<span class="string">&quot;nginx&quot;</span>),</span><br><span class="line">								Ports: corev1.ContainerPortArray&#123;</span><br><span class="line">									corev1.ContainerPortArgs&#123;</span><br><span class="line">										ContainerPort: pulumi.Int(<span class="number">80</span>),</span><br><span class="line">									&#125;,</span><br><span class="line">								&#125;,</span><br><span class="line">							&#125;,</span><br><span class="line">						&#125;,</span><br><span class="line">					&#125;,</span><br><span class="line">				&#125;,</span><br><span class="line">			&#125;,</span><br><span class="line">		&#125;, pulumi.DependsOn([]pulumi.Resource&#123;nodePool&#125;), pulumi.Provider(k8sProvider))</span><br><span class="line">		<span class="keyword">if</span> er != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> er</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		_, err = corev1.NewService(ctx, <span class="string">&quot;nginx&quot;</span>, &amp;corev1.ServiceArgs&#123;</span><br><span class="line">			Metadata: &amp;metav1.ObjectMetaArgs&#123;</span><br><span class="line">				Name:      pulumi.String(<span class="string">&quot;nginx&quot;</span>),</span><br><span class="line">				Namespace: pulumi.String(<span class="string">&quot;default&quot;</span>),</span><br><span class="line">				Labels:    appLabels,</span><br><span class="line">			&#125;,</span><br><span class="line">			Spec: &amp;corev1.ServiceSpecArgs&#123;</span><br><span class="line">				Type: pulumi.String(<span class="string">&quot;LoadBalancer&quot;</span>),</span><br><span class="line">				Ports: corev1.ServicePortArray&#123;</span><br><span class="line">					corev1.ServicePortArgs&#123;</span><br><span class="line">						Port:       pulumi.Int(<span class="number">80</span>),</span><br><span class="line">						TargetPort: pulumi.Int(<span class="number">80</span>),</span><br><span class="line">					&#125;,</span><br><span class="line">				&#125;,</span><br><span class="line">				Selector: appLabels,</span><br><span class="line">			&#125;,</span><br><span class="line">		&#125;, pulumi.DependsOn([]pulumi.Resource&#123;nodePool, deployment&#125;), pulumi.Provider(k8sProvider))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Export the DNS name of the bucket</span></span><br><span class="line">		ctx.Export(<span class="string">&quot;bucketName&quot;</span>, bucket.Url)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>Pulumi.yaml</strong></p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">pcp8-390717</span></span><br><span class="line"><span class="attr">runtime:</span> <span class="string">go</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">A</span> <span class="string">minimal</span> <span class="string">Google</span> <span class="string">Cloud</span> <span class="string">Go</span> <span class="string">Pulumi</span> <span class="string">program</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>Pulumi.dev.yaml</strong></p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">config:</span></span><br><span class="line">  <span class="attr">gcp:project:</span> <span class="string">pcp8-390717</span></span><br></pre></td></tr></table></figure></div>
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Provisioning a GKE Cluster Using Pulumi</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2023-07-19 09:30:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-17 21:05:17
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2023/07/19/pulumi/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Cloud/">#Cloud</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/08/06/couch-potato/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Securinets Quals CTF 2023 - Couch Potato Misc Challenge Writeup</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/06/01/kli8nt/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Streamlined Application Deployemet using Kubernetes</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Provisioning a GKE Cluster Using Pulumi</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Cloud-SDK"><span class="nav-text">Google-Cloud-SDK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pulumi-Installation"><span class="nav-text">Pulumi Installation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#New-Project-and-stack-name"><span class="nav-text">New Project and stack name</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Commands"><span class="nav-text">Commands</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pulumi-new-lt-template-gt"><span class="nav-text">pulumi new &lt;template&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pulumi-stack-select"><span class="nav-text">pulumi stack select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pulumi-up"><span class="nav-text">pulumi up</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pulumi-destroy"><span class="nav-text">pulumi destroy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pulumi-stack-ls"><span class="nav-text">pulumi stack ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pulumi-config"><span class="nav-text">pulumi config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pulumi-stack-export"><span class="nav-text">pulumi stack export</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pulumi-stack-import"><span class="nav-text">pulumi stack import</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#State-Management"><span class="nav-text">State Management</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Provisioning-the-Cluster"><span class="nav-text">Provisioning the Cluster</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-text">Code</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

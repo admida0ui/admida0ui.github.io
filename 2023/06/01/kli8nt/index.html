@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2023/06/01/kli8nt/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="IntroductionAs second-year engineering students, we embarked our academic group project that pushes us beyond our limits. Being self-proclaimed cloud-native and Kubernetes geeks, we decided to venture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Streamlined Application Deployemet using Kubernetes">
+<meta property="og:url" content="http://admida0ui.tech/2023/06/01/kli8nt/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="IntroductionAs second-year engineering students, we embarked our academic group project that pushes us beyond our limits. Being self-proclaimed cloud-native and Kubernetes geeks, we decided to venture">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/fEOyFeQ.png">
+<meta property="og:image" content="https://imgur.com/O5fW0GG.png">
+<meta property="og:image" content="https://imgur.com/KEoSXvr.png">
+<meta property="og:image" content="https://i.imgur.com/WyYpyTw.png">
+<meta property="og:image" content="https://i.imgur.com/zNOA4Lz.png">
+<meta property="og:image" content="https://i.imgur.com/kTZmlxJ.png">
+<meta property="og:image" content="https://i.imgur.com/UomqhLd.png">
+<meta property="article:published_time" content="2023-06-01T06:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T19:05:17.071Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="Academic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/fEOyFeQ.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Streamlined Application Deployemet using Kubernetes -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/PRQxO1A.jpg" alt="Streamlined Application Deployemet using Kubernetes" />
+                    <h1 class="article-title-cover">Streamlined Application Deployemet using Kubernetes</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-06-01 08:00</span>
+        <span class="mobile">2023-06-01 08</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-17 21:05:17</span>
+            <span class="mobile">2024-05-17 21:05</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Kubernetes/">Kubernetes</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Academic/">Academic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>As second-year engineering students, we embarked our academic group project that pushes us beyond our limits. Being self-proclaimed cloud-native and Kubernetes geeks, we decided to venture into an unfamiliar territory with an advanced project. Our goal? To unravel the mysteries of Heroku, Vercel, and On-Render, the leading PaaS solutions! And here is the twist, we were running out of time, and neither ChatGPT nor Google can help us. We are mad, and we actually did it in 4 days! Fellow adventurers, let’s get you to feel the glimpse of what we have been through in just 4 days to build our project codenamed Kli8nt for streamlined application deployments into the Kubernetes realm</p>
+<p>Fueled by the increasing demand for a unified platform that encompasses front-end hosting, backend deployment, and database management, our team leveraged our expertise in DevOps, Kubernetes, and web development to establish a robust and scalable solution that is client-friendly and K8s-able, hence the name Kli8nt. It is our way to design a mechanism that’s a proof-of-concept to the leading PaaS solutions</p>
+<h1 id="Project-Details"><a href="#Project-Details" class="headerlink" title="Project Details:"></a>Project Details:</h1><h2 id="High-Level-Architecture"><a href="#High-Level-Architecture" class="headerlink" title="High Level Architecture"></a>High Level Architecture</h2><p>Our system consists of various interconnected components that work together seamlessly. At the front-end, users interact with the system and provide the necessary information for application deployment. The backbone of our system is the backend, which handles authentication, data storage, and serves as the communication hub with the clusters. It establishes a websocket connection to deliver real-time logs to the user. To facilitate efficient communication between the backend and clusters, we rely on RabbitMQ, a messaging system that ensures reliable information exchange. The clusters themselves take charge of the build and deployment operations, guided by custom controllers to ensure efficiency and accuracy. Lastly, Kafka, our robust data streaming platform, stores and streams application logs from the clusters to the user. Together, these components form a cohesive system that enables smooth and efficient application deployment.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/fEOyFeQ.png"
+                     
+                ></p>
+<h2 id="User-Interface"><a href="#User-Interface" class="headerlink" title="User Interface"></a>User Interface</h2><p>The User Interface serves as the primary interaction point for developers using the<br>Kli8nt platform. Designed with simplicity and ease of use in mind, the UI provides<br>a seamless experience for users to connect to their GitHub accounts, manage their<br>repository specifications, and initiate deployments. We aim to streamline the<br>application management process and empower developers to effortlessly deploy<br>their applications.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://imgur.com/O5fW0GG.png"
+                     
+                ></p>
+<h2 id="User-Authentication"><a href="#User-Authentication" class="headerlink" title="User Authentication"></a>User Authentication</h2><p>Kli8nt leverages the robust authentication capabilities of GitHub OAuth2 as its primary method for user login and authorization. By utilizing this powerful authentication mechanism, users can grant the platform access to their repositories. With the generated Personal Access Token (PAT) associated with the authenticated user, Kli8nt gains the ability to clone both private and public repositories, utilizing the functionalities provided by the GitHub API. This approach ensures secure and seamless integration with GitHub, allowing users to enjoy a streamlined experience while maintaining the necessary permissions and access controls.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://imgur.com/KEoSXvr.png"
+                     
+                ></p>
+<h2 id="Backend-Service"><a href="#Backend-Service" class="headerlink" title="Backend Service"></a>Backend Service</h2><p>The backend service is the backbone of the platform, ensuring efficient functionality by handling user requests, processing deployment tasks, managing logs, and facilitating seamless communication between components. It plays a vital role in request handling and routing, ensuring user requests are directed to the appropriate components for further processing. Additionally, it handles user authentication and authorization, ensuring secure access to the platform. Integration with RabbitMQ allows for the handling and queuing of deployment requests, while task scheduling ensures efficient and ordered processing. The backend service also integrates with GitHub’s Deployment Environment, facilitating synchronization and updates for deployments. Logs are streamed and stored using Kafka, with a backend endpoint responsible for streaming logs back to users for monitoring. Database interaction with PostgreSQL allows for data storage and retrieval related to user configurations, deployment records, and other relevant information, ensuring data consistency and integrity through GORM. Overall, the backend service acts as a crucial orchestrator, ensuring the smooth operation and effective management of the platform’s core functionalities.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/WyYpyTw.png"
+                     
+                ></p>
+<h2 id="The-Messaging-Queue-System"><a href="#The-Messaging-Queue-System" class="headerlink" title="The Messaging Queue System"></a>The Messaging Queue System</h2><p>To manage and queue deployment requests, we’ve integrated RabbitMQ. Simply put, it is a software where queues are defined, to which applications connect in order to transfer messages. For when a deployment request is received, the backend enqueues the task into a BUILD queue to the Kubernetes BUILD Operator. This ensures that each task is processed in the right order. The Kubernetes DEPLOY Operator in turn enqueus deployment results back here though the INFORM queue.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/zNOA4Lz.png"
+                     
+                ></p>
+<h2 id="The-Build-and-Deploy-Kubernetes-Custom-Controller"><a href="#The-Build-and-Deploy-Kubernetes-Custom-Controller" class="headerlink" title="The Build and Deploy Kubernetes Custom Controller"></a>The Build and Deploy Kubernetes Custom Controller</h2><p>The clusters are responsible for the build and deployment operations. These processes are managed by custom controllers, ensuring efficiency and accuracy in deploying applications.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/kTZmlxJ.png"
+                     
+                ></p>
+<h2 id="The-Build-Kubernetes-Custom-Controller"><a href="#The-Build-Kubernetes-Custom-Controller" class="headerlink" title="The Build Kubernetes Custom Controller"></a>The Build Kubernetes Custom Controller</h2><p>The build controller plays a critical role in initiating the build process for each application. It acts as a listener for the queue served by RabbitMQ, enabling it to initiate the build process. When a new application is added to the queue, the controller creates an isolated environment specifically for that application. Within this isolated environment, it launches a dedicated build process. This process involves tasks such as cloning the repository and generating a Dockerfile based on the application’s stack and programming language, starting the Kaniko process to initiate the build, which includes compiling the source code, resolving dependencies, and creating a container image then pushing the resulting container image to a private registry.</p>
+<p>After completing the build and push process, the isolated environment is terminated and deleted, in addition, the controller publishes a message to the deployment queue served by RabbitMQ. This queue holds the applications that are scheduled to be deployed by the deploy controller. This ensures a clean and efficient workflow, as each build process operates in its isolated context. By leveraging the build controller’s capabilities, applications can be built and prepared for deployment without interference or conflicts with other ongoing builds</p>
+<h2 id="The-Deploy-Kubernetes-Custom-Controller"><a href="#The-Deploy-Kubernetes-Custom-Controller" class="headerlink" title="The Deploy Kubernetes Custom Controller"></a>The Deploy Kubernetes Custom Controller</h2><p>After the build process concludes and the build controller sends an element to the queue, the deploy controller consumes the queue and initiates the deployment process. This involves creating a deployment object that includes a pod. The application’s Docker image is then pulled and run within this pod. Simultaneously, a cluster IP service is created and associated with the deployment, enabling internal communication within the cluster.</p>
+<p>The deploy controller takes charge of exposing the application externally and adding a TLS&#x2F;SSL certificate. It achieves this by adding a route rule for the service within the ingress configuration. Additionally, it adds TLS&#x2F;SSL configuration to the Ingress, allowing the application to be accessed securely via HTTPS. By utilizing Nginx Ingress, the controller ensures that the application is reachable and accessible with the desired HTTPS protocol and has a specific subdomain for the application.</p>
+<p>Once the application is successfully deployed and exposed to the TLS certificate, the deploy controller notifies the backend server that the application is now ready for user access. This communication informs the backend server that the newly deployed application is available and can be utilized by users.</p>
+<h2 id="The-Log-Streaming-Controller"><a href="#The-Log-Streaming-Controller" class="headerlink" title="The Log Streaming Controller"></a>The Log Streaming Controller</h2><p>Another important aspect in such provided service, is that the user would like to have a vision over his application while and after its being prepared and sent to production. To deliver such a feature, we have implemented another controller in go, that’s responsible for listening to Pod’s lifecycle events, made possible thanks to the Shared Informer feature in the Kubernetes API which is a local cache kind of resource made to be consumed. Whenever a new Deployment is up and running, grab its logs and stream them real time to another environment to be stored. This environment being Apache Kafka, an open source distributed message streaming that’s suited for high performance data pipelines. Our Kafka is running in its own managed cluster at Confluent, a KaaS provider with additional cool features that we liked while using them (like a nice user-friendly dashboard, a built-in REST API, etc..). Kafka is going to stream the logs, each application in its own kafka topic or event, directly to the backend, and store them for future requests -so you don’t really have to be there at the right time, whenever you request them you’ll get them and if you are there already you get them live. </p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/UomqhLd.png"
+                     
+                ></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>Our end-of-year project theoretically proposes and empirically validate a system design able to streamline the process of deploying any mciroservice application living in Github to Kubernetes on Cloud. This project is our gateway to our graduation projects as well as internship opportunities this summer, and would be a great addition to our professional journeys</p>
+<h1 id="Meet-the-Team"><a href="#Meet-the-Team" class="headerlink" title="Meet the Team"></a>Meet the Team</h1><p>Along with the immense support from our supervisor Mr. Bassem Ben Saleh and his esteemed jury.<br>We would like to extend a heartfelt thank you to our families and close ones for their support and encouragement during late nights and long hours of work.</p>
+<p>For their hard work and dedication to make this project a huge success, huge thanks to: Mohamed Rafraf, Mohamed Sofiene Barka, and Mohamed Skander Soltane.</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Streamlined Application Deployemet using Kubernetes</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2023-06-01 08:00:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-17 21:05:17
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2023/06/01/kli8nt/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Academic/">#Academic</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/07/19/pulumi/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Provisioning a GKE Cluster Using Pulumi</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/03/22/ncsc-iv-quantum/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Securinets NCSC IV CTF - Quantum Challenges Writeup</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Streamlined Application Deployemet using Kubernetes</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Project-Details"><span class="nav-text">Project Details:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#High-Level-Architecture"><span class="nav-text">High Level Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Interface"><span class="nav-text">User Interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Authentication"><span class="nav-text">User Authentication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Backend-Service"><span class="nav-text">Backend Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Messaging-Queue-System"><span class="nav-text">The Messaging Queue System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Build-and-Deploy-Kubernetes-Custom-Controller"><span class="nav-text">The Build and Deploy Kubernetes Custom Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Build-Kubernetes-Custom-Controller"><span class="nav-text">The Build Kubernetes Custom Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Deploy-Kubernetes-Custom-Controller"><span class="nav-text">The Deploy Kubernetes Custom Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Log-Streaming-Controller"><span class="nav-text">The Log Streaming Controller</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Meet-the-Team"><span class="nav-text">Meet the Team</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2023/08/06/couch-potato/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="It’s past one, I was probably sleeping in front of my screen, I’m not even sure if I was awake for a bit or not, I’m not even sure if I’m dreaming or not… All I know is that I left the device on my f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Securinets Quals CTF 2023 - Couch Potato Misc Challenge Writeup">
+<meta property="og:url" content="http://admida0ui.tech/2023/08/06/couch-potato/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="It’s past one, I was probably sleeping in front of my screen, I’m not even sure if I was awake for a bit or not, I’m not even sure if I’m dreaming or not… All I know is that I left the device on my f">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/jHut52F.png">
+<meta property="og:image" content="https://i.imgur.com/vSB9IGX.png">
+<meta property="og:image" content="https://i.imgur.com/DfscXB4.png">
+<meta property="og:image" content="https://i.imgur.com/rdG9k09.png">
+<meta property="og:image" content="https://i.imgur.com/uWfBYaJ.png">
+<meta property="og:image" content="https://i.imgur.com/P8IBsRt.png">
+<meta property="og:image" content="https://i.imgur.com/f1fon6N.png">
+<meta property="og:image" content="https://i.imgur.com/7FHWF6K.png">
+<meta property="og:image" content="https://i.imgur.com/xqvWPxc.png">
+<meta property="og:image" content="https://i.imgur.com/P5bXWY4.png">
+<meta property="og:image" content="https://i.imgur.com/hVzUWC9.png">
+<meta property="og:image" content="https://i.imgur.com/ASWzJB9.png">
+<meta property="og:image" content="https://i.imgur.com/NUIk82u.png">
+<meta property="og:image" content="https://i.imgur.com/AmkpQPE.png">
+<meta property="og:image" content="https://i.imgur.com/B5scqzJ.png">
+<meta property="og:image" content="https://i.imgur.com/3hjuMYS.png">
+<meta property="og:image" content="https://i.imgur.com/lsXXO6K.png">
+<meta property="og:image" content="https://i.imgur.com/XmWhATI.png">
+<meta property="og:image" content="https://i.imgur.com/lTGDuFS.png">
+<meta property="article:published_time" content="2023-08-06T17:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T19:05:17.066Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="Misc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/jHut52F.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Securinets Quals CTF 2023 - Couch Potato Misc Challenge Writeup -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/DmCOwYo.jpg" alt="Securinets Quals CTF 2023 - Couch Potato Misc Challenge Writeup" />
+                    <h1 class="article-title-cover">Securinets Quals CTF 2023 - Couch Potato Misc Challenge Writeup</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-06 19:00</span>
+        <span class="mobile">2023-08-06 19</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-17 21:05:17</span>
+            <span class="mobile">2024-05-17 21:05</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Writeups/">Writeups</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Misc/">Misc</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/jHut52F.png"
+                     
+                ></p>
+<p>It’s past one, I was probably sleeping in front of my screen, I’m not even sure if I was awake for a bit or not, I’m not even sure if I’m dreaming or not… All I know is that I left the device on my favorite channel and that piece of crap failed me. Agh I need to fix it now. It is no longer responding to the commands I give it, and it is no longer showing my favorite channel! I hate my life, can you help me fix it?</p>
+<p>I am looking for three stuff:</p>
+<ul>
+<li><em>What nonsense was I watching the night the device failed me?</em></li>
+<li><em>I might need the Up and Down key codes in NEC 32-bit format?</em></li>
+<li><em>The expiration date of my IPTV subscription.</em></li>
+</ul>
+<p>Flag formal: <strong>Securinets{show_name_00UP1234_DOWN1234_YYYYMMDD}</strong></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://twitter.com/admida0ui" >adm &amp; mida0ui <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="Attachment"><a href="#Attachment" class="headerlink" title="Attachment"></a>Attachment</h2><p>A file called <code>dump.bin</code> was provided in a zip. Weighing 8 MB. Dating back to February the 1st, 2020. 1:07 AM.</p>
+<p>Another file is what seems to be an updated firmware for the device, <code>Firmware.bin</code> weighing 4 MB. And dating back to August the 25th, 2020.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1TGNAOWKZZbCzZuVImklA18IH_cUvtkNy?usp=sharing" >Download Link <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>A Couch potato is a lazy guy that sits in front of the TV screen, indicating that we are dealing with a console, set-top-box STB or Digital Video Recorder DVR and not a PCI card satellite&#x2F;Tuner card or a computer. The user mentioned that he was watching his favorite channel when he fall asleep which make it more likely an STB, or a receiver for simplicity.<br>This also means that the show name we are looking for was broadcasted in his favorite channel.</p>
+<p>The user also mentioned that the device failed him, which means that the device is not responding to the commands he is sending to it. Kind of talking about a control unit, or that’s clearly a remote control that has some keys malfunctioning, specifically the UP and DOWN arrow keys as we know.</p>
+<p>On other hand, the user is suspecting that the IPTV subscription was the thing behind the interruption of his channel. This means that the IPTV subscription was a service provided by the device itself or maybe a third party service. This also means that the STB we’re dealing with is a hybrid device, meaning that it can receive satellite signals and also IPTV, making it a 2nd generation STB and there are plenty in the market today, for third world countries.</p>
+<p>However, the user could be mistaken as the channels that you can shortlist in the favorites are more likely to be satellite channels, hence the IPTV subscription is not the reason behind the interruption of his favorite channel rather than the satellite signal itself or the cardsharing service he is using.</p>
+<p>With all that in mind, we can start our information gathering phase.</p>
+<h2 id="Information-Gathering"><a href="#Information-Gathering" class="headerlink" title="Information Gathering"></a>Information Gathering</h2><p>TL;DR.</p>
+<p>The thing is devices like this are hard to find in UK, Europe and the US. Unlike Africa and Asia. That’s because in European countries and the US, they are mostly banned due to the fact that they are used for cardsharing and IPTV piracy. However, in Africa and Asia, they are still widely used and sold.</p>
+<p>So where to look? These devices are not open source nor they have some kind of documentation is to where to look in their ROMs. Satellite forums, subreddits, and Facebook groups are good resources and some deep search would yield some useful tools and details to deal with dump. We kind of need to know how the memory is splitted. The file is indeed a ROM&#x2F;EEPROM snapshot, so it has a mapping of the memory. We just need to know where the information part is, channel list is, and applications or services are.</p>
+<p>The mapping generally includes the following:</p>
+<ul>
+<li>Bootloader</li>
+<li>Kernel or maincode</li>
+<li>User data</li>
+<li>Menu</li>
+<li>…</li>
+</ul>
+<p>Each at specific offsets and specific lengths. The user data is the most important part as it contains the channel list.</p>
+<p>Keep in mind that if the IPTV subscription was provided by the device itself, then the expiration date could be stored in the device itself or their renewal website. If the IPTV subscription was provided by a third party service, then the expiration date is stored in the third party service database or user panel. In both cases, we need to find the device serial number or MAC address to be able to identify the device and the user. I believe that how they are likely to be stored in the memory dump rather than a plain expiration date.</p>
+<h2 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h2><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.satellites.co.uk/forums/" >https://www.satellites.co.uk/forums/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.reddit.com/r/satellite/" >https://www.reddit.com/r/satellite/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.tunisia-sat.com/forums/" >https://www.tunisia-sat.com/forums/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://sat-universe.com/" >https://sat-universe.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><p>HexWorkshop &#x2F; HxD Editor is a good tool to start with. It is a hex editor that can be used to view and edit files in hexadecimal and binary formats. It is a good tool to start with as it can be used to view the memory dump and search for strings. It can also be used to search for patterns and hex values.</p>
+<h2 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h2><p>First, let’s investigate the dump file.</p>
+<p><code>NCRCBootloader</code> is the start point, which is the bootloader used for these chipsets as indicated in the Hex Editor screen:</p>
+<ul>
+<li>ALI3329</li>
+<li>ALI3606</li>
+<li>ALI3601</li>
+<li>ALI3511</li>
+<li>ALI3510</li>
+<li>ALI3516</li>
+<li>ALI3618</li>
+<li>ALI3821</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/vSB9IGX.png"
+                     
+                ></p>
+<p>Devices with those chipset have these brands <em>Starsat, Sunplus, Tiger, StarMax, Geant, Mediastar, QMAX, AzAmerica, Samsat and many more…</em></p>
+<p>And all of their built-in subscriptions are part of <strong>Gosat</strong>.</p>
+<p>Now, to actually find the specific brand and model, we need to inspect the firmware update file.</p>
+<p>To clear things up, the memory dump serves for user data mainly the channels and services as I said while the firmware update file will indicate the remote control being used.</p>
+<p>The memory dump is a mapping and can be splitted manually and further investigated. However the firmware is encrypted, you can tell by a first glance, no strings or something in there, and can’t help us much to delve into the remote control unit in use.</p>
+<p>Time to google for a way to decrypt such chipset firmware. Let’s use the keyword <code>ALI3329</code> or <code>ALI3511</code> as they are the most common chipset used in these devices and combine the search with decrypt or unpack tool.</p>
+<p>For example:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/DfscXB4.png"
+                     
+                ></p>
+<p>And in Arabic:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/rdG9k09.png"
+                     
+                ></p>
+<p>Using the tool, we determine that the model is SR-2000HD HYPER and the remote control is SR-2000HD HYPER. Hence the brand is Starsat.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/uWfBYaJ.png"
+                     
+                ></p>
+<p>The unpack and repack features are used to decrypt and extract parts of the firmware like the bootloader, maincode, user data if any was supplied by the manufacturer, the menu, the remote, and sometimes a softcam (that’s out of our scope today, maybe in another challenge!). And the repack to insert modified parts and RSA encrypt the whole thing again. Like for instance, we can insert the main menu (including themes and applications) or the remote control unit of a different model or brand and repack it to be used with the device we have, as long as they are using the very same chipset. Well this time, rest assured it is the Hyper remote control and when we talk about key code we mean the IR Infrared key code.</p>
+<p>So the whole memory dump thing and the firmware kind of contain similar stuff at least, one being encrypted and the other not.</p>
+<p>See here, the content of the folder when unpacked.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/P8IBsRt.png"
+                     
+                ></p>
+<p>So why not, giving the dump a try and unpack it as well, we are chasing the user data part anyway. And the tool might very much help. Otherwise I will show how to proceed manually knowing the offsets and lengths found on a forum.</p>
+<h3 id="Finding-the-show"><a href="#Finding-the-show" class="headerlink" title="Finding the show"></a>Finding the show</h3><p>As we said before, we can deal with this part either using the tool or manually.<br>Well, the tool was able to yield this:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/f1fon6N.png"
+                     
+                ></p>
+<p>Very nice, we can see <code>database.sdx</code> file there!</p>
+<p>Well, to proceed manullay you need to know the offsets and lengths beforehand.<br>This is what we meant:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : Bootloader.bin</span><br><span class="line">SIZE : 128,00 KB</span><br><span class="line">CRC : 0x00AF7F6C</span><br><span class="line">offset : 0x00000128</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : maincode.bin</span><br><span class="line">SIZE : 3,25 MB</span><br><span class="line">CRC : 0x19E8C348</span><br><span class="line">offset : 0x00020128</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : menu.bin</span><br><span class="line">SIZE : 1,38 MB</span><br><span class="line">CRC : 0x10934143</span><br><span class="line">offset : 0x00360128</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : Database.sdx</span><br><span class="line">SIZE : 9,80 KB</span><br><span class="line">CRC : 0x00146C71</span><br><span class="line">offset : 0x004C0128</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : softcam.bin</span><br><span class="line">SIZE : 42,38 KB</span><br><span class="line">CRC : 0x008D5F15</span><br><span class="line">offset : 0x004C2860</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : sattp.bin</span><br><span class="line">SIZE : 12,54 KB</span><br><span class="line">CRC : 0x00097FDA</span><br><span class="line">offset : 0x004CD1E8</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br><span class="line">Name : Padding.bin</span><br><span class="line">SIZE : 522,06 KB</span><br><span class="line">CRC : 0x040E1F6B</span><br><span class="line">offset : 0x004D040C</span><br><span class="line">++++++++++++++++++++++++++++++++++++++</span><br></pre></td></tr></table></figure></div>
+
+<p>Found here: <a class="link"   target="_blank" rel="noopener" href="https://www.tunisia-sat.com/forums/threads/3242761/page-47" >https://www.tunisia-sat.com/forums/threads/3242761/page-47 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>We know <code>database.sdx</code> holds the user data meaning the channels. sattp is another file that holds the different satellites and their frequencies aka transponders.</p>
+<p>When we open the file in a hex editor, We can’t read any useful information out of it. This means that there should be a tool in place to view and edit the channels for the specific chipset family we are dealing with as the file seems highly compressed.</p>
+<p>Here’s a view from hex editor first.</p>
+<p>Starts off like this</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/7FHWF6K.png"
+                     
+                ></p>
+<p>And ends padded with 0xFF</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/xqvWPxc.png"
+                     
+                ></p>
+<p>Let’s google a bit…</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/P5bXWY4.png"
+                     
+                ></p>
+<p>We got this</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/hVzUWC9.png"
+                     
+                ></p>
+<p>When trying to first open the database, we got this error message</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/ASWzJB9.png"
+                     
+                ></p>
+<p>And the issue is that the Userdata has a static size as indicated before. As the receiver’s capacity fits a maximum of 6100 channels. So the database file is padded with 0xFF to reach the maximum size. Let’s get rid of the padded data and try again..</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/NUIk82u.png"
+                     
+                ></p>
+<p>Now, it’s working like charm, and I already see some familiar TV channels on Astra 1 (19.2 East).</p>
+<p>Let’s expand the favorites section</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/AmkpQPE.png"
+                     
+                ></p>
+<p>And there is Sky Sports Main Event, UK-based sports channel that is part of BSkyB or Sky Group, pay-television channel and availble for satellite subsribers via Eurobird 1, Astra 2 (28.2 East). Sky Sports Main Event broadcasts the biggest events of sports in the UK.</p>
+<p>Now, great work to reach this point, but we are not done yet. We need to find the right show at that past date, meaning at 1:07 AM on February the 1st, 2020.</p>
+<p>Well, Sky TV Guide won’t keep such data for more than a week or two, so we need to find another way.</p>
+<p>Guess you know what we mean, what else than the way back machine!</p>
+<p>Head over to archive.org and submit the link for the Sky TV Guide and try to narrow your search to a date that’s equal or close to the date in question, as shown below!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/B5scqzJ.png"
+                     
+                ></p>
+<p>And that is the first part of the flag: <code>live_rugby_7&#39;s</code> or <code>live_rugby_7s</code></p>
+<h3 id="Finding-the-keycodes"><a href="#Finding-the-keycodes" class="headerlink" title="Finding the keycodes"></a>Finding the keycodes</h3><p>We know it is Starsat SR-2000HD Hyper’s remote control, well unless you have the same remote control or probably a remote of the same brand and an Arduino card embedded with an IR receiver, you will need to improvise! Like check online there GitHub repos that keep track of IR key codes for different remotes. Or you can use a forum like <a class="link"   target="_blank" rel="noopener" href="https://www.remotecentral.com/" >https://www.remotecentral.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> to find the key codes for the remote control.</p>
+<p>However for this part, we will use an Android app like IRplus or any alternatives and pick the device in question from the list then head over to check the keys, we will provide screenshots for what we’ve found. Since it is the simplest and fastest way.</p>
+<p>This is the LIRC protcol of Starsat <a class="link"   target="_blank" rel="noopener" href="https://lirc.sourceforge.net/remotes/starsat/120" >https://lirc.sourceforge.net/remotes/starsat/120 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>We are looking for NEC, so we found an app for that.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://irplus-remote.github.io/" >net.binarymode.android.irplus <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<ol>
+<li>Selecting the remote control from the list:</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/3hjuMYS.png"
+                     
+                ></p>
+<ol start="2">
+<li>Exporting the remote config and checking the Channel Up arrow and Channel Down arrow</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/lsXXO6K.png"
+                     
+                ></p>
+<p>And that is the second part of the flag: <code>00ff30cf_00ff8877</code></p>
+<p>we can make sure that is the correct format using a website like <a class="link"   target="_blank" rel="noopener" href="https://www.yamaha.com/ypab/irhex_converter.asp" >https://www.yamaha.com/ypab/irhex_converter.asp <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>converting NEC 32-bit to Pronto hex format (RAW HEX) and then to global caché to see the full sendIR command…</p>
+<h3 id="Finding-the-expiration-date"><a href="#Finding-the-expiration-date" class="headerlink" title="Finding the expiration date"></a>Finding the expiration date</h3><p>Now for the fun part, if you dig around the web about Starsat 2000 Hyper you will end up with one official built in service, Apollo that offers IPTV as well as VOD Video on Demand.</p>
+<p>And there is an online service to renew and check your current subscription by just providing the serial number.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="http://www.renewbox.net/index.php" >www.renewbox.net <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>The serial number in most cases is a long number like consists of maybe more than 10 digits. And it can’t be in the firmware since it is released to the public to update their devices. So it must be within the memory of the device itself.</p>
+<p>Let’s grep that easily!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/XmWhATI.png"
+                     
+                ></p>
+<p>And there it is, the serial number, let’s query the IPTV validity.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/lTGDuFS.png"
+                     
+                ></p>
+<p>And the last part of the flag is <code>20141105</code></p>
+<h2 id="Final-Words"><a href="#Final-Words" class="headerlink" title="Final Words"></a>Final Words</h2><p>Flag: <strong>Securinets{live_rugby_7s_00ff30cf_00ff8877_20141105}</strong></p>
+<p>GGs <strong>th3_r0n1ns</strong> for solving this challenge</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Securinets Quals CTF 2023 - Couch Potato Misc Challenge Writeup</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2023-08-06 19:00:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-17 21:05:17
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2023/08/06/couch-potato/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Misc/">#Misc</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/08/06/jackpot/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Securinets Quals CTF 2023 - Jackpot Forensics Challenge Writeup</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/07/19/pulumi/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Provisioning a GKE Cluster Using Pulumi</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Securinets Quals CTF 2023 - Couch Potato Misc Challenge Writeup</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Attachment"><span class="nav-text">Attachment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Information-Gathering"><span class="nav-text">Information Gathering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resources"><span class="nav-text">Resources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools"><span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writeup"><span class="nav-text">Writeup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Finding-the-show"><span class="nav-text">Finding the show</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finding-the-keycodes"><span class="nav-text">Finding the keycodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finding-the-expiration-date"><span class="nav-text">Finding the expiration date</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Final-Words"><span class="nav-text">Final Words</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

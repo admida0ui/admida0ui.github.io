@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2021/12/01/flutter/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="I have successfully been able to work on Flutter on WSL2 and the new WSA in Windows 11 without the need of Android Studio.This is very useful if you are a fan of Microsoft ecosystem or you don’t see t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install Flutter on WSL2 and run apps directly in WSA or in a physical device using ADB.">
+<meta property="og:url" content="http://admida0ui.tech/2021/12/01/flutter/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="I have successfully been able to work on Flutter on WSL2 and the new WSA in Windows 11 without the need of Android Studio.This is very useful if you are a fan of Microsoft ecosystem or you don’t see t">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-32-39.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-33-56.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-34-15.png">
+<meta property="og:image" content="http://admida0ui.tech/2024-05-23-16-34-35.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-41-11.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-42-15.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-42-40.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-43-46.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-44-03.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-44-24.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-45-40.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-46-07.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-46-28.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-46-34.png">
+<meta property="og:image" content="http://admida0ui.tech/images/2024-05-23-16-47-05.png">
+<meta property="article:published_time" content="2021-12-01T20:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-23T14:47:22.575Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="flutter">
+<meta property="article:tag" content="wsl2">
+<meta property="article:tag" content="windows">
+<meta property="article:tag" content="android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://admida0ui.tech/images/2024-05-23-16-32-39.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Install Flutter on WSL2 and run apps directly in WSA or in a physical device using ADB. -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.gifer.com/9wb3.gif" alt="Install Flutter on WSL2 and run apps directly in WSA or in a physical device using ADB." />
+                    <h1 class="article-title-cover">Install Flutter on WSL2 and run apps directly in WSA or in a physical device using ADB.</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2021-12-01 21:00</span>
+        <span class="mobile">2021-12-01 21</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-23 16:47:22</span>
+            <span class="mobile">2024-05-23 16:47</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Work/">Work</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/flutter/">flutter</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/wsl2/">wsl2</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/android/">android</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p>I have successfully been able to work on Flutter on WSL2 and the new WSA in Windows 11 without the need of Android Studio.<br>This is very useful if you are a fan of Microsoft ecosystem or you don’t see the need of Android Studio and its emulators as we now have WSA.</p>
+<p>Originally published on <a class="link"   target="_blank" rel="noopener" href="https://medium.com/@adhbbam/install-flutter-on-wsl2-and-run-apps-directly-in-wsa-or-in-a-physical-device-using-adb-3602f2053f8e" >Medium <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<h1 id="Installing-WSA-—-Windows-Subsystem-For-Android"><a href="#Installing-WSA-—-Windows-Subsystem-For-Android" class="headerlink" title="Installing WSA — Windows Subsystem For Android"></a>Installing WSA — Windows Subsystem For Android</h1><p>You will need to have “Virtual Machine Platform” enabled in “Optional Features” in Control Panel.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-32-39.png"
+                     
+                ></p>
+<p>The best way to do this for now, is to head to rg-adguard.net, select “Productid” in the first drop-down menu. Put “9p3395vx91nr” in the search field. And select “slow” in the next drop-down.</p>
+<p>Scroll down to the bottom of the page, and download the largest file in size, it should be mostly the last one (approximately 1.2GB).</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-33-56.png"
+                     
+                ></p>
+<p>Once the download is complete, right-click the start menu button and open Windows Terminal (Admin), switch to the path where you downloaded the file, usually cd %USERPROFILE%&#x2F;downloads. and execute the following command:<br>Add-AppxPackage .&#x2F;MicrosoftCorporationII.WindowsSubsystemForAndroid_1.8.32828.0_neutral_~_8wekyb3d8bbwe.msixbundle</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-34-15.png"
+                     
+                ></p>
+<p>Note that the version might change there, so copy the name of the file and paste it next to Add-AppxPackage.</p>
+<p>Wait for the installation to complete, Windows 11 will also install the Amazon app store for you automatically.</p>
+<p>We’re not done yet with WSA, you still need to enable developer mode so we can interact with it using adb.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024-05-23-16-34-35.png"
+                     
+                ></p>
+<p>Remember to enable Developer Mode</p>
+<p>Switch Subsystem resources to “Continuous” when you are trying to run your app later, as it takes time, I noticed that with the “As needed” option, Flutter won’t be able to wake up your device.</p>
+<p>Of course to save system resources, you can turn it back to “As needed” once you’re done with Flutter.</p>
+<p>Here ends the part of WSA Installation, we will move to Flutter installation on WSL2 which is the same process as installing Flutter in a Linux distro.</p>
+<h1 id="Installing-Flutter-On-WSL2"><a href="#Installing-Flutter-On-WSL2" class="headerlink" title="Installing Flutter On WSL2"></a>Installing Flutter On WSL2</h1><p>I will assume that you already have WSL2 installed, if not, it is an easy process, just use the command in Windows Terminal (Admin): “wsl — install -d <Distro>” Distro can be Ubuntu, Debian, etc… You can easily just use the Microsoft Store instead and look up the distro of your choice.</p>
+<p>For this tutorial, I will be using Ubuntu but it is a similar process for Debian and other Distros.</p>
+<p>You will need to enable “Virtual Machine Platform” and “Windows Subsystem for Linux” using “Optional Features” in Control Panel and restart Windows.</p>
+<h2 id="Install-OpenJDK8"><a href="#Install-OpenJDK8" class="headerlink" title="Install OpenJDK8"></a>Install OpenJDK8</h2><p>I am using JAVA 8 since the recent version of JAVA have some problems with Flutter, JAVA 8 should be fine.</p>
+<p>In WSL2 terminal type:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openjdk-8-jre</span><br><span class="line">sudo apt install openjdk-8-jdk</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Install-Git"><a href="#Install-Git" class="headerlink" title="Install Git"></a>Install Git</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Setting-up-Flutter"><a href="#Setting-up-Flutter" class="headerlink" title="Setting up Flutter"></a>Setting up Flutter</h2><p>It is better to keep everything in a single directory, I will be using <code>$HOME/Android</code>.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> Android</span><br><span class="line"><span class="built_in">cd</span> Android</span><br><span class="line"><span class="built_in">mkdir</span> cmdline-tools</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Install-Flutter-SDK-Latest-Version"><a href="#Install-Flutter-SDK-Latest-Version" class="headerlink" title="Install Flutter SDK (Latest Version)"></a>Install Flutter SDK (Latest Version)</h2><p>Download here (Install Flutter manually section): <a class="link"   target="_blank" rel="noopener" href="https://docs.flutter.dev/get-started/install/linux" >Linux install | Flutter <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<p>Go to the downloaded location of the compressed archive and extract it</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf flutter_linux_2.5.3-stable.tar.xz</span><br></pre></td></tr></table></figure></div>
+
+<p>Versions may differ!</p>
+<p>Now, move “flutter” folder to “~&#x2F;Android&#x2F;” directory</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mv</span> flutter/ ~/Android/</span><br></pre></td></tr></table></figure></div>
+
+<p>You can delete the archive now.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> flutter_linux_2.5.3-stable.tar.xz</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Install-Android-Command-Line-Tools"><a href="#Install-Android-Command-Line-Tools" class="headerlink" title="Install Android Command Line Tools"></a>Install Android Command Line Tools</h2><p>Download the Android command line tools for Linux from here: <a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio#command-tools" >https://developer.android.com/studio#command-tools <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>Go to the download location of the compressed archive and unzip it.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip commandlinetools-linux-7583922_latest.zip</span><br></pre></td></tr></table></figure></div>
+
+<p>Versions may differ!</p>
+<p>Move the “tools” folder to “~&#x2F;Android&#x2F;cmdline-tools&#x2F;”</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mv</span> tools/ ~/Android/cmdline-tools/</span><br></pre></td></tr></table></figure></div>
+
+<p>You can delete the zip archive now.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> commandlinetools-linux-7583922_latest.zip</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Setting-Up-Environment-Variables"><a href="#Setting-Up-Environment-Variables" class="headerlink" title="Setting Up Environment Variables"></a>Setting Up Environment Variables</h2><p>Now, go back to home directory and open up “.bashrc” file with an editor of your choice.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">vi .bashrc</span><br></pre></td></tr></table></figure></div>
+
+<p>Add the following lines at the end of the file:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ANDROID=<span class="variable">$HOME</span>/Android</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$ANDROID</span>/cmdline-tools/tools:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$ANDROID</span>/cmdline-tools/tools/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$ANDROID</span>/platform-tools:<span class="variable">$PATH</span></span><br><span class="line"><span class="comment"># Android SDK</span></span><br><span class="line"><span class="built_in">export</span> ANDROID_SDK=<span class="variable">$HOME</span>/ANDROID</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$ANDROID_SDK</span>:<span class="variable">$PATH</span></span><br><span class="line"><span class="comment"># Flutter</span></span><br><span class="line"><span class="built_in">export</span> FLUTTER=<span class="variable">$ANDROID</span>/flutter</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$FLUTTER</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Save the file. And restart your terminal or use this command</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .bashrc</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Download-Android-SDK"><a href="#Download-Android-SDK" class="headerlink" title="Download Android SDK"></a>Download Android SDK</h2><p>For Flutter to run, we still need to install system-image, platform-tools, build-tools, platforms, android.</p>
+<p>I will be using android-29 for Android 10 SDK, if you want Android 11 SDK just change to android-30.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/platforms" >You can use the version that is compatible with your device <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>. or you can check it from your terminal</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sdkmanager --list</span><br></pre></td></tr></table></figure></div>
+
+<p>for version 29, type the following:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sdkmanager <span class="string">&quot;system-images;android-29;default;x86_64&quot;</span></span><br><span class="line">sdkmanager <span class="string">&quot;platforms;android-29&quot;</span></span><br><span class="line">sdkmanager <span class="string">&quot;platform-tools&quot;</span></span><br><span class="line">sdkmanager <span class="string">&quot;build-tools;29.0.3&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Now, accept the licenses</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sdkmanager --licenses</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Configure-SDK-Path-For-Flutter"><a href="#Configure-SDK-Path-For-Flutter" class="headerlink" title="Configure SDK Path For Flutter"></a>Configure SDK Path For Flutter</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter config --android-sdk ~/Android</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Checking-Flutter-Doctor"><a href="#Checking-Flutter-Doctor" class="headerlink" title="Checking Flutter Doctor"></a>Checking Flutter Doctor</h2><p>We’re done with Flutter installation, let’s go check Flutter Doctor</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor -v</span><br></pre></td></tr></table></figure></div>
+
+<p>This command should give you all green tick, ignore Android Studio and Chrome. you can still install chrome for WSL2 since it support GUI now. Or just use your Windows browser. I believe it is possible…</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-41-11.png"
+                     
+                ></p>
+<p>If Flutter doctor asks for accepting licenses, use this command</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor --android-licenses</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="Installing-ADB-on-Windows"><a href="#Installing-ADB-on-Windows" class="headerlink" title="Installing ADB on Windows"></a>Installing ADB on Windows</h1><p>This step is optional, unless you want to test your app not only on WSA but also on a physical device.</p>
+<p>You just need to have the very same version of your Linux ADB inside Windows Powershell.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-42-15.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-42-40.png"
+                     
+                ></p>
+<p>It is exactly the same version.</p>
+<p>ADB will be installed automatically within the platform-tools we installed in the previous step, so check “adb — version” in WSL2. Then install the same one on Powershell. This website will help you: <a class="link"   target="_blank" rel="noopener" href="https://androidsdkmanager.azurewebsites.net/Platformtools" >Download Platform Tools for Android SDK Manager <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<p>We will be using ADB over WiFi, since WSL2 still doesn’t have access to host USB devices.</p>
+<p>So connect your device using USB. make sure it is connected to the same WiFi as your computer, and type the following in Powershell:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb kill-server</span><br><span class="line">adb devices</span><br><span class="line">adb tcpip 5555</span><br></pre></td></tr></table></figure></div>
+
+<p>It should show your physical device in the list, now you jump to WSL2 and connect to it using the IP Address of the device and the port you picked, for me 5555</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb connect &lt;IP_ADDRESS&gt;:&lt;PORT&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-43-46.png"
+                     
+                ></p>
+<p>And Flutter Doctor is recognizing it:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-44-03.png"
+                     
+                ></p>
+<p>As well as Visual Studio Code.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-44-24.png"
+                     
+                ></p>
+<p>For Windows 10 users, WSA is not yet available for you, the only way to run your app is by using a physical device or maybe using an emaulator since GUI is now supported in WSL2 and should be in Windows 10 21H2, to install a virtual emulator use the following command in WSL2:</p>
+<p>Check the available virtual devices</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avdmanager list</span><br></pre></td></tr></table></figure></div>
+
+<p>Copy the desired device ID</p>
+<p>Give the emulator a name and paste the ID</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avdmanager -s create avd -n [name] -k <span class="string">&quot;system-images;android-29;google_apis;x86_64&quot;</span> -d [id_device]</span><br></pre></td></tr></table></figure></div>
+
+<p>Once done, it should show up in the Flutter Doctor output.</p>
+<p>If you encounter issues with ADB during connection with a physical device, try to ping the IP address, if it wasn’t successful, go to the Firewall settings and create a firewall entry, create a new “Inbound” Rule. Select “Port” then Specific TCP port “5555” then “Allow the connection” then check all of Domain, Private and Public and add a name. After the firewall entry is added, open up its properties, go to Scope -&gt; Remote IP Addresses -&gt; Add “192.168.1.0&#x2F;24” or your specific LAN IP range.</p>
+<h1 id="Running-A-Flutter-App-On-WSA"><a href="#Running-A-Flutter-App-On-WSA" class="headerlink" title="Running A Flutter App On WSA"></a>Running A Flutter App On WSA</h1><p>This is the moment of truth, let’s check if it is possible to run a Flutter app built on WSL, on WSA.</p>
+<p>Let’s use the Hello World template</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">flutter create hello_world</span><br><span class="line"><span class="built_in">cd</span> hello_world</span><br></pre></td></tr></table></figure></div>
+
+<p>Copy the WSA IP Address from the WSA App and make sure to turn on Developer Mode, and put it into Continuous mode during all the test.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-45-40.png"
+                     
+                ></p>
+<p>Now, connect the device using ADB</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb connect 172.25.97.191:5555</span><br></pre></td></tr></table></figure></div>
+
+<p>The IP address changes everytime you start the WSA app, so make sure to keep that in mind.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-46-07.png"
+                     
+                ></p>
+<p>Flutter Doctor and VS Code.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-46-28.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-46-34.png"
+                     
+                ></p>
+<p>Now, let’s run the app</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter run</span><br></pre></td></tr></table></figure></div>
+
+<p>Give it some time… And Voila!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/2024-05-23-16-47-05.png"
+                     
+                ></p>
+<p>WSA serves as both an Android emulator for your Apps like Android Studio as well as a Virtual Machine for your favorite apps and games.</p>
+<p>Thanks for following this tutorial, don’t forget to share it with people who might need it.</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Install Flutter on WSL2 and run apps directly in WSA or in a physical device using ADB.</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2021-12-01 21:00:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-23 16:47:22
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2021/12/01/flutter/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/flutter/">#flutter</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/wsl2/">#wsl2</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/windows/">#windows</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/android/">#android</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/09/12/csaw-22/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">CSAW&#39;22 Quals - Quantum &amp; Forensics Challenges Writeup</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Install Flutter on WSL2 and run apps directly in WSA or in a physical device using ADB.</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-WSA-%E2%80%94-Windows-Subsystem-For-Android"><span class="nav-text">Installing WSA — Windows Subsystem For Android</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-Flutter-On-WSL2"><span class="nav-text">Installing Flutter On WSL2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-OpenJDK8"><span class="nav-text">Install OpenJDK8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Git"><span class="nav-text">Install Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setting-up-Flutter"><span class="nav-text">Setting up Flutter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Flutter-SDK-Latest-Version"><span class="nav-text">Install Flutter SDK (Latest Version)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Android-Command-Line-Tools"><span class="nav-text">Install Android Command Line Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setting-Up-Environment-Variables"><span class="nav-text">Setting Up Environment Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Download-Android-SDK"><span class="nav-text">Download Android SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-SDK-Path-For-Flutter"><span class="nav-text">Configure SDK Path For Flutter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checking-Flutter-Doctor"><span class="nav-text">Checking Flutter Doctor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-ADB-on-Windows"><span class="nav-text">Installing ADB on Windows</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Running-A-Flutter-App-On-WSA"><span class="nav-text">Running A Flutter App On WSA</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

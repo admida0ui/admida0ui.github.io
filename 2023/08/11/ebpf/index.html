@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2023/08/11/ebpf/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="PingKiller in eBPFPingKiller is a simple eBPF program that drops ICMP packets. It is written in C and uses the eBPF library to load the program into the kernel. Terms eBPF: eBPF is a virtual machine i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ping Killer using XDP and eBPF">
+<meta property="og:url" content="http://admida0ui.tech/2023/08/11/ebpf/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="PingKiller in eBPFPingKiller is a simple eBPF program that drops ICMP packets. It is written in C and uses the eBPF library to load the program into the kernel. Terms eBPF: eBPF is a virtual machine i">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-11T06:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T19:05:17.070Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="Kernel">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Ping Killer using XDP and eBPF -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/wrGS8cR.png" alt="Ping Killer using XDP and eBPF" />
+                    <h1 class="article-title-cover">Ping Killer using XDP and eBPF</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-11 08:00</span>
+        <span class="mobile">2023-08-11 08</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-17 21:05:17</span>
+            <span class="mobile">2024-05-17 21:05</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Work/">Work</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Kernel/">Kernel</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="PingKiller-in-eBPF"><a href="#PingKiller-in-eBPF" class="headerlink" title="PingKiller in eBPF"></a>PingKiller in eBPF</h1><p>PingKiller is a simple eBPF program that drops ICMP packets. It is written in C and uses the eBPF library to load the program into the kernel.</p>
+<h2 id="Terms"><a href="#Terms" class="headerlink" title="Terms"></a>Terms</h2><ul>
+<li><p>eBPF: eBPF is a virtual machine inside the Linux kernel. It can be used to safely execute user-defined programs inside the kernel without the need to change kernel source code or load kernel modules. eBPF programs are written in a restricted C dialect and compiled into bytecode that can be loaded into the kernel with the help of the eBPF library.</p>
+</li>
+<li><p>XDP: XDP is a Linux kernel technology that provides a high performance, programmable network data path. XDP is supported by most Linux distributions and is used extensively by cloud providers and other environments that require high performance networking.</p>
+</li>
+<li><p>KSP: The Kernel Space Program uses XDP (eXpress Data Path) which is implemented using the eBPF (extended Berkeley Packet Filter) framework in C, with some help from libbpf. It allows us to intercept packets at an early stage in the Linux kernel’s networking stack and perform custom packet processing logic. That is to reach the packet header and decide what to do with it, ICMP packets are dropped in this case, other packets are passed to the next stage in the networking stack.</p>
+</li>
+<li><p>USP: The User Space Program is a Golang application that interacts with the XDP eBPF program, providing a user-friendly interface to monitor the packet drop behavior and visualize performance statistics, it also allows us to load the KSP eBPF program into the kernel and attach it to the relevant tracepoint&#x2F;probe (interface), all with the help of Cilium.</p>
+</li>
+<li><p>Cilium: Cilium is an open-source project that provides networking and security capabilities powered by eBPF. Their documentation and codebase offer in-depth insights into eBPF and its applications.</p>
+</li>
+<li><p>BCC: Out-of-our-scope, BCC is a collection of powerful command-line tools and libraries that leverage eBPF for various tracing and performance analysis tasks.</p>
+</li>
+</ul>
+<h2 id="Learning-Section"><a href="#Learning-Section" class="headerlink" title="Learning Section"></a>Learning Section</h2><p>We are currently gathering resources, watching videos, and reading documentations of the Linux Kernel, eBPF use-cases, and Cilium. We will keep updating this learn more section as we progress.</p>
+<ul>
+<li><p>The Linux Kernel Documentation: The Linux kernel documentation includes a comprehensive section on eBPF and XDP, covering various aspects, including API references, usage examples, and implementation details. <a class="link"   target="_blank" rel="noopener" href="http://www.kernel.org/doc/html/latest/bpf" >Link <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</li>
+<li><p>The Cilium Project: Open-sourced platform Cilium was created by Isovalent Inc. to help address the rising security and networking challenges emerging as cloud-native environments, including Kubernetes, grow in scale and complexity. <a class="link"   target="_blank" rel="noopener" href="https://cilium.io/" >Cilium <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</li>
+<li><p>eBPF Community: Community-driven website dedicated to providing resources, tutorials, and news about eBPF. It features articles, case studies, and a curated list of tools and libraries related to eBPF. <a class="link"   target="_blank" rel="noopener" href="https://ebpf.io/" >Link <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</li>
+</ul>
+<h2 id="Environment-Set-up"><a href="#Environment-Set-up" class="headerlink" title="Environment Set-up"></a>Environment Set-up</h2><p>We are using Ubuntu LTS and Linux Manjaro based on Linux kernel 6.1.31 as our development environment, basically eBPF is supported by all Linux Kernels &gt; version 4.</p>
+<h3 id="What-we-will-need"><a href="#What-we-will-need" class="headerlink" title="What we will need"></a>What we will need</h3><ul>
+<li>Clang: Clang is a C, C++, Objective-C, or Objective-C++ compiler that is compiled in C++ based on LLVM. It is designed to be compatible with the GNU Compiler Collection (GCC), supporting a wide variety of platforms. </li>
+<li>LLVM: The LLVM Project is a collection of modular and reusable compiler and toolchain technologies. Despite its name, LLVM has little to do with traditional virtual machines. The name “LLVM” itself is not an acronym; it is the full name of the project. </li>
+<li>bpftool: bpftool is a command-line utility in Linux that is used to manage and manipulate BPF (Berkeley Packet Filter) programs and maps. We are going to install this from the source.</li>
+<li>Golang: Go is an open-source programming language that makes it easy to build simple, reliable, and efficient software.</li>
+</ul>
+<h3 id="Installation-Commands"><a href="#Installation-Commands" class="headerlink" title="Installation Commands"></a>Installation Commands</h3><h4 id="Ubuntu-x2F-Debian-based"><a href="#Ubuntu-x2F-Debian-based" class="headerlink" title="Ubuntu &#x2F; Debian-based"></a>Ubuntu &#x2F; Debian-based</h4><ol>
+<li>Install Clang and LLVM</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install clang llvm</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>Install bpftool</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --recurse-submodules https://github.com/libbpf/bpftool.git</span><br><span class="line"><span class="built_in">cd</span> src</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>Install Golang</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install golang</span><br></pre></td></tr></table></figure></div>
+
+<h4 id="Manjaro-x2F-Arch-based"><a href="#Manjaro-x2F-Arch-based" class="headerlink" title="Manjaro &#x2F; Arch-based"></a>Manjaro &#x2F; Arch-based</h4><ol>
+<li>Install Clang and LLVM</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S clang llvm</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>Install bpftool</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --recurse-submodules https://github.com/libbpf/bpftool.git</span><br><span class="line"><span class="built_in">cd</span> src</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>Install Golang</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S go</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="PingKiller-Our-first-eBPF-program"><a href="#PingKiller-Our-first-eBPF-program" class="headerlink" title="PingKiller: Our first eBPF program"></a>PingKiller: Our first eBPF program</h2><h3 id="What-is-PingKiller"><a href="#What-is-PingKiller" class="headerlink" title="What is PingKiller?"></a>What is PingKiller?</h3><p>PingKiller is a simple eBPF program that drops ICMP packets. It is written in C and uses the eBPF library to load the program into the kernel.</p>
+<h3 id="Kernel-Space-Program"><a href="#Kernel-Space-Program" class="headerlink" title="Kernel Space Program"></a>Kernel Space Program</h3><p>The kernel space program that uses XDP to drop all ICMP packets of a given network interface, and will collect statistics and measure the processing time for dropped and passed packets using eBPF perf event mechanism. The program will run in kernel space, and will expose the data to userspace using eBPF maps.</p>
+<ul>
+<li>Clone libbpf and change into the directory</li>
+</ul>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/libbpf/libbpf.git</span><br><span class="line"><span class="built_in">cd</span> src</span><br><span class="line">make</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>Get back to project root folder and create a new directory where the kernel space program will live <code>ksp</code> and then create a subdirectory named <code>bpf</code> and change into it.</p>
+</li>
+<li><p>Create a file <code>dicmp_kern.c</code>, this file will contain our XDP eBPF logic.</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/bpf.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bpf_helpers.h&gt;</span></span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>The <code>bpf_helpers.h</code> header file contains a set of helper functions that are used to interact with the eBPF runtime. The <code>bpf.h</code> header file contains definitions for eBPF related data structures and constants. These files are part of the Linux kernel source code and are located in the libbpf source code directory.</p>
+</li>
+<li><p>Next, we define the necessary data structures and maps for XDP, <code>perf_trace_event</code> that will represent the perf event data, <code>BPF_MAP_TYPE_PERF_EVENT_ARRAY</code> map to store the perf events, as follows:</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">perf_trace_event</span> &#123;</span></span><br><span class="line">    __u64 timestamp;</span><br><span class="line">    __u32 processing_time_ns;</span><br><span class="line">    __u8 type;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TYPE_ENTER 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TYPE_DROP 2</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TYPE_PASS 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// these TYPE_* values are used in the userspace program later</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    __uint(type, BPF_MAP_TYPE_PERF_EVENT_ARRAY);</span><br><span class="line">    __uint(key_size, <span class="keyword">sizeof</span>(__u32));</span><br><span class="line">    __uint(value_size, <span class="keyword">sizeof</span>(__u32));</span><br><span class="line">&#125; output_map <span class="title function_">SEC</span><span class="params">(<span class="string">&quot;.maps&quot;</span>)</span>;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>XDP Program Function</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SEC(<span class="string">&quot;xdp&quot;</span>)</span><br><span class="line"><span class="type">int</span> <span class="title function_">xdp_dicmp</span><span class="params">(<span class="keyword">struct</span> xdp_md *ctx)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// logic goes here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>The <code>xdp_dicmp</code> function is the entry point of our XDP program, it will be called for each packet that arrives at the network interface. The <code>ctx</code> parameter is a pointer to the <code>xdp_md</code> data structure, which contains information about the packet and the network interface.</p>
+</li>
+<li><p>Now, onto handling perf events, drop and pass packets, and collect statistics.</p>
+</li>
+</ul>
+<p>Inside the <code>xdp_dicmp</code> function, we will first create a <code>perf_trace_event</code> object and initialize it with the current timestamp and the packet processing time, then we will store the event in the <code>output_map</code> map, as follows:</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">perf_trace_event</span> <span class="title">e</span> =</span> &#123;&#125;;</span><br><span class="line"><span class="comment">// Perf event for entering xdp program</span></span><br><span class="line">e.timestamp = bpf_ktime_get_ns();</span><br><span class="line">e.type = TYPE_ENTER;</span><br><span class="line">e.processing_time_ns = <span class="number">0</span>;</span><br><span class="line">bpf_perf_event_output(ctx, &amp;output_map, BPF_F_CURRENT_CPU, &amp;e, <span class="keyword">sizeof</span>(e));</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>Next, we will check if the packet is an ICMP packet, if it is, we will drop it and store a perf event with the type <code>TYPE_DROP</code>, otherwise, we will pass the packet and store a perf event with the type <code>TYPE_PASS</code>, as follows:</p>
+</li>
+<li><p>We start by getting a pointer to the packet data using the <code>data</code> field of the <code>xdp_md</code> data structure, then we get the packet size using the <code>data_end</code> field, and finally, we get the packet header using the <code>data</code> field.</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *data = (<span class="type">void</span> *)(<span class="type">long</span>)ctx-&gt;data; <span class="comment">// start of packet data</span></span><br><span class="line"><span class="type">void</span> *data_end = (<span class="type">void</span> *)(<span class="type">long</span>)ctx-&gt;data_end; <span class="comment">// end of packet data</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ethhdr</span> *<span class="title">eth</span> =</span> data; <span class="comment">// ethernet header</span></span><br><span class="line"><span class="keyword">if</span> (data + <span class="keyword">sizeof</span>(<span class="keyword">struct</span> ethhdr) &gt; data_end) <span class="comment">// check if packet has ethernet header</span></span><br><span class="line">&#123;</span><br><span class="line">    e.type = TYPE_DROP;</span><br><span class="line">    __u64 ts = bpf_ktime_get_ns();</span><br><span class="line">    e.processing_time_ns = ts - e.timestamp;</span><br><span class="line">    e.timestamp = ts;</span><br><span class="line">    bpf_perf_event_output(ctx, &amp;output_map, BPF_F_CURRENT_CPU, &amp;e, <span class="keyword">sizeof</span>(e));</span><br><span class="line">    <span class="keyword">return</span> XDP_DROP;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (bpf_ntohs(eth-&gt;h_proto) != ETH_P_IP) <span class="comment">// check if ethernet header is ipv4</span></span><br><span class="line">&#123;</span><br><span class="line">    e.type = TYPE_PASS;</span><br><span class="line">    __u64 ts = bpf_ktime_get_ns();</span><br><span class="line">    e.processing_time_ns = ts - e.timestamp;</span><br><span class="line">    e.timestamp = ts;</span><br><span class="line">    bpf_perf_event_output(ctx, &amp;output_map, BPF_F_CURRENT_CPU, &amp;e, <span class="keyword">sizeof</span>(e));</span><br><span class="line">    <span class="keyword">return</span> XDP_PASS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">iphdr</span> *<span class="title">iph</span> =</span> data + <span class="keyword">sizeof</span>(<span class="keyword">struct</span> ethhdr); <span class="comment">// ip header</span></span><br><span class="line"><span class="keyword">if</span> (data + <span class="keyword">sizeof</span>(<span class="keyword">struct</span> ethhdr) + <span class="keyword">sizeof</span>(<span class="keyword">struct</span> iphdr) &gt; data_end) <span class="comment">// check if packet has ip header</span></span><br><span class="line">&#123;</span><br><span class="line">    e.type = TYPE_DROP;</span><br><span class="line">    __u64 ts = bpf_ktime_get_ns();</span><br><span class="line">    e.processing_time_ns = ts - e.timestamp;</span><br><span class="line">    e.timestamp = ts;</span><br><span class="line">    bpf_perf_event_output(ctx, &amp;output_map, BPF_F_CURRENT_CPU, &amp;e, <span class="keyword">sizeof</span>(e));</span><br><span class="line">    <span class="keyword">return</span> XDP_DROP;    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// This is a ping packet</span></span><br><span class="line"><span class="keyword">if</span> (iph-&gt;protocol == IPPROTO_ICMP) &#123; <span class="comment">// check if ip header is icmp</span></span><br><span class="line">    bpf_printk(<span class="string">&quot;Got ICMP packet\n&quot;</span>); <span class="comment">// print to kernel log</span></span><br><span class="line">    e.type = TYPE_DROP;</span><br><span class="line">    __u64 ts = bpf_ktime_get_ns();</span><br><span class="line">    e.processing_time_ns = ts - e.timestamp;</span><br><span class="line">    e.timestamp = ts;</span><br><span class="line">    bpf_perf_event_output(ctx, &amp;output_map, BPF_F_CURRENT_CPU, &amp;e, <span class="keyword">sizeof</span>(e));</span><br><span class="line">    <span class="keyword">return</span> XDP_DROP; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (iph-&gt;protocol == IPPROTO_TCP) <span class="comment">// check if ip header is tcp</span></span><br><span class="line">    bpf_printk(<span class="string">&quot;Got TCP packet\n&quot;</span>); <span class="comment">// print to kernel log</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>The drop and pass logic is the same, we just change the <code>e.type</code> value and the return value of the function, we also calculate the packet processing time and store it in the <code>e.processing_time_ns</code> field.</p>
+</li>
+<li><p>If there is no ethernet header, we will drop the packet and store a perf event with the type <code>TYPE_DROP</code>, otherwise, we will check if the ethernet header is an IPv4 header, if it is not, we will pass the packet and store a perf event with the type <code>TYPE_PASS</code>, otherwise, we will check if the IP header is an ICMP header, if it is, we will drop the packet and store a perf event with the type <code>TYPE_DROP</code>, otherwise, we will check if the IP header is a TCP header, if it is, we will print a message to the kernel log.</p>
+</li>
+<li><p>Finally, we will pass the other packets and store a perf event with the type <code>TYPE_PASS</code>, as follows:</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">e.type = TYPE_PASS;</span><br><span class="line">__u64 ts = bpf_ktime_get_ns();</span><br><span class="line">e.processing_time_ns = ts - e.timestamp;</span><br><span class="line">e.timestamp = ts;</span><br><span class="line">bpf_perf_event_output(ctx, &amp;output_map, BPF_F_CURRENT_CPU, &amp;e, <span class="keyword">sizeof</span>(e));</span><br><span class="line"><span class="keyword">return</span> XDP_PASS;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>The <code>bpf_printk</code> function is used to print messages to the kernel log, it is similar to the <code>printf</code> function in C, but it is only used for debugging purposes, it is not recommended to use it in production.</p>
+</li>
+<li><p>Now, we are done with the function, do not forget to add the license:</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> _license[] SEC(<span class="string">&quot;license&quot;</span>) = <span class="string">&quot;GPL&quot;</span>;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>And that is it, we are done with the XDP program, now we will compile it using the following command:</li>
+</ul>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clang -S \</span><br><span class="line">    -g \</span><br><span class="line">    -target bpf \</span><br><span class="line">    -I../../libbpf/src\</span><br><span class="line">    -Wall \</span><br><span class="line">    -Werror \</span><br><span class="line">    -O2 -emit-llvm -c -o dicmp_kern.ll dicmp_kern.c</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>Which will generate the LLVM IR file <code>dicmp_kern.ll</code>, then we will use the <code>llc</code> tool to compile the LLVM IR file to BPF bytecode, as follows:</li>
+</ul>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">llc -march=bpf -filetype=obj -O2 -o dicmp_kern.o dicmp_kern.ll</span><br></pre></td></tr></table></figure></div>
+
+<p>Notice, that this compilation step can take part in the userspace program since we can compile c programs to bytecode in golang, we will check that next time.</p>
+<h3 id="User-Space-Program"><a href="#User-Space-Program" class="headerlink" title="User Space Program"></a>User Space Program</h3><ul>
+<li><p>Here, we will write the Golang logic that interacts with the XDP program in order to collect metrics</p>
+</li>
+<li><p>First, the USP will load the XDP program, then it will create a perf event map, and finally, it will read the perf events from the map and print them to the terminal.</p>
+</li>
+<li><p>We start by importing the required packages:</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">        <span class="string">&quot;encoding/binary&quot;</span></span><br><span class="line">        <span class="string">&quot;fmt&quot;</span></span><br><span class="line">        <span class="string">&quot;net&quot;</span></span><br><span class="line">        <span class="string">&quot;os&quot;</span></span><br><span class="line">        <span class="string">&quot;os/signal&quot;</span></span><br><span class="line">        <span class="string">&quot;syscall&quot;</span></span><br><span class="line">        <span class="string">&quot;github.com/cilium/ebpf&quot;</span></span><br><span class="line">        <span class="string">&quot;github.com/cilium/ebpf/link&quot;</span></span><br><span class="line">        <span class="string">&quot;github.com/cilium/ebpf/perf&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>Then, we will define the perf event data structure:</li>
+</ul>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">        TYPE_ENTER = <span class="number">1</span></span><br><span class="line">        TYPE_DROP  = <span class="number">2</span></span><br><span class="line">        TYPE_PASS  = <span class="number">3</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> event <span class="keyword">struct</span> &#123;</span><br><span class="line">        TimeSinceBoot  <span class="type">uint64</span></span><br><span class="line">        ProcessingTime <span class="type">uint32</span></span><br><span class="line">        Type           <span class="type">uint8</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> ringBufferSize = <span class="number">128</span> <span class="comment">// size of ring buffer used to calculate average processing times</span></span><br><span class="line"><span class="keyword">type</span> ringBuffer <span class="keyword">struct</span> &#123;</span><br><span class="line">        data   [ringBufferSize]<span class="type">uint32</span></span><br><span class="line">        start  <span class="type">int</span></span><br><span class="line">        pointer <span class="type">int</span></span><br><span class="line">        filled <span class="type">bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>The <code>ringBuffer</code> data structure is used to calculate the average processing time of the last <code>ringBufferSize</code> packets, it is a ring buffer that stores the processing time of the last <code>ringBufferSize</code> packets, the <code>start</code> field is used to keep track of the oldest packet in the buffer, the <code>pointer</code> field is used to keep track of the next empty slot in the buffer, and the <code>filled</code> field is used to check if the buffer is full or not.</p>
+</li>
+<li><p>Implemented below, are the functions to sum and average the processing times in the ring buffer:</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rb *ringBuffer)</span></span> add(val <span class="type">uint32</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> rb.pointer &lt; ringBufferSize &#123;</span><br><span class="line">                rb.pointer++</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                rb.filled = <span class="literal">true</span></span><br><span class="line">                rb.pointer= <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        rb.data[rb.pointer<span class="number">-1</span>] = val</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rb *ringBuffer)</span></span> avg() <span class="type">float32</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> rb.pointer == <span class="number">0</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">        sum := <span class="type">uint32</span>(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> _, val := <span class="keyword">range</span> rb.data &#123;</span><br><span class="line">                sum += <span class="type">uint32</span>(val)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> rb.filled &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="type">float32</span>(sum) / <span class="type">float32</span>(ringBufferSize)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">float32</span>(sum) / <span class="type">float32</span>(rb.pointer)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>Now, we will define the <code>main</code> function:</li>
+</ul>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	spec, err := ebpf.LoadCollectionSpec(<span class="string">&quot;../ksp/bpf/dicmp_kern.o&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	coll, err := ebpf.NewCollection(spec)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(fmt.Sprintf(<span class="string">&quot;Failed to create new collection: %v\n&quot;</span>, err))</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> coll.Close()</span><br><span class="line">	prog := coll.Programs[<span class="string">&quot;xdp_dicmp&quot;</span>]</span><br><span class="line">	<span class="keyword">if</span> prog == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(<span class="string">&quot;No program named &#x27;xdp_dicmp&#x27; found in collection&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	iface := <span class="string">&quot;wlo1&quot;</span></span><br><span class="line">	<span class="keyword">if</span> iface == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(<span class="string">&quot;No interface specified. Please set the INTERFACE environment variable to the name of the interface to be use&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	iface_idx, err := net.InterfaceByName(iface)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(fmt.Sprintf(<span class="string">&quot;Failed to get interface %s: %v\n&quot;</span>, iface, err))</span><br><span class="line">	&#125;</span><br><span class="line">	opts := link.XDPOptions&#123;</span><br><span class="line">		Program:   prog,</span><br><span class="line">		Interface: iface_idx.Index,</span><br><span class="line">		<span class="comment">// Flags is one of XDPAttachFlags (optional).</span></span><br><span class="line">	&#125;</span><br><span class="line">	lnk, err := link.AttachXDP(opts)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> lnk.Close()</span><br><span class="line">	fmt.Println(<span class="string">&quot;Successfully loaded and attached BPF program.&quot;</span>)</span><br><span class="line">	<span class="comment">// handle perf events</span></span><br><span class="line">	outputMap, ok := coll.Maps[<span class="string">&quot;output_map&quot;</span>]</span><br><span class="line">	<span class="keyword">if</span> !ok &#123;</span><br><span class="line">		<span class="built_in">panic</span>(<span class="string">&quot;No map named &#x27;output_map&#x27; found in collection&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	perfEvent, err := perf.NewReader(outputMap, <span class="number">4096</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(fmt.Sprintf(<span class="string">&quot;Failed to create perf event reader: %v\n&quot;</span>, err))</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> perfEvent.Close()</span><br><span class="line">	buckets := <span class="keyword">map</span>[<span class="type">uint8</span>]<span class="type">uint32</span>&#123;</span><br><span class="line">		TYPE_ENTER: <span class="number">0</span>, <span class="comment">// bpf program entered</span></span><br><span class="line">		TYPE_DROP:  <span class="number">0</span>, <span class="comment">// bpf program dropped</span></span><br><span class="line">		TYPE_PASS:  <span class="number">0</span>, <span class="comment">// bpf program passed</span></span><br><span class="line">	&#125;</span><br><span class="line">	processingTimePassed := &amp;ringBuffer&#123;&#125;</span><br><span class="line">	processingTimeDropped := &amp;ringBuffer&#123;&#125;</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// var event event</span></span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			record, err := perfEvent.Read()</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				fmt.Println(err)</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">var</span> e event</span><br><span class="line">			<span class="keyword">if</span> <span class="built_in">len</span>(record.RawSample) &lt; <span class="number">12</span> &#123;</span><br><span class="line">				fmt.Println(<span class="string">&quot;Invalid sample size&quot;</span>)</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// time since boot in the first 8 bytes</span></span><br><span class="line">			e.TimeSinceBoot = binary.LittleEndian.Uint64(record.RawSample[:<span class="number">8</span>])</span><br><span class="line">			<span class="comment">// processing time in the next 4 bytes</span></span><br><span class="line">			e.ProcessingTime = binary.LittleEndian.Uint32(record.RawSample[<span class="number">8</span>:<span class="number">12</span>])</span><br><span class="line">			<span class="comment">// type in the last byte</span></span><br><span class="line">			e.Type = <span class="type">uint8</span>(record.RawSample[<span class="number">12</span>])</span><br><span class="line">			buckets[e.Type]++</span><br><span class="line">			<span class="keyword">if</span> e.Type == TYPE_ENTER &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> e.Type == TYPE_DROP &#123;</span><br><span class="line">				processingTimeDropped.add(e.ProcessingTime)</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> e.Type == TYPE_PASS &#123;</span><br><span class="line">				processingTimePassed.add(e.ProcessingTime)</span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Print(<span class="string">&quot;\033[H\033[2J&quot;</span>)</span><br><span class="line">			fmt.Printf(<span class="string">&quot;total: %d. passed: %d. dropped: %d. passed processing time avg (ns): %f. dropped processing time avg (ns): %f\n&quot;</span>, buckets[TYPE_ENTER], buckets[TYPE_PASS], buckets[TYPE_DROP], processingTimePassed.avg(), processingTimeDropped.avg())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> os.Signal, <span class="number">1</span>)</span><br><span class="line">	signal.Notify(c, os.Interrupt, syscall.SIGTERM)</span><br><span class="line">	&lt;-c</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><p>We start by loading the eBPF collection from the compiled object file, then we get the <code>xdp_dicmp</code> program from the collection, and we attach it to the specified interface.</p>
+</li>
+<li><p>Then, we get the <code>output_map</code> map from the collection, and we create a perf event reader for it.</p>
+</li>
+<li><p>We create two ring buffers, one for the processing time of the dropped packets, and one for the processing time of the passed packets.</p>
+</li>
+<li><p>Then, we start a goroutine to read the perf events from the <code>output_map</code> map, and we print the statistics every time we receive a perf event.</p>
+</li>
+<li><p>Finally, we wait for an interrupt signal to exit the program.</p>
+</li>
+<li><p>Now, we can run the program:</p>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">go mod init dicmp</span><br><span class="line">go mod tidy</span><br><span class="line">CGO_ENABLED=0 go build . </span><br><span class="line">sudo ./dicmp</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>DEMO</strong></p>
+<ul>
+<li>We will run the program, and we will ping the interface to generate ICMP packets:</li>
+</ul>
+<video src="https://i.imgur.com/dxDPlJb.mp4" controls="controls" style="max-width: 730px;">
+</video>
+
+<h1 id="Next-Steps"><a href="#Next-Steps" class="headerlink" title="Next Steps"></a>Next Steps</h1><ul>
+<li>Learning how to deal with eBPF map entries lookups and updates</li>
+<li>Learning how to control the kernel space program from the user space program using eBPF maps</li>
+<li>Dealing with syscalls in eBPF programs</li>
+</ul>
+<p>Shout out to Peter McConnell for his great post on Medium about XDP implementation.</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Ping Killer using XDP and eBPF</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2023-08-11 08:00:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-17 21:05:17
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2023/08/11/ebpf/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Kernel/">#Kernel</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/08/19/karmada/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/08/06/quals23/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Securinets Quals CTF 2023 - Writeups Index</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Ping Killer using XDP and eBPF</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PingKiller-in-eBPF"><span class="nav-text">PingKiller in eBPF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Terms"><span class="nav-text">Terms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning-Section"><span class="nav-text">Learning Section</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Environment-Set-up"><span class="nav-text">Environment Set-up</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-we-will-need"><span class="nav-text">What we will need</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation-Commands"><span class="nav-text">Installation Commands</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PingKiller-Our-first-eBPF-program"><span class="nav-text">PingKiller: Our first eBPF program</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-is-PingKiller"><span class="nav-text">What is PingKiller?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel-Space-Program"><span class="nav-text">Kernel Space Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-Space-Program"><span class="nav-text">User Space Program</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Next-Steps"><span class="nav-text">Next Steps</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

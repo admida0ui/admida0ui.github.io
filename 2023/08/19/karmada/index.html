@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2023/08/19/karmada/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="IntroductionKarmada is a multi-Kubernetes cluster application distribution management system that can create multi-cluster applications just like using Kubernetes native API. Environment Setup We are">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada">
+<meta property="og:url" content="http://admida0ui.tech/2023/08/19/karmada/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="IntroductionKarmada is a multi-Kubernetes cluster application distribution management system that can create multi-cluster applications just like using Kubernetes native API. Environment Setup We are">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/5yTKO4G.png">
+<meta property="og:image" content="https://i.imgur.com/L3GaEPh.png">
+<meta property="og:image" content="https://i.imgur.com/ukZgmJ4.png">
+<meta property="og:image" content="https://i.imgur.com/nhtq1PJ.png">
+<meta property="og:image" content="https://i.imgur.com/s15ZbBE.png">
+<meta property="og:image" content="https://i.imgur.com/tlyGNmB.png">
+<meta property="og:image" content="https://i.imgur.com/CLIAwjq.png">
+<meta property="og:image" content="https://i.imgur.com/vp0jvTi.png">
+<meta property="og:image" content="https://i.imgur.com/ttWWFrV.png">
+<meta property="og:image" content="https://i.imgur.com/NKj50zB.png">
+<meta property="article:published_time" content="2023-08-19T07:30:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T19:05:17.071Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="Cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/5yTKO4G.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/1xrxNAA.png" alt="Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada" />
+                    <h1 class="article-title-cover">Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-19 09:30</span>
+        <span class="mobile">2023-08-19 09:30</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-17 21:05:17</span>
+            <span class="mobile">2024-05-17 21:05</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Work/">Work</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Cloud/">Cloud</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Karmada is a multi-Kubernetes cluster application distribution management system that can create multi-cluster applications just like using Kubernetes native API.</p>
+<h2 id="Environment-Setup"><a href="#Environment-Setup" class="headerlink" title="Environment Setup"></a>Environment Setup</h2><ul>
+<li>We are going to install Karmada kubernetes plugin into our Kind local cluster (on-prem) to work as our host cluster and then it will be joining two member clusters from two different cloud providers Google Cloud Platform and Digital Ocean.</li>
+<li>Both members will join the host in push mode (agentless).</li>
+</ul>
+<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><p>Go (Latest)<br>Kubectl<br>Kind</p>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>Create a Kind cluster</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster</span><br></pre></td></tr></table></figure></div>
+
+<p>Host Machine (always)</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/karmada-io/karmada/releases/download/v1.2.0/kubectl-karmada-linux-amd64.tgz</span><br><span class="line"></span><br><span class="line">tar -zxf kubectl-karmada-linux-amd64.tgz</span><br><span class="line">sudo <span class="built_in">cp</span> kubectl-karmada /usr/local/bin/</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="Initialize-the-Karmada-control-plane-components-on-our-Kind-local-cluster"><a href="#Initialize-the-Karmada-control-plane-components-on-our-Kind-local-cluster" class="headerlink" title="Initialize the Karmada control plane components on our Kind local cluster"></a>Initialize the Karmada control plane components on our Kind local cluster</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl karmada init --kubeconfig=~/.kube/config</span><br></pre></td></tr></table></figure></div>
+
+<p>Output:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/5yTKO4G.png"
+                     
+                ></p>
+<p>Checking with <code>kubectl -n karmada-system get pods</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/L3GaEPh.png"
+                     
+                ></p>
+<h3 id="Create-Google-Cloud-GKE-Cluster-and-get-its-Kubeconfig"><a href="#Create-Google-Cloud-GKE-Cluster-and-get-its-Kubeconfig" class="headerlink" title="Create Google Cloud GKE Cluster and get its Kubeconfig"></a>Create Google Cloud GKE Cluster and get its Kubeconfig</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/ukZgmJ4.png"
+                     
+                ></p>
+<p>Notice, for GKE Kubeconfig we must install the gcloud cli and the gcloud auth plugin for kubectl in order to be able to authenticate to the GKE cluster, this is only required for GKE as Digital Ocean Cluster uses token-based authentication</p>
+<p>gcloud requirements installation</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yay -S google-cloud-cli</span><br><span class="line">yay -S google-cloud-cli-gke-gcloud-auth-plugin</span><br></pre></td></tr></table></figure></div>
+
+<p>Add the following to your .bashrc or .zshrc</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> USE_GKE_GCLOUD_AUTH_PLUGIN=True</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></div>
+
+<p>Getting the GKE Kubeconfig file locally</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcloud container clusters get-credentials &lt;clustername&gt; --region us-central1 --project &lt;projectname&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p>Then download the file <code>~/.kube/config</code> locally and rename it to member1 or like config1</p>
+<h3 id="Create-Digital-Ocean-Kubernetes-Cluster-and-get-its-Kubeconfig"><a href="#Create-Digital-Ocean-Kubernetes-Cluster-and-get-its-Kubeconfig" class="headerlink" title="Create Digital Ocean Kubernetes Cluster and get its Kubeconfig"></a>Create Digital Ocean Kubernetes Cluster and get its Kubeconfig</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/nhtq1PJ.png"
+                     
+                ></p>
+<p>Go to actions and download config locally then rename it as well to member2 or config2</p>
+<p>With everything done in enviornment setup, we join both clusters to our host cluster now</p>
+<h2 id="Join-member-clusters"><a href="#Join-member-clusters" class="headerlink" title="Join member clusters"></a>Join member clusters</h2><p>To make names simpler we <code>sed -i &#39;s/do-ams3-k8s-1-27-4-do-0-ams3-1692406742545/docluster/g&#39; config2</code> and <code>sed -i &#39;s/gke_esoteric-might-387308_us-central1_autopilot-cluster-1/gke-cluster/g&#39; config1</code> because Karmada doesnt support special characters in names as well as longer than 48-character names.</p>
+<p>There are two contexts in Karmada:</p>
+<ul>
+<li>karmada-apiserver: <code>kubectl config use-context karmada-apiserver</code></li>
+<li>karmada-host: <code>kubectl config use-context karmada-host</code></li>
+</ul>
+<p>The karmada-apiserver is the main kubeconfig to be used when interacting with the Karmada control plane, while the karmada-host is only used for debugging Karmada installation with the host cluster.</p>
+<p>Remember, although we have the context karmada-apiserver, this still not an actual Kubernetes cluster, rather it is a Karmada control plane API server running inside the Karmada-host Cluster.</p>
+<p>Karmada simplifies multi-cluster access through its central access portals on the karmada-apiserver. This allows unified authentication to be managed within the Karmada control plane. Karmada achieves unified authentication using Kubernetes user camouflage feature.</p>
+<p>When a cluster is added to Karmada, it generates a ServiceAccount called karmada-impersonator in the cluster’s karmada-cluster namespace. The associated token is then gathered into the Karmada control plane. This ServiceAccount lacks default permissions as it’s not bound to any RBAC.</p>
+<p>So, let’s start with the GKE Cluster</p>
+<h3 id="Join-GKE-Cluster"><a href="#Join-GKE-Cluster" class="headerlink" title="Join GKE Cluster"></a>Join GKE Cluster</h3><p><strong>In host cluster, run</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl karmada --kubeconfig /etc/karmada/karmada-apiserver.config  <span class="built_in">join</span> gke-cluster --cluster-kubeconfig=~/clusters/config1</span><br></pre></td></tr></table></figure></div>
+
+<p>This will fail saying “no secret was found for the gke-cluster service account”, because Kubernetes no longer creates a secret token for service account automatically, so we need to create that manually. Karmada needs to use ServiceAccount and Secret to access member clusters.</p>
+<p>So, lets make thing more clear, upon running that command, karmada will create a service account inside our GKE cluster, but the thing is, this service account which is named karmada-gke-cluster lacks a secret, and since Kubernetes decided to no longer dealing with that, we have to deal with it manually…</p>
+<p>As shown here:</p>
+<p><strong>Using GKE config to edit service account and create secrets using kubectl</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl --kubeconfig=config2 get sa -n karmada-cluster                                                                </span><br><span class="line">NAME                   SECRETS   AGE</span><br><span class="line">default                0         7h51m</span><br><span class="line">karmada-gke-cluste     0         109m</span><br><span class="line">karmada-impersonator   0         7h51m</span><br></pre></td></tr></table></figure></div>
+
+<p>so let’s prepare our secret.yaml file</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">karmada-impersonator</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">karmada-cluster</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/service-account.name:</span> <span class="string">&quot;karmada-impersonator&quot;</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">kubernetes.io/service-account-token</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">gke-cluster-secret</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">karmada-cluster</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/service-account.name:</span> <span class="string">&quot;karmada-gke-cluster&quot;</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">kubernetes.io/service-account-token</span></span><br></pre></td></tr></table></figure></div>
+
+<p>and edit the existing service account to append the secret name at the end<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/s15ZbBE.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/tlyGNmB.png"
+                     
+                ></p>
+<p>We’re done for GKE, let’s just join it as member now</p>
+<p>This is the output to expect</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl karmada --kubeconfig /etc/karmada/karmada-apiserver.config  <span class="built_in">join</span> gke-cluster --cluster-kubeconfig=~/clusters/config1</span><br><span class="line">cluster(ubuntub) is joined successfully</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="Join-Digital-Ocean-Cluster"><a href="#Join-Digital-Ocean-Cluster" class="headerlink" title="Join Digital Ocean Cluster"></a>Join Digital Ocean Cluster</h3><p><strong>In host cluster, run</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl karmada --kubeconfig /etc/karmada/karmada-apiserver.config  <span class="built_in">join</span> docluster --cluster-kubeconfig=~/clusters/config2</span><br></pre></td></tr></table></figure></div>
+
+<p>The same process here, Karmada will create a service account for both the docluster and the karmada-impersonator, and both will be lacking secrets.</p>
+<p><strong>Using Digital Ocean config to edit service account and create secrets using kubectl</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/CLIAwjq.png"
+                     
+                ></p>
+<p>Secret file here</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">karmada-impersonator</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">karmada-cluster</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/service-account.name:</span> <span class="string">&quot;karmada-impersonator&quot;</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">kubernetes.io/service-account-token</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">docluster-secret</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">karmada-cluster</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/service-account.name:</span> <span class="string">&quot;karmada-docluster&quot;</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">kubernetes.io/service-account-token</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="View-member-clusters"><a href="#View-member-clusters" class="headerlink" title="View member clusters"></a>View member clusters</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/vp0jvTi.png"
+                     
+                ></p>
+<h2 id="Deploy-Nginx-application"><a href="#Deploy-Nginx-application" class="headerlink" title="Deploy Nginx application"></a>Deploy Nginx application</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> nginx-deployment.yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    app: nginx</span><br><span class="line">  ports:</span><br><span class="line">    - protocol: TCP</span><br><span class="line">      port: 80</span><br><span class="line">      targetPort: 80</span><br><span class="line">---</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx</span><br><span class="line">  labels:</span><br><span class="line">    app: nginx</span><br><span class="line">spec:</span><br><span class="line">  replicas: 2</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nginx</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: nginx</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - image: nginx</span><br><span class="line">        name: nginx</span><br><span class="line">$ kubectl  --kubeconfig /etc/karmada/karmada-apiserver.config apply -f nginx-deployment.yaml</span><br></pre></td></tr></table></figure></div>
+
+<p>Karmada, works on Kubernetes manifests as they are, but requires a distribution strategy and specification of member clusters, so let’s create <code>PropagationPolicy.yaml</code></p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">policy.karmada.io/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PropagationPolicy</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx-propagation</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">resourceSelectors:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line">      <span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line">      <span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">placement:</span></span><br><span class="line">    <span class="attr">clusterAffinity:</span></span><br><span class="line">      <span class="attr">clusterNames:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">ubuntub</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">ubuntuc</span></span><br><span class="line">    <span class="attr">replicaScheduling:</span></span><br><span class="line">      <span class="attr">replicaDivisionPreference:</span> <span class="string">Weighted</span></span><br><span class="line">      <span class="attr">replicaSchedulingType:</span> <span class="string">Divided</span></span><br><span class="line">      <span class="attr">weightPreference:</span></span><br><span class="line">        <span class="attr">staticWeightList:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">targetCluster:</span></span><br><span class="line">              <span class="attr">clusterNames:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">ubuntub</span></span><br><span class="line">            <span class="attr">weight:</span> <span class="number">1</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">targetCluster:</span></span><br><span class="line">              <span class="attr">clusterNames:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">ubuntuc</span></span><br><span class="line">            <span class="attr">weight:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></div>
+
+<p>The same could be achieved using a simpler strategy to duplicate across all the member clusters.</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">policy.karmada.io/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PropagationPolicy</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx-propagation</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">resourceSelectors:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line">      <span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">placement:</span></span><br><span class="line">    <span class="attr">replicaScheduling:</span></span><br><span class="line">      <span class="attr">replicaSchedulingType:</span> <span class="string">Duplicated</span></span><br></pre></td></tr></table></figure></div>
+
+<p>So when we apply any of the above PropagationPolicies, both member clusters will have nginx deployment with two replicas.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl  --kubeconfig /etc/karmada/karmada-apiserver.config apply -f PropagationPolicy.yaml</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Application-Deployment-Status"><a href="#Application-Deployment-Status" class="headerlink" title="Application Deployment Status"></a>Application Deployment Status</h2><h3 id="In-Control-Cluster"><a href="#In-Control-Cluster" class="headerlink" title="In Control Cluster"></a>In Control Cluster</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/ttWWFrV.png"
+                     
+                ></p>
+<p>Notice there are no pods here!</p>
+<h3 id="In-Member-Clusters"><a href="#In-Member-Clusters" class="headerlink" title="In Member Clusters"></a>In Member Clusters</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/NKj50zB.png"
+                     
+                ></p>
+<h2 id="What-to-check-next"><a href="#What-to-check-next" class="headerlink" title="What to check next?"></a>What to check next?</h2><p>Implemeting this whole logic in a kubernetes custom controller using Kubebuilder or client-go</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2023-08-19 09:30:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-17 21:05:17
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2023/08/19/karmada/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Cloud/">#Cloud</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2024/05/17/fido/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Setting up FIDO2 on Linux (1)</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/08/11/ebpf/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Ping Killer using XDP and eBPF</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Environment-Setup"><span class="nav-text">Environment Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prerequisites"><span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Initialize-the-Karmada-control-plane-components-on-our-Kind-local-cluster"><span class="nav-text">Initialize the Karmada control plane components on our Kind local cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Google-Cloud-GKE-Cluster-and-get-its-Kubeconfig"><span class="nav-text">Create Google Cloud GKE Cluster and get its Kubeconfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Digital-Ocean-Kubernetes-Cluster-and-get-its-Kubeconfig"><span class="nav-text">Create Digital Ocean Kubernetes Cluster and get its Kubeconfig</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Join-member-clusters"><span class="nav-text">Join member clusters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Join-GKE-Cluster"><span class="nav-text">Join GKE Cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Join-Digital-Ocean-Cluster"><span class="nav-text">Join Digital Ocean Cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View-member-clusters"><span class="nav-text">View member clusters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy-Nginx-application"><span class="nav-text">Deploy Nginx application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application-Deployment-Status"><span class="nav-text">Application Deployment Status</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Control-Cluster"><span class="nav-text">In Control Cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Member-Clusters"><span class="nav-text">In Member Clusters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-to-check-next"><span class="nav-text">What to check next?</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

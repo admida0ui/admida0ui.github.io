@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+    
+    <meta name="author" content="admida0ui">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://admida0ui.tech/2022/09/12/csaw-22/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="CSAW CTF is one of the oldest and biggest CTFs in the world, with more than 900 teams participating in the 2022 edition. We would like to thank the organizers for the stable infrastructure and the cre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAW&#39;22 Quals - Quantum &amp; Forensics Challenges Writeup">
+<meta property="og:url" content="http://admida0ui.tech/2022/09/12/csaw-22/index.html">
+<meta property="og:site_name" content="admida0ui">
+<meta property="og:description" content="CSAW CTF is one of the oldest and biggest CTFs in the world, with more than 900 teams participating in the 2022 edition. We would like to thank the organizers for the stable infrastructure and the cre">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/u91o/noir/blob/main/noir.png?raw=true">
+<meta property="og:image" content="https://i.imgur.com/dpalAg1.png">
+<meta property="og:image" content="https://i.imgur.com/wh0uUv2.png">
+<meta property="og:image" content="https://i.imgur.com/ouMza3O.png">
+<meta property="og:image" content="https://i.imgur.com/8x38gOi.png">
+<meta property="og:image" content="https://i.imgur.com/GOTSIPB.png">
+<meta property="og:image" content="https://i.imgur.com/RH9goSf.png">
+<meta property="og:image" content="https://imgur.com/jZoDJhE.gif">
+<meta property="og:image" content="https://imgur.com/aFiEzTR.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/190504993-8094b514-dfa2-472f-8622-59867ef2e061.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/190486028-970479de-3ff1-415e-bdd2-b4f0e6c8dab2.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/190497970-bd14060b-e413-43b6-982a-17da2d1c18a5.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/68945305/190505635-f998a0df-a328-4230-a3f1-1e3be73a5cef.png">
+<meta property="article:published_time" content="2022-09-12T10:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T19:05:17.070Z">
+<meta property="article:author" content="admida0ui,contact@admida0ui.tech">
+<meta property="article:tag" content="Misc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/u91o/noir/blob/main/noir.png?raw=true">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/9c/88/d1/9c88d167fbe4409252c9c1ad92adbe98.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            CSAW&#39;22 Quals - Quantum &amp; Forensics Challenges Writeup -
+        
+        admida0ui
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"admida0ui.tech","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"static","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"mida0ui & adm","subtitle":{"text":["Hey! This is Adam & Rania","Cloud & DevOps Enthusiasts","Open Source Intelligence","CTFs @ SOter14 Securinets"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"links":{"github":"https://github.com/admida0ui","instagram":null,"zhihu":null,"twitter":"https://twitter.com/admida0ui","email":"contact@admida0ui.tech"}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.2.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Stories":{"path":"/categories/Stories/","icon":"fa-regular fa-book"},"Writeups":{"path":"/categories/Writeups/","icon":"fa-regular fa-file-code"},"CTF12":{"path":"https://ctf.admida0ui.tech","icon":"fa-regular fa-flag"},"About":{"icon":"fa-regular fa-user","submenus":{"Rania":"https://raniamida0ui.github.io","Adam":"https://adamlahbib.me"}}},"search":{"enable":false,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/3/19 14:00:00"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/admida0ui.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                admida0ui
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Stories/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-book"></i>
+                                        
+                                        STORIES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/categories/Writeups/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-file-code"></i>
+                                        
+                                        WRITEUPS
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-flag"></i>
+                                        
+                                        CTF12
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Stories/"  >
+                             
+                                
+                                    <i class="fa-regular fa-book"></i>
+                                
+                                STORIES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/categories/Writeups/"  >
+                             
+                                
+                                    <i class="fa-regular fa-file-code"></i>
+                                
+                                WRITEUPS
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        target="_blank" rel="noopener" href="https://ctf.admida0ui.tech"  >
+                             
+                                
+                                    <i class="fa-regular fa-flag"></i>
+                                
+                                CTF12
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                ABOUT&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://raniamida0ui.github.io">RANIA</a>
+                            </li>
+                        
+                            <li class="dropdown-item flex-center">
+                                <a class="dropdown-item" target="_blank" rel="noopener" href="https://adamlahbib.me">ADAM</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/T7wOgqb.gif" alt="CSAW&#39;22 Quals - Quantum &amp; Forensics Challenges Writeup" />
+                    <h1 class="article-title-cover">CSAW&#39;22 Quals - Quantum &amp; Forensics Challenges Writeup</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2022-09-12 12:00</span>
+        <span class="mobile">2022-09-12 12</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-17 21:05:17</span>
+            <span class="mobile">2024-05-17 21:05</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Writeups/">Writeups</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Misc/">Misc</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p>CSAW CTF is one of the oldest and biggest CTFs in the world, with more than 900 teams participating in the 2022 edition. We would like to thank the organizers for the stable infrastructure and the creative challenges.</p>
+<p>we finished first in the MENA region and 14th globally</p>
+<p>Kudos to everyone in my team SOter14 for their huge work and efforts, you can catch up with out latest news at <a class="link"   target="_blank" rel="noopener" href="https://soter14.tech/" >our website <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/SOter14Team" >twitter page <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>The contest was fun and challenging, we managed to solve 25 out of the 28 challenges in Pwn, Web, OSINT, Forensics, Steganography, Misc, Quantum Computing, AI, Cryptography, and Reverse Engineering.</p>
+<p>Below are the writeups for forensics challs: Noir, Not Too Taxing (Crypto), and Encrypted disk.</p>
+<h1 id="Noir-Digital-Forensics-x2F-Steganography"><a href="#Noir-Digital-Forensics-x2F-Steganography" class="headerlink" title="Noir: Digital Forensics &#x2F; Steganography"></a>Noir: Digital Forensics &#x2F; Steganography</h1><p>+++info Description<br>I am a forest, and a night of dark trees: but he who is not afraid of my darkness, will find banks full of roses under my cypresses. Friedrich Nietzsche.</p>
+<p>The image contains a flag in the format (flag)this_is_the_flag<br>+++</p>
+<p>Challenge Link &amp; Author</p>
+<ul>
+<li>site: Challenge Link<br>url: <a class="link"   target="_blank" rel="noopener" href="https://drive.google.com/file/d/1BudamndgM6TioyzVXicMKVDjA2F-KUPz/view?usp=sharing" >https://drive.google.com/file/d/1BudamndgM6TioyzVXicMKVDjA2F-KUPz/view?usp=sharing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>desc: CSAW 2022 - Noir<br>image: <a class="link"   target="_blank" rel="noopener" href="https://ctftime.org/media/events/logo_48.png" >https://ctftime.org/media/events/logo_48.png <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>color: “#2296fd”</li>
+<li>site: Author - Wen Jun L.<br>desc: Wen Jun L. Linkedin Profile<br>url: <a class="link"   target="_blank" rel="noopener" href="https://www.linkedin.com/in/wenjl/" >https://www.linkedin.com/in/wenjl/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>image: <a class="link"   target="_blank" rel="noopener" href="https://media-exp1.licdn.com/dms/image/C5603AQGZdulNxGshvg/profile-displayphoto-shrink_400_400/0/1602081502952?e=1668643200&v=beta&t=XeXg__QTpf__BhQHFkZD7sSsL7PeCEbEXdi-J66JfeU" >https://media-exp1.licdn.com/dms/image/C5603AQGZdulNxGshvg/profile-displayphoto-shrink_400_400/0/1602081502952?e=1668643200&amp;v=beta&amp;t=XeXg__QTpf__BhQHFkZD7sSsL7PeCEbEXdi-J66JfeU <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>color: “#de2336”</li>
+</ul>
+<p>This challenge blowed our minds, it was part of CSAW’21 Finals and it is a 0-solves chall, so it was offered in the Quals of 2022. We’ve got an image, bit heavy around 9 MB that looks like a scene from a horror game, storm, forest, and darkness. It was a twisted chall!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://github.com/u91o/noir/blob/main/noir.png?raw=true"
+                     
+                ></p>
+<p>First, we tried the normal steganogrpahy ways around it, but obviously that is a total waster of time.</p>
+<p>It had 100+ on Aperisolve alone!</p>
+<p>Technically, the image is merely noise in the three RGB channels whith contrast on few areas, that when included with the alpha channel gives the image as you see it! Amazing, it really feels like some streaming technique, a kind of standard that’s used by TVs to show pictures we can understand. But we neglected the thought of getting a video out of an image, how unfair! Instead we’ve thought of the noise as a raw data that we can feed to Audacity and hopefully get an audible thing out of it, using U-LAW since we’re dealing with RAW data, it made much sense, because we have seen some images filled with noise turning into audio. But a video, insane!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/dpalAg1.png"
+                     
+                ></p>
+<p>And of course, it was a video!</p>
+<p>Noir represents a kind of movies, black and white, crime generally, and that’s how we finally went into the idea that we’re dealing with a video rather than an audio.</p>
+<p>The Noir movies are taped to a stripe and played through a wheel showing still images 24 frames a second - Oh, keep that in mind! Still images mean also RAW data. That could help.</p>
+<p>But still we wonder, how to extract the video.<br>Well it can’t be manually, there must be a tool, or it would be a total nightmare.</p>
+<p>To save you some time, it was <code>FFmpeg</code>!!</p>
+<p>FFmpeg is a free and open-source software project consisting of a suite of libraries and programs for handling video, audio, and other multimedia files and streams. At its core is the command-line ffmpeg tool itself, designed for processing of audiovisual files. Per Wikipedia.</p>
+<p>Well, that means some sort of conversion, right? Yep, but from a single png to what? There are hundreds of video formats out there, some of them are no longer being used.</p>
+<p>But we can narrow our results, to lightweight ones since the image is just 9 MB, 24 fps if that helps, RAW data, so no codecs!</p>
+<p>FFmpeg command to convert formats is basically:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>ffmpeg command</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i <span class="built_in">source</span> -pix_fmt pixelformat  -f rawvideo - &gt; output.extension</span><br></pre></td></tr></table></figure></div>
+
+<p>You can specify the frames, although ffmpeg can pretty much detect that automatically.</p>
+<p>We need the pixelformat and the extension. We’re getting close!</p>
+<p>Hmm, since we’re dealing with an image, can’t the extension of the video we’re looking for be both an image extension and a video extension. WEBM answers that. How clever!</p>
+<p>Webm is actually the only extension we’ve found thats a Joker, can be an image&#x2F;audio&#x2F;video. Which makes it special. That’s it, by luck, we got it, WEBM.</p>
+<p>However we tried a lot of extenison, it was a game of trial and error, for instance we checked mp4, wmv, avi, mkv, flv, mov, you name it…</p>
+<p>FFmpeg needs a pixel format, well, there is a hude table of these formats…</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>pixels format</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">name=     yuv420p, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=     yuyv422, nb_channels=   1, depth=   8, is_alpha=n</span><br><span class="line">name=       rgb24, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=       bgr24, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=     yuv422p, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=     yuv444p, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=       rgb32, nb_channels=   4, depth=   8, is_alpha=y</span><br><span class="line">name=     yuv410p, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=     yuv411p, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=      rgb565, nb_channels=   3, depth=   5, is_alpha=n</span><br><span class="line">name=      rgb555, nb_channels=   3, depth=   5, is_alpha=n</span><br><span class="line">name=        gray, nb_channels=   1, depth=   8, is_alpha=n</span><br><span class="line">name=       monow, nb_channels=   1, depth=   1, is_alpha=n</span><br><span class="line">name=       monob, nb_channels=   1, depth=   1, is_alpha=n</span><br><span class="line">name=        pal8, nb_channels=   4, depth=   8, is_alpha=y</span><br><span class="line">name=    yuvj420p, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=    yuvj422p, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=    yuvj444p, nb_channels=   3, depth=   8, is_alpha=n</span><br><span class="line">name=      xvmcmc, nb_channels=   0, depth=   0, is_alpha=n</span><br><span class="line">name=    xvmcidct, nb_channels=   0, depth=   0, is_alpha=n</span><br><span class="line">name=     uyvy422, nb_channels=   1, depth=   8, is_alpha=n</span><br><span class="line">name=   uyyvyy411, nb_channels=   1, depth=   8, is_alpha=n</span><br><span class="line">name=       bgr32, nb_channels=   4, depth=   8, is_alpha=y</span><br><span class="line">name=      bgr565, nb_channels=   3, depth=   5, is_alpha=n</span><br><span class="line">name=      bgr555, nb_channels=   3, depth=   5, is_alpha=n</span><br><span class="line">name=        bgr8, nb_channels=   1, depth=   8, is_alpha=n</span><br><span class="line">name=        bgr4, nb_channels=   1, depth=   4, is_alpha=n</span><br><span class="line">name=   bgr4_byte, nb_channels=   1, depth=   8, is_alpha=n</span><br><span class="line">name=        rgb8, nb_channels=   1, depth=   8, is_alpha=n</span><br><span class="line">name=        rgb4, nb_channels=   1, depth=   4, is_alpha=n</span><br><span class="line">name=   rgb4_byte, nb_channels=   1, depth=   8, is_alpha=n</span><br><span class="line">name=        nv12, nb_channels=   2, depth=   8, is_alpha=n</span><br><span class="line">name=        nv12, nb_channels=   2, depth=   8, is_alpha=n</span><br><span class="line">name=     rgb32_1, nb_channels=   4, depth=   8, is_alpha=y</span><br><span class="line">name=     bgr32_1, nb_channels=   4, depth=   8, is_alpha=y</span><br><span class="line">name=    gray16be, nb_channels=   1, depth=  16, is_alpha=n</span><br><span class="line">name=    gray16le, nb_channels=   1, depth=  16, is_alpha=n</span><br></pre></td></tr></table></figure></div>
+
+<p>Well, we didn’t guess, we, at this stage, after looking deeply into the image, and as said before, the RGB channels are carrying noise that surely represent the video, however the alpha channel is the one that shape the picture as we see it in the previews. So the pixel format we choose is rgb24 excluding the alpha channel.</p>
+<p>The final command is:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i noir.png -pix_fmt rgb24  -f rawvideo - &gt; vid.webm</span><br></pre></td></tr></table></figure></div>
+
+<p>Coool, after all the hustle we’ve got a video, a subway with blinking lights, or should I say, Morse Code!<br>The clock was ticking, we’re at the final hours of the CTF, and the video is 2 mins long.<br>Could there be any OpenCV tool for this! Of course, here is a link you might need it as well <a class="link"   target="_blank" rel="noopener" href="https://github.com/Razer2015/MorseDecoder" >MorseDecoder <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>Here is a link for the video as well <a class="link"   target="_blank" rel="noopener" href="https://drive.google.com/file/d/19NS92WnVY1IMlG4hyEYXvsE71j_m1Cpo/view?usp=sharing" >video.webm <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>Using the tool, I let it record my screen and positioned the cross selection on the train lights. Within a minute we’ve got the flag!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/wh0uUv2.png"
+                     
+                ></p>
+<p>Finally, it was a creative challenge we must say!</p>
+<p>The flag is <code>(flag)sil3nt_refl3ct1on</code></p>
+<h1 id="Not-Too-Taxing-Digital-Forensics-x2F-Cryptography"><a href="#Not-Too-Taxing-Digital-Forensics-x2F-Cryptography" class="headerlink" title="Not Too Taxing: Digital Forensics &#x2F; Cryptography"></a>Not Too Taxing: Digital Forensics &#x2F; Cryptography</h1><p>+++info Description<br>We intercepted some email communications between a tax consultant and his client that contained some important tax documents. We were able to successfully extract two of the documents, but we can’t figure out the password to the file in order to extract the data. Attached are the two extracted files, Tax_Ret_Form_Blank.pdf and Tax_Ret_Form_Nov_2021.zip, and a transcript of the emails we found, SPBlock_Email.pdf.</p>
+<p>Can you figure out the password so we can get this guy’s info?<br>+++</p>
+<p>Challenge Link &amp; Author</p>
+<ul>
+<li>site: Challenge Link<br>url: <a class="link"   target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1z5HlXGYaVxmNwVmxdDXFBOOIAedKzsZM?usp=sharing" >https://drive.google.com/drive/folders/1z5HlXGYaVxmNwVmxdDXFBOOIAedKzsZM?usp=sharing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>desc: CSAW 2022 - Not Too Taxing<br>image: <a class="link"   target="_blank" rel="noopener" href="https://ctftime.org/media/events/logo_48.png" >https://ctftime.org/media/events/logo_48.png <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>color: “#2296fd”</li>
+<li>site:<br>desc:<br>url:<br>image:<br>color: “#de2336”</li>
+</ul>
+<p>In this challenge we were given, an encrypted zip archive containing a filled state tax form document for the month of Novemeber 2021, the emails transmitted between … and the client, as well as the template of the tax form blank.</p>
+<p>We’ve noticed the zip was using the ZipCrypto Store compression, which is breakable if you can find 12 bytes of the data inside the zip, 8 of which got to be contiguous.</p>
+<p>ZipCrypto is considered as the legacy encryption of archives, you must be aware that it is the default method used in most Linux distros: ZipCrypto Deflate. Thus you might want to manually change that method when compressing to AES for higher security.</p>
+<p>The ZipCrypto algorithm generates a pseudo-random stream of bytes&#x2F;keystream, which is XORed to the entry’s content. to produce the encrypted data. The generator’s state made of three 32-bits integers (keys), is initialized using the password and then contiuously updating as encryption goes on.</p>
+<p>This encryption algorithm is vulnerable to known plaintext attacks to recover the content fully.</p>
+<p>We’re going to use <code>bkcrack</code> tool which can recover the content of the archive, change a zip archive’s password, and recover the original password. All by retrieving the zip archive three generated keys.</p>
+<p>The installation is pretty straight forward, just git clone the repo then,</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -S . -B build -DCMAKE_INSTALL_PREFIX=install</span><br><span class="line">cmake --build build --config Release</span><br><span class="line">cmake --build build --config Release --target install</span><br></pre></td></tr></table></figure></div>
+
+<p>Well, we must use the blank tax form as our plaintext attack, as it shares a lot of identical bytes with the filled form inside the zip.</p>
+<p>However you can’t just feed the pdf to bkcrack and hope for it to crack the zip. The tool requires a non encrypted zip with the similar bytes inside to attack the encrypted zip.</p>
+<p>So let’s get our blank form inside a zip and specify the method of encryption as ZipCrypto and the compression level as store. Now we guarantee there are plenty of similar bytes to execute the attack.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/ouMza3O.png"
+                     
+                ></p>
+<p>First we retrieve the three keys from the zip archive using</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bkcrack -C Tax_Ret_Form_Nov_2021.zip -c Tax_Ret_Form_Nov_2021.zip -P Tax_Ret_Blank.zip -p Tax_Ret_Form_Blank.pdf</span><br></pre></td></tr></table></figure></div>
+
+<p>-C: Specifies the encrypted zip archive<br>-c: Specifies the target file within the archive<br>-P: Specifies the plaintext zip archive<br>-p: specifies the plaintext file within the non encrypted archive.</p>
+<p>Now let it process for a while, it should not take long, as we provided more than enough data to bkcrack.</p>
+<p>Here are they keys I have got:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>result</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b2c4a24e f036ff3a 998f6727</span><br></pre></td></tr></table></figure></div>
+
+<p>If the compression wasn’t Store, and instead it was Deflate, then the Github repo provides some python scripts to decompress those types, just first include <code>-d deciphered</code> at the end of the previous command.</p>
+<p>Then run:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 tools/inflate.py deciphered decompressed</span><br></pre></td></tr></table></figure></div>
+
+<p>In our case, it was just Store, so we move on to the next step, we’re going to recreate the very same archive with a password of our choise, this is the fastest way around Zip crypto archives, you can go ahead and retrieve the password, we will show that. However that process will take a bit longer.</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><figcaption><span>command Line</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bkcrack -C Tax_Ret_Form_Nov_2021.zip -k b2c4a24e f036ff3a 998f6727 -U unlocked.zip 1234</span><br></pre></td></tr></table></figure></div>
+
+<p>And within a second, we got our new archive with the filled document restored successfully!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/8x38gOi.png"
+                     
+                ></p>
+<p>And the flag was: <code>flag&#123;1f_y0u_u53_z1pcryp70_4ny0n3_c4n_aud17_y0u&#125;</code></p>
+<p>However if you want the hard way, you can retrieve the original password of the archive using the three keys, you might need to know the length though, or guess it. Tideous task…</p>
+<p>Anyways, here is the command you would use for that:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bkcrack -k b2c4a24e f036ff3a 998f6727 -r 8..12 ?p</span><br></pre></td></tr></table></figure></div>
+
+<p>-r to specify the length, it can be a rough number or an interval.</p>
+<p>Sorry, I didnt bother to get the password :))</p>
+<p>It was a creative challenge. However I must say that we did not check the email content document at all lol!</p>
+<h1 id="Encrypted-Disk-Digital-Forensics"><a href="#Encrypted-Disk-Digital-Forensics" class="headerlink" title="Encrypted Disk: Digital Forensics"></a>Encrypted Disk: Digital Forensics</h1><p>+++info Description<br>th31nk encrypted his disk and forgot the password, can you help him? Flag is what you find, no need to wrap</p>
+<p>HINT: Custom Profile<br>+++</p>
+<p>Challenge Link &amp; Author </p>
+<ul>
+<li>site: Challenge Link<br>url: <a class="link"   target="_blank" rel="noopener" href="https://drive.google.com/file/d/16tILpZa5GivY-Z84lrm86V8DC5DWaHza/view?usp=sharing" >https://drive.google.com/file/d/16tILpZa5GivY-Z84lrm86V8DC5DWaHza/view?usp=sharing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>desc: CSAW 2022 - Encrytped Disk<br>image: <a class="link"   target="_blank" rel="noopener" href="https://ctftime.org/media/events/logo_48.png" >https://ctftime.org/media/events/logo_48.png <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>color: “#2296fd”</li>
+<li>site: Author - Crazyman<br>desc: Crazyman Twitter Profile<br>url: <a class="link"   target="_blank" rel="noopener" href="https://twitter.com/CrazymanArmy" >https://twitter.com/CrazymanArmy <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>image: <a class="link"   target="_blank" rel="noopener" href="https://pbs.twimg.com/profile_images/1427918895424282628/NR5jaECn_400x400.jpg" >https://pbs.twimg.com/profile_images/1427918895424282628/NR5jaECn_400x400.jpg <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>color: “#de2336”</li>
+</ul>
+<p>In this challenge we got a disk image &amp; a memory dump. The Description tell us that the user encrypted his disk and forgot the password! So we can understand that the memory dump will help us to decrypt the disk to get the flag! right?? Let’s Check what we have !</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ file *</span><br><span class="line">forensic.img: LUKS encrypted file, ver 1 [aes, ecb, sha1] UUID: 61478c6d-b04e-4f1a-aff6-b4bb3a29cfbe</span><br><span class="line">memory.raw:   data</span><br></pre></td></tr></table></figure></div>
+<p>As you see we have LUKS encrypted file version1! I will say it again! it’s verion 1!!!<br>Oh wait what is LUKS??! </p>
+<p>LUKS or the Linux Unified Key Setup is a disk encryption specification created by Clemens Fruhwirth in 2004 and was originally intended for Linux.<br>While most disk encryption softwares implement different, incompatible, and undocumented formats, LUKS implements a platform-independent on-disk format for use in various tools. This not only faciliates compatibility and interoperability among different programs, but also assures that they all implement password management in a secure and documented manner. Per Wikipedia.</p>
+<p>Unlike most blogs say, you should stick with LUKS2 if you are applying it to your disk, since it provides an extra layer of security by storing the master key in the kernel directly. However LUKS1 masterkey gets loaded in the RAM when you try to unlock it, and that what we are going to grab from the memory dump!</p>
+<p>The encrypted master key is stored as plaintext in the LUKS header. However once we mount it and get prompted to enter a passphrase, at least one of eight (LUKS support up to 8 passphrases), the decrypted master key (AES) is loaded into the memory.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/GOTSIPB.png"
+                     
+                ><br><em>Image courtesy: MDPI</em></p>
+<p>When we tried to use Volatility.py against the memory dump we had some troubles finding the right profile. </p>
+<p>We are sure that this memory image is linux one, because we have LUKS. Let’s figure out what is the distrubition and the version to search or make our volatility profile to work with! </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ strings memory.ram | grep <span class="string">&quot;Linux version&quot;</span></span><br><span class="line">Linux version 4.4.0-72-lowlatency (buildd@lcy01-17) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4) ) <span class="comment">#93-Ubuntu SMP PREEMPT Fri Mar 31 15:25:21 UTC 2017 (Ubuntu 4.4.0-72.93-lowlatency 4.4.49)</span></span><br></pre></td></tr></table></figure></div>
+<p>Oh it’s [Ubuntu 16.04.4]{.pinky} with low-latency kernel! oh wait what? what did you mean by low-latency kernel?<br>As I know there is various type of linux kernel like Real-tim kernel, generic kernel, Low-latency kernel<br>This types of kernel varies in the type of the scheduler and their algorithm, as well as the system interuption… etc! None is better than the other! Each one has its use case.</p>
+<p>For example the low-latency one can reduce audio latency and the context switches are more frequent. This type of kernel has a scheduler that is not suitable for a server environment! But it will be good for a professional audio or video editing!</p>
+<p>Ok now i guess you get it ! It’s time to make our profile! In this demo we will make a volatility profile with low-latency kernel using docker container. It’s better than downloading a whole VM! Don’t waste time in that! </p>
+<p>Let’s download volatiltiy man</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ git <span class="built_in">clone</span> https://github.com/volatilityfoundation/volatility</span><br><span class="line">Cloning into <span class="string">&#x27;volatility&#x27;</span>...</span><br><span class="line">remote: Enumerating objects: 27411, <span class="keyword">done</span>.</span><br><span class="line">Cceiving objects:   7% (1919/27411), 340.01 KiB | 652.00 KiB/s</span><br></pre></td></tr></table></figure></div>
+<p>In Volatility repository there is <code>/tools/linux</code> directory that contains tools that allow us to make a linux profile. In this directory there is a file called [Makefile]{.pinky} that contains important information ! Let’s check it! </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~volatility/tools/linux/$ <span class="built_in">cat</span> Makefile</span><br><span class="line">obj-m += module.o</span><br><span class="line">KDIR ?= /</span><br><span class="line">KVER ?= $(shell <span class="built_in">uname</span> -r)</span><br><span class="line"></span><br><span class="line">-include version.mk</span><br><span class="line"></span><br><span class="line">all: dwarf</span><br><span class="line"></span><br><span class="line">dwarf: module.c</span><br><span class="line">        $(MAKE) -C $(KDIR)/lib/modules/$(KVER)/build CONFIG_DEBUG_INFO=y M=<span class="string">&quot;<span class="subst">$(PWD)</span>&quot;</span> modules</span><br><span class="line">        dwarfdump -di module.ko &gt; module.dwarf</span><br><span class="line">        $(MAKE) -C $(KDIR)/lib/modules/$(KVER)/build M=<span class="string">&quot;<span class="subst">$(PWD)</span>&quot;</span> clean</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">        $(MAKE) -C $(KDIR)/lib/modules/$(KVER)/build M=<span class="string">&quot;<span class="subst">$(PWD)</span>&quot;</span> clean</span><br><span class="line">        <span class="built_in">rm</span> -f module.dwarf</span><br></pre></td></tr></table></figure></div>
+<p>Look at the <code>KVER</code> variable , it contains your current kernel version! it’s an automatic kernel detection! in our case we will change it with the version of kernel that we will use it! Check the Linux Version from the output of the last strings command that we runed on the memory dump.<br>change <code>$(shell uname -r)</code> with <code>4.4.0-72-lowlatency</code>. Do it manually or use the magic of <code>sed</code> command</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Sed Magic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~volatility/tools/linux/$ sed -i <span class="string">&#x27;s/$(shell uname -r)/4.4.0-72-lowlatency/g&#x27;</span> Makefile</span><br></pre></td></tr></table></figure></div>
+
+<p>Now it’s time to run a [Ubuntu 16.04.4]{.pinky} docker container and mount the current direcotry that contains the tools to build the profile. We can use the variable environment $PWD to indicate the current path easly. Don’t waste your time writing the whole path man ! </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Command Line Prompt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -it --<span class="built_in">rm</span> -v <span class="variable">$PWD</span>:/volatility ubuntu:16.04 /bin/bash</span><br><span class="line">Unable to find image <span class="string">&#x27;ubuntu:16.04&#x27;</span> locally</span><br><span class="line">16.04: Pulling from library/ubuntu</span><br><span class="line">58690f9b18fc: Downloading [=========&gt;                                         ]  8.522MB/46.5MB</span><br><span class="line">b51569e7c507: Download complete</span><br><span class="line">da8ef40b9eca: Download complete</span><br></pre></td></tr></table></figure></div>
+<p>Just wait until the container is pulled &amp; get your bash !</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>The ubuntu container is ready</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Digest: sha256:91bd29a464fdabfcf44e29e1f2a5f213c6dfa750b6290e40dd6998ac79da3c41</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> ubuntu:16.04</span><br><span class="line">root@507b1a4007ff:/<span class="comment">#</span></span><br></pre></td></tr></table></figure></div>
+<p>Since our ubuntu container is ready to use. Let’s install the low-latency kernel and the essentials packages for building the profile.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Install our packages</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@507b1a4007ff:/<span class="comment"># apt update &amp;&amp; apt install -y linux-image-4.4.0-72-lowlatency linux-headers-4.4.0-72-lowlatency build-essential dwarfdump make zip</span></span><br><span class="line">Get:1 http://security.ubuntu.com/ubuntu xenial-security InRelease [99.8 kB]</span><br><span class="line">Get:2 http://archive.ubuntu.com/ubuntu xenial InRelease [247 kB]</span><br><span class="line">Get:3 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [2051 kB]</span><br><span class="line">Get:4 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [99.8 kB]</span><br><span class="line">Get:5 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [97.4 kB]</span><br><span class="line">Get:6 http://archive.ubuntu.com/ubuntu xenial/main amd64 Packages [1558 kB]</span><br><span class="line">Get:7 http://security.ubuntu.com/ubuntu xenial-security/restricted amd64 Packages [15.9 kB]</span><br></pre></td></tr></table></figure></div>
+<p>Ah man you’ll wait again until the installation is done! After the installation is finished let’s check our volatility tools inside the container then make the profile !</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Make The profile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@507b1a4007ff:/<span class="comment"># ls</span></span><br><span class="line">bin   dev  home        lib    media  opt   root  sbin  sys  usr  vmlinuz</span><br><span class="line">boot  etc  initrd.img  lib64  mnt    proc  run   srv   tmp  var  volatility</span><br><span class="line"></span><br><span class="line">root@507b1a4007ff:/<span class="comment"># cd volatility/</span></span><br><span class="line"></span><br><span class="line">root@507b1a4007ff:/volatility<span class="comment"># ls</span></span><br><span class="line">Makefile  Makefile.enterprise  kcore  module.c</span><br><span class="line"></span><br><span class="line">root@507b1a4007ff:/volatility<span class="comment"># make</span></span><br><span class="line">make -C //lib/modules/4.4.0-72-lowlatency/build CONFIG_DEBUG_INFO=y M=<span class="string">&quot;/volatility&quot;</span> modules</span><br><span class="line">make[1]: Entering directory <span class="string">&#x27;/usr/src/linux-headers-4.4.0-72-lowlatency&#x27;</span></span><br><span class="line">  CC [M]  /volatility/module.o</span><br><span class="line">  Building modules, stage 2.</span><br><span class="line">  MODPOST 1 modules</span><br><span class="line">  CC      /volatility/module.mod.o</span><br><span class="line">  LD [M]  /volatility/module.ko</span><br><span class="line">make[1]: Leaving directory <span class="string">&#x27;/usr/src/linux-headers-4.4.0-72-lowlatency&#x27;</span></span><br><span class="line">dwarfdump -di module.ko &gt; module.dwarf</span><br><span class="line">make -C //lib/modules/4.4.0-72-lowlatency/build M=<span class="string">&quot;/volatility&quot;</span> clean</span><br><span class="line">make[1]: Entering directory <span class="string">&#x27;/usr/src/linux-headers-4.4.0-72-lowlatency&#x27;</span></span><br><span class="line">  CLEAN   /volatility/.tmp_versions</span><br><span class="line">  CLEAN   /volatility/Module.symvers</span><br><span class="line">make[1]: Leaving directory <span class="string">&#x27;/usr/src/linux-headers-4.4.0-72-lowlatency&#x27;</span></span><br></pre></td></tr></table></figure></div>
+<p>Now let’s zip the result of the make command (module.dwarf) and the system map file from the <code>/boot</code> :</p>
+<ul>
+<li><p>The system map file contains the Symbols that will be used by volatility to run the plugin correctly. It list function entry points and addresses of kernel data structures of a particular build of a kernel!</p>
+</li>
+<li><p>The <code>module.dwarf</code> contains the <code>vtypes</code> of this kernel module! To make we can call <code>vtypes</code> as the kernel’s data structures. To make it more easy <code>vtypes</code> is a small library to define <code>Validating Types</code> that will be used by the kernel !</p>
+</li>
+</ul>
+<p>Why we zip the <code>module.dwarf</code> and the <code>System.map</code> file? It’s simple man! These two files represent the whole profile that will be used by volatility! Volatility requires these 2 files to be in zip to deal with it as profile! Wow man, our profile is coming!</p>
+<p>zip Ubuntu1604.zip module.dwarf &#x2F;boot&#x2F;System.map-4.4.0-72-lowlatency</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Zip the 2 files</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@507b1a4007ff:/volatility<span class="comment"># zip Ubuntu1604-low.zip module.dwarf /boot/System.map-4.4.0-72-lowlatency</span></span><br><span class="line">  adding: module.dwarf (deflated 89%)</span><br><span class="line">  adding: boot/System.map-4.4.0-72-lowlatency (deflated 79%)</span><br></pre></td></tr></table></figure></div>
+<p>Now just leave our ubuntu container. we finished the 1st step of the challenge and you learn how to make a cool &amp; custom linux profile! Now you can copy this zip file to <code>/plugins/overlays/linux/</code> directory in your volatility environment.</p>
+<p>Sanity Check please ! Let’s list all the ubuntu profiles available!</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>check the availability of the profile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ vol.py --info | grep -i ubuntu </span><br><span class="line">Volatility Foundation Volatility Framework 2.6.1</span><br><span class="line">LinuxUbuntu1604-lowx64     - A Profile <span class="keyword">for</span> Linux Ubuntu1604-low x64</span><br></pre></td></tr></table></figure></div>
+<p>Cool! we found our new profile recognized by volatility ! Now it’s time to try use it.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Test the new profile</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ vol.py -f memory.raw --profile=LinuxUbuntu1604-lowx64 linux_banner    </span><br><span class="line">Volatility Foundation Volatility Framework 2.6.1</span><br><span class="line">Linux version 4.4.0-72-lowlatency (buildd@lcy01-17) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4) ) <span class="comment">#93-Ubuntu SMP PREEMPT Fri Mar 31 15:25:21 UTC 2017 (Ubuntu 4.4.0-72.93-lowlatency 4.4.49)</span></span><br></pre></td></tr></table></figure></div>
+<p>Bingo!! Our profile is ready to work! Let’s start the investigation now<br>I started checking the bash history!</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Bash History</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">vol.py -f memory.raw --profile=LinuxUbuntu1604-lowx64 linux_bash        </span><br><span class="line">Volatility Foundation Volatility Framework 2.6.1</span><br><span class="line">Pid      Name       Command Time             Command</span><br><span class="line">-------- ---------- -----------------------  -------</span><br><span class="line">    1229 bash       2017-04-14 07:58:36 UTC  <span class="built_in">history</span></span><br><span class="line">    1229 bash       2017-04-14 07:58:36 UTC  apt-get install linux-image-4.4.0-72-lowlatency linux-headers-lowlatency</span><br><span class="line">    1229 bash       2017-04-14 07:58:36 UTC  reboot</span><br><span class="line">    1229 bash       2017-04-14 07:58:36 UTC  apt-get insta</span><br><span class="line">    1229 bash       2017-04-14 07:59:07 UTC  <span class="built_in">history</span></span><br><span class="line">    1229 bash       2017-05-05 12:04:44 UTC  apt-get install lynx gnupg</span><br><span class="line">    1229 bash       2017-05-05 12:06:54 UTC  nano /etc/fstab</span><br><span class="line">    1229 bash       2017-05-05 12:06:58 UTC  nano /etc/crypttab</span><br><span class="line">    1229 bash       2017-05-05 12:07:08 UTC  <span class="built_in">cd</span> /mnt/</span><br><span class="line">    1229 bash       2017-05-05 12:07:29 UTC  <span class="built_in">cp</span> -R /media/sf_DUMP/dir* .</span><br><span class="line">    1229 bash       2017-05-05 12:07:38 UTC  ping 8.8.8.8</span><br><span class="line">    1229 bash       2017-05-05 12:09:14 UTC  gpg --quick-gen-key <span class="string">&#x27;Troll &lt;abuse@nothere.com&gt;&#x27;</span> rsa4096 cert 1y</span><br><span class="line">    1229 bash       2017-05-05 12:09:49 UTC  lynx -accept_all_cookies <span class="string">&quot;https://www.google.com/?=password+porno+collection&quot;</span></span><br><span class="line">    1229 bash       2017-05-05 12:10:27 UTC  gpg --<span class="built_in">yes</span> --batch --passphrase=1m_4n_4dul7_n0w -c findme.txt</span><br><span class="line">    1229 bash       2017-05-05 12:10:37 UTC  lynx -accept_all_cookies <span class="string">&quot;https://www.google.com/?=password+troll+memes&quot;</span></span><br><span class="line">    1229 bash       2017-05-05 12:11:04 UTC  gpg --<span class="built_in">yes</span> --batch --passphrase=Troll_Tr0ll_TrOll -c end.zip</span><br><span class="line">    1229 bash       2017-05-05 12:11:20 UTC  nano dir1/dic_fr_l33t.txt</span><br><span class="line">    1229 bash       2017-05-05 12:11:28 UTC  <span class="built_in">rm</span> findme.txt</span><br><span class="line">    1229 bash       2017-05-05 12:11:35 UTC  <span class="built_in">rm</span> -rf dir1/</span><br><span class="line">    1229 bash       2017-05-05 12:11:55 UTC  <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/sdb of=/media/sf_DUMP/forensic.img bs=2048</span><br></pre></td></tr></table></figure></div>
+<p>Let’s analyse this history together to understand what is going on here! </p>
+<ul>
+<li>The user install low-latency kernel </li>
+<li>install lynx : a terminal-based web browser for all Linux distributions</li>
+<li>edit the &#x2F;etc&#x2F;fstab.</li>
+<li>edit &#x2F;etc&#x2F;crypttab </li>
+<li>copy the directories from media (it can be a flash) partition to <code>/mnt/</code></li>
+<li>Check the connectivity by pinging the DNS server of google (I used to do the same test :3)</li>
+<li>generate a key with gpg using rsa4096. Something will be encrypted in the next commands! I am sure</li>
+<li>use lynx to search for porno password collection! mmm He want a premium account </li>
+<li>Encrypt <code>findme.txt</code> file using gpg !! This will generate an encrypted file <code>findme.txt.gpg</code></li>
+<li>Search for troll password! </li>
+<li>Encrypt <code>end.zip</code> with gpg again! We have <code>end.zip.gpg</code>, another encrypted file! </li>
+<li>edit a file text called <code>dic_fr_l33t.txt</code></li>
+<li>remove <code>findme.txt</code>. I guess we need to recover this file ! </li>
+<li>remove the directory that contains the <code>dic_fr_l33t.txt</code> file</li>
+</ul>
+<blockquote>
+<p>&#x2F;etc&#x2F;fstab: is a configuration table designed to ease the burden of mounting and unmounting file systems to a machine. It is a set of rules used to control how different filesystems are treated each time they are introduced to a system</p>
+</blockquote>
+<blockquote>
+<p>The &#x2F;etc&#x2F;crypttab (encrypted device table) file is similar to the fstab file and contains a list of encrypted devices to be unlocked during system boot up. This file can be used for automatically mounting encrypted swap devices or secondary file systems.</p>
+</blockquote>
+<p>Ok the encrypted disk contains a <code>end.zip.gpg</code> and <code>findme.text.gpg</code>. These 2 files are the key of the task! The flag is on these files! So we need to decrypt to disk and mount it!</p>
+<h2 id="Decrypt-Disk-and-MOUNT-IT"><a href="#Decrypt-Disk-and-MOUNT-IT" class="headerlink" title="Decrypt Disk and MOUNT IT"></a>Decrypt Disk and MOUNT IT</h2><p>Dealing with the disk we require <code>cryptsetup</code> –a tool to manage plain dm-crypt and LUKS encrypted volumes, to install it, use <code>sudo apt install cryptsetup-bin</code>.</p>
+<p>Analyzing the disk image to understand what we need to next!</p>
+<p>command <code>cryptsetup luksDump forensic.img</code> will return some useful LUKS information:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>LUKS INFO</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">LUKS header information <span class="keyword">for</span> forensic.img</span><br><span class="line"></span><br><span class="line">Version:        1</span><br><span class="line">Cipher name:    aes</span><br><span class="line">Cipher mode:    ecb</span><br><span class="line">Hash spec:      sha1</span><br><span class="line">Payload offset: 2048</span><br><span class="line">MK bits:        128</span><br><span class="line">MK digest:      a0 0c 4d c4 4a 53 5c 00 0c c3 33 63 13 5b 2c 41 8e a3 3f a9</span><br><span class="line">MK salt:        5e 84 10 01 a8 19 06 22 6a 7b 1b <span class="built_in">df</span> 35 73 46 8e</span><br><span class="line">                0e 7e f4 68 b0 97 38 81 cf 6d 99 7c 22 82 bd 06</span><br><span class="line">MK iterations:  117625</span><br><span class="line">UUID:           61478c6d-b04e-4f1a-aff6-b4bb3a29cfbe</span><br><span class="line"></span><br><span class="line">Key Slot 0: ENABLED</span><br><span class="line">        Iterations:             507935</span><br><span class="line">        Salt:                   68 5e 9a ef 39 26 3a 09 3a a2 57 fa b8 a4 d9 6b</span><br><span class="line">                                65 81 49 63 d7 43 41 2a 0e 0a <span class="built_in">cd</span> cb d7 94 ac 01</span><br><span class="line">        Key material offset:    8</span><br><span class="line">        AF stripes:             4000</span><br><span class="line">Key Slot 1: DISABLED</span><br><span class="line">Key Slot 2: DISABLED</span><br><span class="line">Key Slot 3: DISABLED</span><br><span class="line">Key Slot 4: DISABLED</span><br><span class="line">Key Slot 5: DISABLED</span><br><span class="line">Key Slot 6: DISABLED</span><br><span class="line">Key Slot 7: DISABLED</span><br></pre></td></tr></table></figure></div>
+
+<p>It is clear as day that once we have the master key –the one used to control the disk the way we want, we can add a key slot&#x2F;passphrase.</p>
+<p>As said in the introduction, the master key must be loaded into the RAM, we know it is AES, so using <code>findaes</code> tool <a class="link"   target="_blank" rel="noopener" href="https://sourceforge.net/projects/findaes/" >here <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>Then, extract the downloaded zip file<br><code>unzip findaes*.zip</code><br>Compile it<br><code>cd findaes* ; make</code><br>And run it against the memory dump<br><code>./findaes memory.raw</code><br>And you get this!</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>AES Finally !</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Found AES-128 key schedule at offset 0xad9f450:</span><br><span class="line">8d 3f 52 7d e5 14 87 2f 59 59 08 95 8d bc 0e d1</span><br></pre></td></tr></table></figure></div>
+
+<p>Going further is a routinuous disk encryption operation, with the masterkey in hand, we can generate a new passphrase say <code>1234</code> or <code>p@ssw0rd</code> for us to access the content.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>MasterKey !</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -n <span class="string">&quot;8d 3f 52 7d e5 14 87 2f 59 59 08 95 8d bc 0e d1&quot;</span> | <span class="built_in">tr</span> -d <span class="string">&quot; &quot;</span> | xxd -r -p  &gt; masterkey.key</span><br><span class="line"></span><br><span class="line">cryptsetup luksAddKey --master-key-file=masterkey.key forensic.img                               </span><br><span class="line">Enter new passphrase <span class="keyword">for</span> key slot:</span><br><span class="line">Verify passphrase:</span><br></pre></td></tr></table></figure></div>
+
+<p>Let’s see if it is now placed as Key Slot 1!</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>LUKS</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cryptsetup luksDump forensic.img | grep Key.Slot</span><br><span class="line">Key Slot 0: ENABLED</span><br><span class="line">Key Slot 1: ENABLED</span><br><span class="line">Key Slot 2: DISABLED</span><br><span class="line">Key Slot 3: DISABLED</span><br><span class="line">Key Slot 4: DISABLED</span><br><span class="line">Key Slot 5: DISABLED</span><br><span class="line">Key Slot 6: DISABLED</span><br><span class="line">Key Slot 7: DISABLED</span><br></pre></td></tr></table></figure></div>
+
+<p>All good!<br>Now, we mount it!</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cryptosetup luksOpen forensic.img mydata</span><br><span class="line">Enter passphrase for forensic.img: </span><br><span class="line">mkdir ~/csaw</span><br><span class="line">sudo mount /dev/mapper/mydata ~/csaw</span><br></pre></td></tr></table></figure></div>
+
+<p>Just fill in your new passphrase in the previous step, and you’ll have it!</p>
+<p>If you got some permission concern while trying to access the mount point, just switch to root!</p>
+<p>After decrypting the disk and mounting it! We find 2 directories! <code>dir2</code> and <code>lost+found</code>. OK I can say skip &amp; ignore <code>lost+found</code> directory. The <code>dir2</code> is our target. Let’s get our flag man! </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>test</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ <span class="built_in">ls</span> </span><br><span class="line">end.png    findme.txt.gpg      readme.txt</span><br></pre></td></tr></table></figure></div>
+<p>Let’s check the readme.txt first, Just i am trying to be patient before attacking the <code>findme.txt.gpg</code></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Check readme</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ <span class="built_in">cat</span> readme.txt</span><br><span class="line">Do you know GPG? So just <span class="keyword">do</span> it to decipher!!!</span><br></pre></td></tr></table></figure></div>
+<p>Ah man! We know that! We need to decrypt the gpg files. But wait! where is the <code>end.zip.gpg</code> file!<br>Ok it’s not important for me! I guess <code>findme.txt.gpg</code> is the flag! Let’s decipher it with <code>gpg</code> command line utility. Of course we will use <code>1m_4n_4dul7_n0w</code> password! </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>test</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ gpg --output findme.txt --decrypt findme.txt.gpg <span class="comment"># it will ask you for a password</span></span><br><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ <span class="built_in">cat</span> findme.txt</span><br><span class="line">The flag is not here of course !!!</span><br><span class="line">You must find it :-)</span><br><span class="line">Troll one day troll always ........</span><br></pre></td></tr></table></figure></div>
+<p>Ah man ! I don’t find the flag! OK still the <code>end.zip.gpg</code>! Let’s find this, i guess it’s hiding in <code>end.png</code> image </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Investigate end.png</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ sudo binwalk end.png </span><br><span class="line"></span><br><span class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">0             0x0             PNG image, 850 x 300, 8-bit/color RGB, non-interlaced</span><br><span class="line">320           0x140           Zlib compressed data, best compression</span><br><span class="line">917           0x395           Zlib compressed data, best compression</span><br><span class="line">493886        0x7893E         Zip archive data, at least v2.0 to extract, compressed size: 61917, uncompressed size: 61907, name: end.zip.gpg</span><br><span class="line">555953        0x87BB1         End of Zip archive, footer length: 22</span><br></pre></td></tr></table></figure></div>
+<p>Finally we found it, let’s use <code>foremost</code> command to extract our target ! </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Investigate end.png</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ foremost end.png   </span><br><span class="line">Processing: end.png</span><br><span class="line">|foundat=end.zip.gpgUT</span><br><span class="line">*|</span><br></pre></td></tr></table></figure></div>
+<p>A new directory called <code>output</code> is created and it contains the extracted files from <code>end.png</code> using </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Investigate end.png</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ tree output</span><br><span class="line">output</span><br><span class="line">├── audit.txt</span><br><span class="line">├── png</span><br><span class="line">│   └── 00000000.png</span><br><span class="line">└── zip</span><br><span class="line">    └── 00000964.zip</span><br><span class="line"></span><br><span class="line">2 directories, 3 files</span><br></pre></td></tr></table></figure></div>
+<p>OK let’s unzip the <code>00000964.zip</code> file and decipher the <code>end.zip.gpg</code> file using <code>Troll_Tr0ll_TrOll</code> password and get our flag </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Investigate end.png</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ unzip output/zip/00000964.zip </span><br><span class="line">Archive:  output/zip/00000964.zip</span><br><span class="line">  inflating: end.zip.gpg</span><br><span class="line">4n6nk8s@csaw2022:~/csaw/dir2$ gpg --output end.zip --decrypt end.zip.gpg</span><br></pre></td></tr></table></figure></div>
+<p>Ah finally there is a flag.gif file in end.zip file but wait!! the zip file is protected!</p>
+<p>We’ve noticed that the encryption is ZipCrypto Deflate which is similar to the other chall, crackable by just knowing 12 bytes of whats inside the zip, 8 of which must be contiguous.<br>We’ve went ahead, used the header of a GIF file, and digging more into the GIF file structure, we’ve came to know that in most of the GIF files there is a constant text ‘NETSCAPE’ at the hexadecimal offset 0x310 which fulfills our needs, 8 bytes contiguous plus the header, we’ve got more than 12 bytes.</p>
+<p>The header is just <code>GIF89a</code> at offset 0x0.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/RH9goSf.png"
+                     
+                ></p>
+<p>You can get bkcrack from <a class="link"   target="_blank" rel="noopener" href="https://github.com/kimci86/bkcrack" >here <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>-C to specify the ciphered zip, -c for the target file -x to specify known bytes at some offset and -d to get the deciphered data once the process is done, and keys were found!</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bkcrack -C end.zip -c flag.gif -x 0 474946383961 -x 0x310 4E4554534415045322E30 -d deciphered</span><br></pre></td></tr></table></figure></div>
+
+<p>Unfortunately, it ended with <code>Could Not find the keys.</code></p>
+<p>However we were not lucky to crack the zip open using bkcrack again.</p>
+<p>Don’t worry dude! we have rockyou and john! Let’s give bruteforcing a chance. We can extract the password hash with <code>zip2john</code> command! </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Extract the hash of the password</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/mnt/dir2$ zip2john end.zip &gt; zip.hash  </span><br><span class="line">ver 2.0 efh 5455 efh 7875 end.zip/flag.gif PKZIP Encr: TS_chk, cmplen=61563, decmplen=90082, crc=18A1C7A3 ts=8050 cs=8050 <span class="built_in">type</span>=8</span><br></pre></td></tr></table></figure></div>
+<p>Now it’s time to bruteforce the hash with rockyou!</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Extract the hash of the password</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~/mnt/dir2$ john --wordlist=<span class="variable">$rockyou</span> zip.hash</span><br><span class="line">Using default input encoding: UTF-8</span><br><span class="line">Loaded 1 password <span class="built_in">hash</span> (PKZIP [32/64])</span><br><span class="line">No password hashes left to crack (see FAQ)</span><br></pre></td></tr></table></figure></div>
+<p>Wait what??? The password wasn’t found on rockyou! What the hack?? After some investigating we remember that there is a text file called <code>dic_fr_l33t.txt</code>! dic means dictionary and fr means french right ? Oh man we need to recover this wordlist! But the user deleted it. I’ll give a chance to <code>linux_find_file</code>. Let’s try to dump this text file. It might be stil loaded in the memory right? </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Extract the hash of the password</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ vol.py -f memory.raw --profile=LinuxUbuntu1604-lowx64 linux_find_file -L | grep dic_fr</span><br><span class="line">Volatility Foundation Volatility Framework 2.6.1</span><br><span class="line">3 0xffff88000c135cd8 /media/sf_DUMP/dir1/dic_fr_l33t.txt</span><br><span class="line">vol.py -f memory.raw --profile=LinuxUbuntu1604-lowx64 linux_find_file -i 0xffff88000c135cd8 -O dic_fr_l33t.txt</span><br><span class="line">Volatility Foundation Volatility Framework 2.6.1</span><br></pre></td></tr></table></figure></div>
+<p>Ah God! The extracted file is empty. We need another way to recover the wordlist and with an elegent way<br>After some minutes of thinking. We decide to use a regex that allow us to collect words that not contains special chars like <code>&#123;_;&#125;/][-</code> </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Extract the hash of the password</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ strings memory.raw | grep -v <span class="string">&quot; \|\_\|\-\|\[\|\]\|\`\|\;\|\/\|\.\|\&#125;\|\&#123;&quot;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> | <span class="built_in">sort</span> &gt; myrock.txt</span><br><span class="line">4n6nk8s@csaw2022:~/mnt/dir2$ sudo john --wordlist=~/myrock.txt zip.hash</span><br><span class="line">Using default input encoding: UTF-8</span><br><span class="line">Loaded 1 password <span class="built_in">hash</span> (PKZIP [32/64])</span><br><span class="line">Will run 8 OpenMP threads</span><br><span class="line">Press <span class="string">&#x27;q&#x27;</span> or Ctrl-C to abort, almost any other key <span class="keyword">for</span> status</span><br><span class="line">Cyb3rs3curit3    (end.zip/flag.gif)</span><br><span class="line">1g 0:00:00:00 DONE (2022-09-12 20:34) 6.666g/s 655360p/s 655360c/s 655360C/s Coup3ri3z..D3fouraillions</span><br><span class="line">Use the <span class="string">&quot;--show&quot;</span> option to display all of the cracked passwords reliably</span><br><span class="line">Session completed.</span><br></pre></td></tr></table></figure></div>
+<p>Oh man we did it! The password of the protected <code>end.zip</code> is <code>Cyb3rs3curit3</code> (CyberSecurité).Let’s extract the <code>flag.gif</code> file now…</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://imgur.com/jZoDJhE.gif"
+                     
+                ><br>Let’s convert this gif to frames using <code>ffmpeg</code> utility, the magical one xD</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Split the gif</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ <span class="built_in">mkdir</span> temp ; ffmpeg -i /mnt/dir2/flag.gif -vsync 0 temp/temp%d.png</span><br><span class="line">Input <span class="comment">#0, gif, from &#x27;flag.gif&#x27;:</span></span><br><span class="line">  Duration: 00:00:03.60, start: 0.000000, bitrate: 200 kb/s</span><br><span class="line">  Stream <span class="comment">#0:0: Video: gif, bgra, 290x290, 10 fps, 10 tbr, 100 tbn</span></span><br><span class="line">Stream mapping:</span><br><span class="line">  Stream <span class="comment">#0:0 -&gt; #0:0 (gif (native) -&gt; png (native))</span></span><br><span class="line">Press [q] to stop, [?] <span class="keyword">for</span> <span class="built_in">help</span></span><br><span class="line">Output <span class="comment">#0, image2, to &#x27;temp/temp%d.png&#x27;:</span></span><br><span class="line">  Metadata:</span><br><span class="line">    encoder         : Lavf59.27.100</span><br><span class="line">  Stream <span class="comment">#0:0: Video: png, rgba(pc, gbr/unknown/unknown, progressive), 290x290, q=2-31, 200 kb/s, 10 fps, 10 tbn</span></span><br><span class="line">    Metadata:</span><br><span class="line">      encoder         : Lavc59.37.100 png</span><br><span class="line">frame=   36 fps=0.0 q=-0.0 Lsize=N/A time=00:00:03.60 bitrate=N/A speed=14.8x</span><br><span class="line">video:113kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown</span><br></pre></td></tr></table></figure></div>
+<p>We got this images! oh we have 36 QR Code images! Seriously i don’t want to scan it manually!<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://imgur.com/aFiEzTR.png"
+                     
+                ><br>Let’s Write a small code that reads all these QRcode images! I am too lazy man !</p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><figcaption><span>Scan QRCode</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">36</span>):</span><br><span class="line"></span><br><span class="line">    img=cv2.imread(<span class="string">&quot;temp&quot;</span>+<span class="built_in">str</span>(i+<span class="number">1</span>)+<span class="string">&quot;.png&quot;</span>)</span><br><span class="line">    det=cv2.QRCodeDetector()</span><br><span class="line">    val, pts, st_code=det.detectAndDecode(img)</span><br><span class="line">    flag+=val[::-<span class="number">1</span>]</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure></div>
+<p>Let’s run the code now ! I wish this nightmare finish dude! I don’t another step please</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><figcaption><span>Run Reader</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4n6nk8s@csaw2022:~$ python3 temp/solve.py</span><br><span class="line">The_flag_is:1_Lik3_F0r3nS1c_4nd_y0u?</span><br></pre></td></tr></table></figure></div>
+<p>And Finally we got the flag! </p>
+<h1 id="Quantum-Leap-Misc"><a href="#Quantum-Leap-Misc" class="headerlink" title="Quantum Leap : Misc"></a>Quantum Leap : Misc</h1><p>+++info Description<br>My friend took the quantum leap and purchased a quantum computer with two qubits. They mentioned using a quantum logic gate to input the flag and they gave me the computers output. I have been stuck and Can NOT figure out the flag.<br>+++</p>
+<p>Challenge Link &amp; Author</p>
+<ul>
+<li>site: Challenge Link<br>url: <a class="link"   target="_blank" rel="noopener" href="https://github.com/RaniaMidaoui/CTF-writeups/blob/main/CSAW22/Quantum%20Leap/output.txt" >https://github.com/RaniaMidaoui/CTF-writeups/blob/main/CSAW22/Quantum%20Leap/output.txt <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>desc: CSAW 2022 - Quantum Leap<br>image: <a class="link"   target="_blank" rel="noopener" href="https://ctftime.org/media/events/logo_48.png" >https://ctftime.org/media/events/logo_48.png <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>color: “#2296fd”</li>
+</ul>
+<p>The description mentions that we’re dealing with a quantum computer with two qubits, se we can assume that the gate the person used to get the output is a two-qubit quantum logic gate.</p>
+<p>A quantum gate is basic quantum circuit operating on a small number of qubits, they perform operations to change the state of the qubits, and unlike many classical logic gates, quantum logic gates are reversible.<br>Each quantum gate has its matrix, and since the qubit states are represented with vectors, the gates transform these vectors to get new states.<br>The state vectors of the states |0&gt; and |1&gt; are:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/190504993-8094b514-dfa2-472f-8622-59867ef2e061.png"
+                      alt="2022-09-15_19h32_37"
+                ></p>
+<p>The CNOT gate was applied, it’s a two-qubit quantum gate that performs a controlled NOT where one qubit is the control and the second qubit is the target.<br>Its matrix is the following :</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/190486028-970479de-3ff1-415e-bdd2-b4f0e6c8dab2.png"
+                      alt="2022-09-15_19h33_11"
+                ></p>
+<p>When applied:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/190497970-bd14060b-e413-43b6-982a-17da2d1c18a5.png"
+                      alt="2022-09-15_20h47_02"
+                ></p>
+<p>The mathematics behind these results are simple: </p>
+<p>Lets take |10&gt; and |11&gt;:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://user-images.githubusercontent.com/68945305/190505635-f998a0df-a328-4230-a3f1-1e3be73a5cef.png"
+                      alt="2022-09-15_21h46_45"
+                ></p>
+<p>This ⊗ represents a tensor product, you can read about it here if you don’t know what it is : <a class="link"   target="_blank" rel="noopener" href="https://www.math3ma.com/blog/the-tensor-product-demystified" >https://www.math3ma.com/blog/the-tensor-product-demystified <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>The first qubit is usually referred to as the control qubit and the second qubit as the target qubit. Expressed in basis states, the CNOT gate:<br>leaves the control qubit unchanged and performs a Pauli-X gate or NOT gate (which just flips the state of the qubit) on the target qubit when the control qubit is in state ∣1⟩;<br>leaves the target qubit unchanged when the control qubit is in state ∣0⟩.</p>
+<p>As you may have noticed, this challenge can be done manually by converting the output string to binary, taking two bits at a time and checking the value of the most significant bit, if it’s 1, the other bit is flipped, else, nothing is done.</p>
+<p>I wanted to solve this task with the CNOT gate itself,using the qiskit module in python.<br>Qiskit is an open-source SDK for working with quantum computers at the level of pulses, circuits, and application modules.</p>
+<p>As mentioned before quantum logic gates are reversible, in this case, when CNOT gate is applied once on the output, we get the flag.</p>
+<p>Here’s the script, you can run it on jupyter notebook: </p>
+<div class="highlight-container" data-rel="Py"><figure class="iseeu highlight py"><figcaption><span>Solver</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> qiskit <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">output = <span class="string">&#x27;wxqvn$Zae$&#123;deyZv$d&quot;i&#x27;</span></span><br><span class="line">output_array = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">format</span>(i, <span class="string">&#x27;08b&#x27;</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">bytearray</span>(output, encoding =<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line">bin_flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">state_vect</span>(<span class="params">bit</span>):</span><br><span class="line">    <span class="keyword">if</span>(bit == <span class="string">&#x27;0&#x27;</span>):</span><br><span class="line">        vect = [<span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="keyword">else</span> : </span><br><span class="line">        vect = [<span class="number">0</span> ,<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> vect</span><br><span class="line"></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i&lt;<span class="built_in">len</span>(output_array):</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#Initialize the quantum circuit</span></span><br><span class="line">    q = QuantumRegister(<span class="number">2</span>, <span class="string">&quot;q&quot;</span>)</span><br><span class="line">    c = ClassicalRegister(<span class="number">2</span>, <span class="string">&quot;c&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    qc = QuantumCircuit(q,c)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#get the initial state from the output</span></span><br><span class="line">    vect0 = state_vect(output_array[i])</span><br><span class="line">    vect1 = state_vect(output_array[i+<span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#initialize the register</span></span><br><span class="line">    qc.initialize(vect1,<span class="number">0</span>)</span><br><span class="line">    qc.initialize(vect0,<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    qc.measure(q, c)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#apply the CNOT gate, q[1] is the control and q[0] is the target</span></span><br><span class="line">    qc.cx(q[<span class="number">1</span>],q[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    qc.measure(q, c)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#execute the circuit</span></span><br><span class="line">    qobj = assemble(qc, shots=<span class="number">1</span>)</span><br><span class="line">    job = execute(qc,Aer.get_backend(<span class="string">&#x27;qasm_simulator&#x27;</span>),shots=<span class="number">1</span>)</span><br><span class="line">    counts = job.result().get_counts()</span><br><span class="line">    </span><br><span class="line">    bin_flag += <span class="built_in">str</span>(counts)[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#Increment the counter to get the next 2 qubits</span></span><br><span class="line">    i=i+<span class="number">2</span></span><br><span class="line">    </span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">chr</span>(<span class="built_in">int</span>(bin_flag[i*<span class="number">8</span>:i*<span class="number">8</span>+<span class="number">8</span>],<span class="number">2</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(bin_flag)//<span class="number">8</span>))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure></div>
+<p>The flag is <code>flag&#123;4_qu4ntum_g4t3&#125;</code></p>
+<br/>
+
+<p>That’s it for CSAW’22 Quals!</p>
+<p><strong>Credits to Raf²</strong></p>
+<ul>
+<li>site: Mohamed Rafraf<br>image: <a class="link"   target="_blank" rel="noopener" href="https://soter14.tech/assets/img/rafraf.webp" >https://soter14.tech/assets/img/rafraf.webp <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>desc: Portfolio<br>url: <a class="link"   target="_blank" rel="noopener" href="https://mohamedrafraf.github.io/" >https://mohamedrafraf.github.io/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>color: “#de2336”</li>
+</ul>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> CSAW&#39;22 Quals - Quantum &amp; Forensics Challenges Writeup</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2022-09-12 12:00:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-17 21:05:17
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2022/09/12/csaw-22/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Misc/">#Misc</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/09/30/friendly-osint/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Securinets Friendly CTF 22 - OSINT Writeups</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2021/12/01/flutter/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Install Flutter on WSL2 and run apps directly in WSA or in a physical device using ADB.</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">CSAW&#39;22 Quals - Quantum &amp; Forensics Challenges Writeup</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Noir-Digital-Forensics-x2F-Steganography"><span class="nav-text">Noir: Digital Forensics &#x2F; Steganography</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Not-Too-Taxing-Digital-Forensics-x2F-Cryptography"><span class="nav-text">Not Too Taxing: Digital Forensics &#x2F; Cryptography</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Encrypted-Disk-Digital-Forensics"><span class="nav-text">Encrypted Disk: Digital Forensics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Decrypt-Disk-and-MOUNT-IT"><span class="nav-text">Decrypt Disk and MOUNT IT</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Quantum-Leap-Misc"><span class="nav-text">Quantum Leap : Misc</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">admida0ui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br>
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.2.0</a>
+        </div>
+        
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

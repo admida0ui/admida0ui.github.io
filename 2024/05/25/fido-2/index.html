@@ -13,21 +13,28 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://admida0ui.tech/tags/cloud/"/>
+    <link rel="canonical" href="http://admida0ui.tech/2024/05/25/fido-2/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="We are a couple sharing stories and experiences · Working at PCP Consulting · Cloud &amp; Network Engineering Students @INSAT · CTFs @SOter14Team @Securinets">
-<meta property="og:type" content="website">
-<meta property="og:title" content="admida0ui">
-<meta property="og:url" content="http://admida0ui.tech/tags/Cloud/index.html">
+        <meta name="description" content="PrerequisitesFedora is used as the base system for this guide. The same steps can be followed on other distributions. Fedora comes with systemd-cryptsetup by default, which is a utility to manage encr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setting up FIDO2 on Linux (2) - Decrypt LUKS with FIDO2">
+<meta property="og:url" content="http://admida0ui.tech/2024/05/25/fido-2/index.html">
 <meta property="og:site_name" content="admida0ui">
-<meta property="og:description" content="We are a couple sharing stories and experiences · Working at PCP Consulting · Cloud &amp; Network Engineering Students @INSAT · CTFs @SOter14Team @Securinets">
+<meta property="og:description" content="PrerequisitesFedora is used as the base system for this guide. The same steps can be followed on other distributions. Fedora comes with systemd-cryptsetup by default, which is a utility to manage encr">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://sysguides.com/wp-content/uploads/2021/11/03-13-install-fedora-35-with-luks-full-disk-encryption-luks2-passphrase.webp">
+<meta property="article:published_time" content="2024-05-25T18:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-26T23:30:10.280Z">
 <meta property="article:author" content="admida0ui,contact@admida0ui.tech">
-<meta property="article:tag" content="admida0ui,admida0ui.tech,admida0ui.github.io,adm &amp; mida0ui,mida0ui &amp; adm, adm, mida0ui,adam lahbib,rania midaoui,soter14,securinets,insat,rania,adam">
+<meta property="article:tag" content="fido">
+<meta property="article:tag" content="fedora">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="security">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sysguides.com/wp-content/uploads/2021/11/03-13-install-fedora-35-with-luks-full-disk-encryption-luks2-passphrase.webp">
     
     
     <!--- Icon Part-->
@@ -39,7 +46,7 @@
     
     <title>
         
-            Tag: Cloud -
+            Setting up FIDO2 on Linux (2) - Decrypt LUKS with FIDO2 -
         
         admida0ui
     </title>
@@ -347,45 +354,219 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fa-solid fa-tag"></i>&nbsp;Cloud
-        </div>
-        <div class="tag-post-list">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
             
-<div class="archive-list-container">
+                      
+                <div class="article-title">
+                    <img src="https://i.imgur.com/7OialCz.jpeg" alt="Setting up FIDO2 on Linux (2) - Decrypt LUKS with FIDO2" />
+                    <h1 class="article-title-cover">Setting up FIDO2 on Linux (2) - Decrypt LUKS with FIDO2</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/admida0ui.png">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">admida0ui</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-05-25 20:00</span>
+        <span class="mobile">2024-05-25 20</span>
+        <span class="hover-info">Created</span>
+    </span>
     
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2023</span>
-                <span class="archive-year-post-count">[2]</span>
-            </div>
-            <ul class="article-list">
-              
-              <li class="article-item" date-is='08-19'>
-                <a href="/2023/08/19/karmada/">
-                  <span class="article-title">Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada</span>
-                </a>
-              </li>
-              
-              <li class="article-item" date-is='07-19'>
-                <a href="/2023/07/19/pulumi/">
-                  <span class="article-title">Provisioning a GKE Cluster Using Pulumi</span>
-                </a>
-              </li>
-              
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-05-27 01:30:10</span>
+            <span class="mobile">2024-05-27 01:30</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Work/">Work</a>&nbsp;
+                    </li>
+                
             </ul>
-        </section>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/fido/">fido</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/fedora/">fedora</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/security/">security</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
     
 </div>
 
-        </div>
-    </div>
+                        </div>
+                    </div>
+                </div>
+            
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    <span class="page-number current">1</span>
+            <div class="article-content markdown-body">
+                <h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><p>Fedora is used as the base system for this guide. The same steps can be followed on other distributions.</p>
+<p>Fedora comes with systemd-cryptsetup by default, which is a utility to manage encrypted block devices. We will use this utility to easily add a FIDO2 key as a mean to unlock the LUKS filesystem. You can also rely on your computer’s TPM chip instead of a FIDO2 key, but this guide will focus on the latter. The steps are similar for both methods though.</p>
+<p>Note that systemd-cryptsetup only supports LUKS2 and Fedora have been using LUKS2 by default since Fedora 30. If you have an older LUKS1 filesystem, you can upgrade it to LUKS2.</p>
+<p>If you did a full disk encryption during installation, you are ready to start with the steps below. If you wish to encrypt an existing Fedora disk, you can follow our previous guide on <a href="/2024/04/30/luks/">Encrypt an Existing Fedora Disk with LUKS</a>.</p>
+<p>Learn more about LUKS and FIDO2 in the <a href="/2024/05/20/fido-1/">previous post</a>.</p>
+<h1 id="Identify-the-LUKS-Partition"><a href="#Identify-the-LUKS-Partition" class="headerlink" title="Identify the LUKS Partition"></a>Identify the LUKS Partition</h1><p>You will need the device path of the LUKS partition to add the FIDO2 key. Run the following command to list all block devices:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk -f</span><br></pre></td></tr></table></figure></div>
+
+<p>The LUKS partition will have a <code>crypto_LUKS</code> filesystem type. In this example, the LUKS partition is <code>/dev/nvme0n1p6</code> since I use dual-boot with Windows on the same drive.</p>
+<h1 id="Dracut-Configuration"><a href="#Dracut-Configuration" class="headerlink" title="Dracut Configuration"></a>Dracut Configuration</h1><p>Dracut is the tool used to generate the initramfs image in Fedora. We need to add the FIDO2 module to the initramfs image to be able to unlock the LUKS partition with a FIDO2 key.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;add_dracutmodules+=\&quot; fido2 \&quot;&quot;</span> | sudo <span class="built_in">tee</span> /etc/dracut.conf.d/fido2.conf</span><br></pre></td></tr></table></figure></div>
+
+<p>Now, enroll the FIDO2 key to the LUKS partition as an additional unlock method:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemd-cryptenroll --fido2-device auto /dev/nvmen1p3</span><br></pre></td></tr></table></figure></div>
+
+<p>By default PIN (if set up) and presence (touch) are the requested means for use.</p>
+<p>Next, update crypttab and append <code>fido2-device=auto</code> to the options of the LUKS partition:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemd-cryptenroll --fido2-device auto /dev/nvmen1p3</span><br></pre></td></tr></table></figure></div>
+
+<p>Finally, regenerate the initramfs image:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dracut -f</span><br></pre></td></tr></table></figure></div>
+
+<p>Know that the prompt for the LUKS password will be the same as before, but you will have to use the FIDO2 key PIN there instead and touch the key.</p>
+<p><strong>Preview</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://sysguides.com/wp-content/uploads/2021/11/03-13-install-fedora-35-with-luks-full-disk-encryption-luks2-passphrase.webp"
+                     
+                ></p>
+<p>This post relies on the Fedora Magazine article <a class="link"   target="_blank" rel="noopener" href="https://fedoramagazine.org/use-systemd-cryptenroll-with-fido-u2f-or-tpm2-to-decrypt-your-disk/" >here <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Setting up FIDO2 on Linux (2) - Decrypt LUKS with FIDO2</li>
+        <li><strong>Author:</strong> admida0ui</li>
+        <li><strong>Created at:</strong> 2024-05-25 20:00:00</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2024-05-27 01:30:10
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://admida0ui.tech/2024/05/25/fido-2/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
 </div>
 
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/fido/">#fido</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/fedora/">#fedora</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/security/">#security</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2024/05/17/fido/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Setting up FIDO2 on Linux (1) - Tweaks, PAM Integration and Git Authentication</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Setting up FIDO2 on Linux (2) - Decrypt LUKS with FIDO2</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Identify-the-LUKS-Partition"><span class="nav-text">Identify the LUKS Partition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dracut-Configuration"><span class="nav-text">Dracut Configuration</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
     </div>
 </div>
 
@@ -622,6 +803,23 @@
     </div>
 
     
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
 
     <div class="right-side-tools-container">
         <div class="side-tools-container">
@@ -732,6 +930,16 @@
 
 
 <div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
     
 </div>
 

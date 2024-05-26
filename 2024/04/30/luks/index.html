@@ -13,25 +13,36 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://admida0ui.tech/2023/08/06/quals23/"/>
+    <link rel="canonical" href="http://admida0ui.tech/2024/04/30/luks/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="The CTFSecurinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September. We">
+        <meta name="description" content="PrerequisitesThis guide assumes you have a default Fedora installation where you forgot to check the “Encrypt my data” box during installation, or perhaps if you have a secondary disk that you want to">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Securinets Quals CTF 2023 - Writeups Index">
-<meta property="og:url" content="http://admida0ui.tech/2023/08/06/quals23/index.html">
+<meta property="og:title" content="Encrypt an Existing Fedora Disk with LUKS">
+<meta property="og:url" content="http://admida0ui.tech/2024/04/30/luks/index.html">
 <meta property="og:site_name" content="admida0ui">
-<meta property="og:description" content="The CTFSecurinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September. We">
+<meta property="og:description" content="PrerequisitesThis guide assumes you have a default Fedora installation where you forgot to check the “Encrypt my data” box during installation, or perhaps if you have a secondary disk that you want to">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.imgur.com/eYBMvzh.jpg">
-<meta property="article:published_time" content="2023-08-06T19:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-17T19:05:17.071Z">
+<meta property="og:image" content="https://i.imgur.com/EjXiIgA.png">
+<meta property="og:image" content="https://i.imgur.com/qGkq4ed.png">
+<meta property="og:image" content="https://i.imgur.com/9rn13sr.png">
+<meta property="og:image" content="https://i.imgur.com/bDqZH0f.png">
+<meta property="og:image" content="https://i.imgur.com/169zxLr.png">
+<meta property="og:image" content="https://i.imgur.com/eR9weRT.png">
+<meta property="og:image" content="https://i.imgur.com/plMgrf3.png">
+<meta property="og:image" content="https://i.imgur.com/kiy88sm.png">
+<meta property="og:image" content="https://i.imgur.com/JV947QM.png">
+<meta property="og:image" content="https://sysguides.com/wp-content/uploads/2021/11/03-13-install-fedora-35-with-luks-full-disk-encryption-luks2-passphrase.webp">
+<meta property="article:published_time" content="2024-04-30T18:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-26T23:24:11.492Z">
 <meta property="article:author" content="admida0ui,contact@admida0ui.tech">
-<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="fedora">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="security">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.imgur.com/eYBMvzh.jpg">
+<meta name="twitter:image" content="https://i.imgur.com/EjXiIgA.png">
     
     
     <!--- Icon Part-->
@@ -43,7 +54,7 @@
     
     <title>
         
-            Securinets Quals CTF 2023 - Writeups Index -
+            Encrypt an Existing Fedora Disk with LUKS -
         
         admida0ui
     </title>
@@ -357,8 +368,8 @@
             
                       
                 <div class="article-title">
-                    <img src="https://i.imgur.com/nIQ3IA1.png" alt="Securinets Quals CTF 2023 - Writeups Index" />
-                    <h1 class="article-title-cover">Securinets Quals CTF 2023 - Writeups Index</h1>
+                    <img src="https://i.imgur.com/3AXCKT5.jpeg" alt="Encrypt an Existing Fedora Disk with LUKS" />
+                    <h1 class="article-title-cover">Encrypt an Existing Fedora Disk with LUKS</h1>
                 </div>
             
                 
@@ -378,15 +389,15 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-08-06 21:00</span>
-        <span class="mobile">2023-08-06 21</span>
+        <span class="desktop">2024-04-30 20:00</span>
+        <span class="mobile">2024-04-30 20</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-05-17 21:05:17</span>
-            <span class="mobile">2024-05-17 21:05</span>
+            <span class="desktop">2024-05-27 01:24:11</span>
+            <span class="mobile">2024-05-27 01:24</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -397,7 +408,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/Writeups/">Writeups</a>&nbsp;
+                        <a href="/categories/Work/">Work</a>&nbsp;
                     </li>
                 
             </ul>
@@ -409,7 +420,15 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/CTF/">CTF</a>&nbsp;
+                        <a href="/tags/fedora/">fedora</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/security/">security</a>&nbsp;
                     </li>
                 
             </ul>
@@ -432,21 +451,185 @@
             
 
             <div class="article-content markdown-body">
-                <h2 id="The-CTF"><a href="#The-CTF" class="headerlink" title="The CTF"></a>The CTF</h2><p>Securinets Quals CTF was this Securinets generation’s first CTF event on CTFTime where all the big teams have demonstrated therir skills to get to the finals in Tunisia this late-September.</p>
-<p>We present three challenging tasks, one forensics involving Hiberfil.sys, Restore Point, and Crypto-currency Wallet, and two Misc involving Hamiltonian diagonalization, Trotterization, circuit simulation for Quantum System, and Reverse Engineering a set-top-box firmware and analyzing its memory dump.</p>
-<p>Congratulations to SKSD, r3kapig, Hexagon for earning the top 3 spots in the CTF, and we deliver a special apperciation to the Securinets masterminds for their hard work and dedication to make this event a huge success, and we hope to see you all in the finals. </p>
-<h2 id="Scoreboard"><a href="#Scoreboard" class="headerlink" title="Scoreboard"></a>Scoreboard</h2><p><img  
+                <h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><p>This guide assumes you have a default Fedora installation where you forgot to check the “Encrypt my data” box during installation, or perhaps if you have a secondary disk that you want to encrypt, let it be another home partition or an external drive. A manual encryption process post-installation is also useful if you want to set up a FIDO 2 key to unlock your LUKS filesystem. We will cover this topic on a separate upcoming post.</p>
+<p>Having the following btrfs-based partition layout:</p>
+<ul>
+<li>Root partition<ul>
+<li>Btrfs subvolume ‘root’ mounted at &#x2F;</li>
+<li>Btrfs subvolume ‘home’ mounted at &#x2F;home</li>
+</ul>
+</li>
+<li>Boot partition mounted at &#x2F;boot</li>
+<li>EFI partition mounted at &#x2F;boot&#x2F;efi for UEFI systems</li>
+</ul>
+<p>Following this process may lead to data loss if not done correctly. Make sure to have the following:</p>
+<ul>
+<li>A full backup of your data before proceeding</li>
+<li>Cryptsetup installed on your system, can be installed with <code>sudo dnf install cryptsetup</code></li>
+<li>At least 100 MB of free space</li>
+<li>A live USB of Fedora or any other Linux distribution</li>
+</ul>
+<h1 id="Encrypting-the-Disk"><a href="#Encrypting-the-Disk" class="headerlink" title="Encrypting the Disk"></a>Encrypting the Disk</h1><h2 id="UUID-and-Kernel-Version-from-Fedora-Installation"><a href="#UUID-and-Kernel-Version-from-Fedora-Installation" class="headerlink" title="UUID and Kernel Version from Fedora Installation"></a>UUID and Kernel Version from Fedora Installation</h2><p>After making sure you have the prerequisites, we start by taking note of the root partition UUID and kernel version.</p>
+<p>Run the following command to get the UUID of the root partition:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk -f</span><br></pre></td></tr></table></figure></div>
+
+<p>It might be useful to remember which partition is mounted at &#x2F;boot and &#x2F;boot&#x2F;efi as well in case you have dual-boot systems.</p>
+<p>Now, run the following command to get the kernel version:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -r</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Reboot-into-Live-USB"><a href="#Reboot-into-Live-USB" class="headerlink" title="Reboot into Live USB"></a>Reboot into Live USB</h2><h3 id="Mount-the-Root-Partition-in-the-Live-USB"><a href="#Mount-the-Root-Partition-in-the-Live-USB" class="headerlink" title="Mount the Root Partition in the Live USB"></a>Mount the Root Partition in the Live USB</h3><p>We first, make sure we are able to locate and identify the device of the root partition with:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blkid --uuid &lt;root_partition_uuid&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://i.imgur.com/eYBMvzh.jpg"
+                     data-src="https://i.imgur.com/EjXiIgA.png"
                      
                 ></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://ctftime.org/event/1874" >Event Link <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h2 id="Writeups"><a href="#Writeups" class="headerlink" title="Writeups"></a>Writeups</h2><ol>
-<li><a href="/2023/08/06/0-8-4/">Quantum: 0-8-4 Challenge Writeup</a></li>
-<li><a href="/2023/08/06/jackpot/">Forensics: Jackpot Challenge Writeup</a></li>
-<li><a href="/2023/08/06/couch-potato/">Misc: Couch Potato Challenge Writeup</a></li>
-</ol>
+<p>To avoind any troubles, run a check on the filesystem:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btrfs check &lt;device&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/qGkq4ed.png"
+                     
+                ></p>
+<p>Once done, mount the root partition to &#x2F;mnt:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/&lt;root_partition_device&gt; /mnt</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="Shrinking-the-Root-Partition"><a href="#Shrinking-the-Root-Partition" class="headerlink" title="Shrinking the Root Partition"></a>Shrinking the Root Partition</h3><p>We need to shrink the root partition to make space for the LUKS partition. We will shrink it by at least 32 MB:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btrfs filesystem resize -32M /mnt</span><br></pre></td></tr></table></figure></div>
+
+<p>When done, unmount the root partition to proceed with the encryption:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /mnt</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="In-place-LUKS-Encryption-of-the-Root-Partition"><a href="#In-place-LUKS-Encryption-of-the-Root-Partition" class="headerlink" title="In-place LUKS Encryption of the Root Partition"></a>In-place LUKS Encryption of the Root Partition</h3><p>We will now encrypt the root partition in-place. Run the following command to encrypt the root partition:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cryptsetup reencrypt --encrypt --reduce-device-size 32M /dev/&lt;device&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p>When prompted, enter a passphrase for the root partition. This process may take a while depending on the size of the partition.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/9rn13sr.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/bDqZH0f.png"
+                     
+                ></p>
+<p>When completed, the root partition will have a different UUID. Run the following command to get the new UUID and note it down.</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk -f</span><br></pre></td></tr></table></figure></div>
+
+<p>You will also notice the filesystem type of the root partition has changed to crypto_LUKS.</p>
+<h3 id="Resizing-the-mapped-filesystem-to-use-the-full-partition"><a href="#Resizing-the-mapped-filesystem-to-use-the-full-partition" class="headerlink" title="Resizing the mapped filesystem to use the full partition"></a>Resizing the mapped filesystem to use the full partition</h3><p>Open the partition and provide the passphrase when prompted:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cryptsetup open /dev/&lt;device&gt; system</span><br></pre></td></tr></table></figure></div>
+
+<p>Mount the mapped filesystem:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/mapper/system /mnt</span><br></pre></td></tr></table></figure></div>
+
+<p>Resize the filesystem to use the full partition:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btrfs filesystem resize max /mnt</span><br></pre></td></tr></table></figure></div>
+
+<p>Unmount the mapped filesystem:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /mnt</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/169zxLr.png"
+                     
+                ></p>
+<p>Don’t close the partition yet and follow the next steps.</p>
+<h3 id="GRUB-Configuration"><a href="#GRUB-Configuration" class="headerlink" title="GRUB Configuration"></a>GRUB Configuration</h3><p>To be able to boot into the encrypted root partition, we need to update the GRUB configuration.</p>
+<p>Mount the root subvolume to &#x2F;mnt:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t btrfs -o <span class="string">&quot;noatime,subvol=root,compress=zstd:1&quot;</span> /dev/mapper/system /mnt</span><br></pre></td></tr></table></figure></div>
+
+<p>The noatime option is optional but recommended for SSDs to reduce the number of writes. The compress&#x3D;zstd:1 option is also optional but recommended for better compression.</p>
+<p>If know which devices are mounted at &#x2F;boot and &#x2F;boot&#x2F;efi, mount them as well, otherwise the vfat partition is usually the EFI partition and the ext4 partition is usually the boot partition:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsblk -f</span><br><span class="line">mount /dev/&lt;boot_partition_device&gt; /mnt/boot</span><br><span class="line">mount /dev/&lt;efi_partition_device&gt; /mnt/boot/efi</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/eR9weRT.png"
+                     
+                ></p>
+<p>Now, bind the pseudo filesystems:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mount --<span class="built_in">bind</span> /dev /mnt/dev</span><br><span class="line">mount --<span class="built_in">bind</span> /dev/pts /mnt/dev/pts</span><br><span class="line">mount --<span class="built_in">bind</span> /proc /mnt/proc</span><br><span class="line">mount --<span class="built_in">bind</span> /run /mnt/run</span><br><span class="line">mount --<span class="built_in">bind</span> /sys /mnt/sys</span><br></pre></td></tr></table></figure></div>
+
+<p>To open a shell within the filesystem environment, run the following command:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chroot</span> /mnt /bin/bash</span><br></pre></td></tr></table></figure></div>
+
+<p>Chroot stands for change root and it changes the root directory for the current running process and its children to the specified directory.</p>
+<p>Open the GRUB configuration file with your preferred text editor:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/default/grub</span><br></pre></td></tr></table></figure></div>
+
+<p>Modify the line for kernel parameters to include the root new UUID identified as LUKS partition, and to temporarily disable the SELinux enforcing mode as shown below:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX=<span class="string">&quot;[other params] rd.luks.uuid=&lt;LUKS partition UUID&gt; enforcing=0&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/plMgrf3.png"
+                     
+                ></p>
+<p>Now, to avoid trouble with SELinux, we need to relabel the filesystem:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> /.autorelabel</span><br></pre></td></tr></table></figure></div>
+
+<p>On the next boot, the SELinux subsystem will detect this file, and then relabel all of the files on that system with the correct SELinux contexts, which may take a while.</p>
+<p>Rebuild the GRUB configuration:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub2-mkconfig -o /boot/grub2/grub.cfg</span><br></pre></td></tr></table></figure></div>
+
+<p>If you have UEFI, run the following command as well:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub2-mkconfig -o /etc/grub2-efi.cfg</span><br></pre></td></tr></table></figure></div>
+
+<p>Regenerate the initramfs to ensure cryptsetup is included, use the kernel version noted earlier:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dracut --kver &lt;kernel version&gt; --force</span><br></pre></td></tr></table></figure></div>
+
+<p>Exit the chroot environment:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/kiy88sm.png"
+                     
+                ></p>
+<h3 id="Unmount-and-Reboot"><a href="#Unmount-and-Reboot" class="headerlink" title="Unmount and Reboot"></a>Unmount and Reboot</h3><p>Unmount the filesystems in reverse order:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://i.imgur.com/JV947QM.png"
+                     
+                ></p>
+<p>Close the LUKS partition:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cryptsetup close system</span><br></pre></td></tr></table></figure></div>
+
+<p>Reboot into the existing Fedora installation:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -r now</span><br></pre></td></tr></table></figure></div>
+
+<p>You will be prompted to enter the passphrase for the LUKS partition. If you have followed the steps correctly, you should be able to boot into the encrypted root partition.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://sysguides.com/wp-content/uploads/2021/11/03-13-install-fedora-35-with-luks-full-disk-encryption-luks2-passphrase.webp"
+                     
+                ></p>
+<h2 id="Post-Encryption"><a href="#Post-Encryption" class="headerlink" title="Post-Encryption"></a>Post-Encryption</h2><p>Reenable SELinux enforcing mode in the GRUB configuration file <code>etc/default/grub</code> by removing the <code>enforcing=0</code> parameter from the <code>GRUB_CMDLINE_LINUX</code> line. Save the file and rebuild the GRUB configuration the same way we did before:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub2-mkconfig -o /boot/grub2/grub.cfg</span><br></pre></td></tr></table></figure></div>
+
+<p>If you have UEFI, run the following command as well:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub2-mkconfig -o /etc/grub2-efi.cfg</span><br></pre></td></tr></table></figure></div>
+
+<p>And we will need to relabel SELinux contexts again with:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> /.autorelabel</span><br></pre></td></tr></table></figure></div>
+
+<p>Reboot and login to your system. You have successfully encrypted your root partition with LUKS.</p>
+<p>Stay tuned for the next post on how to set up a FIDO 2 key to unlock your LUKS filesystem.</p>
+<p>This post is my application of the answer provided by cam-rod on Unix Stack Exchange. The original answer can be found <a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/710367/how-to-encrypt-an-existing-disk-on-fedora-without-formatting" >here <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>. Which heavily derives from maxschelpzig <a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/a/584275/533888" >answer <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> and the <a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/dm-crypt/Device_encryption#Encrypt_an_existing_unencrypted_file_system" >Arch Wiki <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>. I also want to point out that the tool <code>luksipc</code> is no longer working and the <code>cryptsetup reencrypt</code> command is the only way to do an in-place encryption of a partition.</p>
 
             </div>
 
@@ -454,16 +637,16 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> Securinets Quals CTF 2023 - Writeups Index</li>
+        <li><strong>Title:</strong> Encrypt an Existing Fedora Disk with LUKS</li>
         <li><strong>Author:</strong> admida0ui</li>
-        <li><strong>Created at:</strong> 2023-08-06 21:00:00</li>
+        <li><strong>Created at:</strong> 2024-04-30 20:00:00</li>
         
             <li>
-                <strong>Updated at:</strong> 2024-05-17 21:05:17
+                <strong>Updated at:</strong> 2024-05-27 01:24:11
             </li>
         
         <li>
-            <strong>Link:</strong> https://admida0ui.tech/2023/08/06/quals23/
+            <strong>Link:</strong> https://admida0ui.tech/2024/04/30/luks/
         </li>
         <li>
             <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
@@ -478,7 +661,15 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/CTF/">#CTF</a>&nbsp;
+                            <a href="/tags/fedora/">#fedora</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/security/">#security</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -492,13 +683,13 @@
                         <div class="article-prev">
                             <a class="prev"
                             rel="prev"
-                            href="/2023/08/11/ebpf/"
+                            href="/2024/05/17/fido/"
                             >
                                 <span class="left arrow-icon flex-center">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">Ping Killer using XDP and eBPF</span>
+                                    <span class="post-nav-title-item">Setting up FIDO2 on Linux (1) - Tweaks, PAM Integration and Git Authentication</span>
                                     <span class="post-nav-item">Prev posts</span>
                                 </span>
                             </a>
@@ -508,10 +699,10 @@
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/08/06/0-8-4/"
+                            href="/2023/08/19/karmada/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">Securinets Quals CTF 2023 - 0-8-4 Quantum Writeup</span>
+                                    <span class="post-nav-title-item">Multi-Cloud Multi-Cluster Kubernetes Orchestration with Karmada</span>
                                     <span class="post-nav-item">Next posts</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -532,8 +723,8 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">On this page</div>
-        <div class="page-title">Securinets Quals CTF 2023 - Writeups Index</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-CTF"><span class="nav-text">The CTF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scoreboard"><span class="nav-text">Scoreboard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writeups"><span class="nav-text">Writeups</span></a></li></ol>
+        <div class="page-title">Encrypt an Existing Fedora Disk with LUKS</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Encrypting-the-Disk"><span class="nav-text">Encrypting the Disk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UUID-and-Kernel-Version-from-Fedora-Installation"><span class="nav-text">UUID and Kernel Version from Fedora Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reboot-into-Live-USB"><span class="nav-text">Reboot into Live USB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mount-the-Root-Partition-in-the-Live-USB"><span class="nav-text">Mount the Root Partition in the Live USB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shrinking-the-Root-Partition"><span class="nav-text">Shrinking the Root Partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-place-LUKS-Encryption-of-the-Root-Partition"><span class="nav-text">In-place LUKS Encryption of the Root Partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resizing-the-mapped-filesystem-to-use-the-full-partition"><span class="nav-text">Resizing the mapped filesystem to use the full partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GRUB-Configuration"><span class="nav-text">GRUB Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unmount-and-Reboot"><span class="nav-text">Unmount and Reboot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Post-Encryption"><span class="nav-text">Post-Encryption</span></a></li></ol></li></ol>
 
     </div>
 </div>

@@ -1,5 +1,5 @@
 ---
-title: Setting up FIDO2 on Linux (1)
+title: Setting up FIDO2 on Linux (1) - Tweaks, PAM Integration and Git Authentication
 date: 2024-5-17 20:00:00
 tags: [fido, fedora, linux, security]
 categories: Work
@@ -12,7 +12,7 @@ FIDO (Fast Identity Online) is a set of standards for passwordless authenticatio
 Authentication with FIDO2 is based on public key cryptography. The user registers a device with the online service, and then authenticates by proving possession of the device. The device creates a new key pair for each service, and the private key is stored securely on the device, never leaving it.
 
 In addition to classic two-factor authentication (2FA), FIDO2 also supports passwordless authentication. This means that users can authenticate without entering a password, using only a FIDO2 device.
-
+SUDO
 Various devices can be used for FIDO2 authentication, such as Nitrokey, YubiKey, or SoloKeys. These devices are connected to the computer via USB, NFC, or Bluetooth.
 
 ![FIDO2](https://hwsecurity.dev/img/hardware-partners/yubico-series.png)
@@ -68,6 +68,8 @@ Notice that the key will blink green to prompt you to briefly touch it (dependin
 pamu2fcfg | sudo tee -a /etc/fido2/u2f_keys
 ```
 
+**If at any time, you wish to be prompted for a PIN just edit the u2f_keys file and add '+pin' just after '+presence'**
+
 ## PAM Configuration
 
 The PAM configuration files for all distributions are located in the `/etc/pam.d/` directory.
@@ -107,6 +109,15 @@ You can test it by opening a TTY session with `Ctrl+Alt+F3` and logging in with 
 ![sudo](https://i.imgur.com/z4HbBkb.png)
 
 You can test it by running a command with `sudo`.
+
+Now, typically you will get 15 minutes of sudo access after the first successful authentication with the FIDO2 key. We can change that and make it prompt every time you run a command with `sudo`.
+
+```bash
+sudo visudo
+```
+
+Edit the line where it says `Defaults env_reset` to `Defaults env_reset,timestamp_timeout=0` and save the file.
+
 
 The PAM configuration file for the GDM display manager is `/etc/pam.d/gdm-password`. For which the reference to the FIDO2 module must be inserted second as indicated in the image below.
 

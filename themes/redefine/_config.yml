@@ -14,7 +14,7 @@ info:
   # Author name
   author: admida0ui
   # Site URL
-  url: https://admida0ui.tech
+  url: https://admida0ui.de
 # BASIC INFORMATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -148,7 +148,7 @@ home_banner:
       instagram: # your Instagram URL
       zhihu:  # your ZhiHu URL
       twitter:  https://twitter.com/admida0ui
-      email:  contact@admida0ui.tech
+      email:  contact@admida0ui.de
       # ...... # you can add more
 # HOME BANNER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
@@ -174,7 +174,7 @@ navbar:
       path: /categories/Writeups/
       icon: fa-regular fa-file-code
     CTF12: 
-      path: https://ctf.admida0ui.tech
+      path: https://ctf.admida0ui.de
       icon: fa-regular fa-flag
     About: 
       icon: fa-regular fa-user

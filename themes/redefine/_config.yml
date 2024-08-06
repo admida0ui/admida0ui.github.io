@@ -10,9 +10,9 @@
 # BASIC INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start
 info:
   # Site title
-  title: admida0ui
+  title: ADM-MIDA0UI
   # Author name
-  author: admida0ui
+  author: ADM-MIDA0UI
   # Site URL
   url: https://admida0ui.de
 # BASIC INFORMATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
@@ -105,10 +105,10 @@ home_banner:
     light: /images/wallhaven-wqery6-light.webp # light mode
     dark: /images/wallhaven-wqery6-dark.webp # dark mode
   # Home banner title
-  title: mida0ui & adm
+  title: ADM-MIDA0UI
   # Home banner subtitle
   subtitle:
-    text: [Hey! This is Adam & Rania, Cloud & DevOps Enthusiasts, Open Source Intelligence, CTFs @ SOter14 Securinets] # subtitle text, array
+    text: [Cloud & DevOps Enthusiasts, Open Source Intelligence, CTFs @ SOter14 Securinets] # subtitle text, array
     hitokoto:  # 一言配置
       enable: false # Whether to enable hitokoto
       api: https://v1.hitokoto.cn # API URL, can add types, see https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
@@ -147,7 +147,7 @@ home_banner:
       github:  https://github.com/admida0ui
       instagram: # your Instagram URL
       zhihu:  # your ZhiHu URL
-      twitter:  https://twitter.com/admida0ui
+      twitter:  # your Twitter URL
       email:  contact@admida0ui.de
       # ...... # you can add more
 # HOME BANNER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
@@ -176,11 +176,11 @@ navbar:
     CTF12: 
       path: https://ctf.admida0ui.de
       icon: fa-regular fa-flag
-    About: 
-      icon: fa-regular fa-user
-      submenus:
-        Rania: https://raniamidaoui.github.io
-        Adam: https://adamlahbib.github.io
+    # About: 
+    #   icon: fa-regular fa-user
+    #   submenus:
+    #     Rania: https://raniamidaoui.github.io
+    #     Adam: https://adamlahbib.github.io
     # you can add more
   # Navbar search (local search). Requires hexo-generator-searchdb (npm i hexo-generator-searchdb). See https://github.com/theme-next/hexo-generator-searchdb
   search:
@@ -317,7 +317,7 @@ footer:
   # Show website running time
   runtime: true # show website running time or not
   # Icon in footer, write fontawesome icon code here
-  icon: '<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>'
+  icon: ''
   # The start time of the website, format: YYYY/MM/DD HH:mm:ss
   start: 2023/3/19 14:00:00
   # Footer message
